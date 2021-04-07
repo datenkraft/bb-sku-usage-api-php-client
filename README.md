@@ -1,29 +1,33 @@
-# README #
+# Backbone - SKU Usage API PHP Client
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Introduction
 
-### What is this repository for? ###
+## Local setup for development
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Prerequisities
 
-### How do I get set up? ###
+Before you continue, make sure you have **Docker** and **Docker Compose** installed. Run `docker -v` and `docker-compose -v` in the terminal, to check the installation.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### Start the docker container
 
-### Contribution guidelines ###
+To be able to start working properly, **bb-docker**, **bb-sku-usage-api-php-client**, **bb-infrastructure** and **bb-sku-usage-api** projects have to be in the same folder, which means that the local structure looks like this:
 
-* Writing tests
-* Code review
-* Other guidelines
+```
+-some-directory/  
+    -bb-docker
+    -bb-sku-usage-api  
+    -bb-sku-usage-api-php-client
+    -bb-infrastructure
+```
 
-### Who do I talk to? ###
+After that, to start the docker containers, navigate to the development folder in the **bb-docker** project and run `docker-compose up`.
 
-* Repo owner or admin
-* Other community or team contact
+If the setup was correct, you should be able to xxxxx.
+
+## Official Documentation
+
+Documentation for the SKU Usage API PHP Client can be found [here]().
+
+## Contributing
+
+All feature and bug fix branches are created directly from the main branch, and are also merged directly into the main branch after the approved pull request. Feature and bug fix branches are to be deleted after the merge into main.
