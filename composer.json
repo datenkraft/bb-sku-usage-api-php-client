@@ -1,0 +1,13 @@
+{
+  "name": "datenkraft/bb-sku-usage-api-php-client",
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "pact-foundation/pact-php": "^7.0",
+    "ext-json": "^7.4"
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/"
+    ]
+  }
+}

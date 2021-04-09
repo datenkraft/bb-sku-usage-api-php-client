@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php">
+
+    <!-- Testsuite for contract tests with Pact -->
+    <testsuites>
+        <testsuite name="Pact">
+            <directory>tests/Pact/</directory>
+        </testsuite>
+    </testsuites>
+
+    <!-- PHPUnit Listener to start/stop the mock server, write the results, and publish them to the pact broker -->
+    <listeners>
+        <listener class="PhpPact\Consumer\Listener\PactTestListener">
+            <arguments>
+                <array>
+                    <element key="0">
+                        <string>Pact</string>
+                    </element>
+                </array>
+            </arguments>
+        </listener>
+    </listeners>
+
+    <!-- Environment variables for testing -->
+    <php>
+        <env name="PACT_MOCK_SERVER_HOST" value="localhost"/>
+        <env name="PACT_MOCK_SERVER_PORT" value="7935"/>
+        <env name="PACT_CONSUMER_NAME" value="skuusageConsumer"/>
+        <env name="PACT_CONSUMER_VERSION" value="1.0.0"/>
+        <env name="PACT_CONSUMER_TAG" value="main"/>
+        <env name="PACT_PROVIDER_NAME" value="skuusageProvider"/>
+        <env name="PACT_OUTPUT_DIR" value="pacts"/>
+        <env name="PACT_MOCK_SERVER_HEALTH_CHECK_TIMEOUT" value="10"/>
+        <env name="PACT_BROKER_URI" value="https://datenkraft.pactflow.io/"/>
+        <env name="PACT_BROKER_BEARER_TOKEN" value="Nn10zhsOIaNxghh4k0SqGw"/>
+    </php>
+
+</phpunit>
