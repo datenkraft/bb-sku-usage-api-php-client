@@ -78,8 +78,7 @@ class SKUUsageConsumerTest extends TestCase
         $this->token = 'valid_token';
     }
 
-    protected
-    function tearDown(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
 
