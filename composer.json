@@ -9,5 +9,8 @@
     "classmap": [
       "tests/"
     ]
+  },
+  "require": {
+    "squizlabs/php_codesniffer": "^3.6"
   }
 }

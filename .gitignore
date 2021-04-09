@@ -21,7 +21,6 @@ dist/
 
 # Maven
 target/
-dist/
 
 # JetBrains IDE
 .idea/
@@ -48,5 +47,12 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Vendor
+vendor/
 
-/vendor/
+# Pacts
+pacts/
+
+# PHPUnit
+.phpunit.cache/
+.phpunit.result.cache

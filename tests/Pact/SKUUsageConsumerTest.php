@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Pact;
 
 use DateTime;
@@ -89,8 +88,7 @@ class SKUUsageConsumerTest extends TestCase
     /**
      * @throws GuzzleException
      */
-    public
-    function testAddSKUUsageDataSuccess()
+    public function testAddSKUUsageDataSuccess()
     {
         // Consumer request
         $request = new ConsumerRequest();
@@ -149,8 +147,7 @@ class SKUUsageConsumerTest extends TestCase
     /**
      * @throws GuzzleException
      */
-    public
-    function testAddSKUUsageDataUnauthorized()
+    public function testAddSKUUsageDataUnauthorized()
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -200,8 +197,7 @@ class SKUUsageConsumerTest extends TestCase
     /**
      * @throws GuzzleException
      */
-    public
-    function testAddSKUUsageDataForbidden()
+    public function testAddSKUUsageDataForbidden()
     {
         // Token with invalid scope
         $this->token = 'valid_token_invalid_scope';
@@ -251,8 +247,7 @@ class SKUUsageConsumerTest extends TestCase
     /**
      * @throws GuzzleException
      */
-    public
-    function testAddSKUUsageDataBadRequest()
+    public function testAddSKUUsageDataBadRequest()
     {
         // Error code in response is 400, extra is not defined
         $this->errorResponse['code'] = '400';
@@ -297,8 +292,7 @@ class SKUUsageConsumerTest extends TestCase
     /**
      * @throws GuzzleException
      */
-    public
-    function testAddSKUUsageDataUnprocessableEntity()
+    public function testAddSKUUsageDataUnprocessableEntity()
     {
         // SKU with skuId does not exist
         $this->skuUsageData['skuId'] = 'skuId_test_invalid';
@@ -347,8 +341,7 @@ class SKUUsageConsumerTest extends TestCase
     /**
      * @throws GuzzleException
      */
-    public
-    function testAddSKUUsageDataConflict()
+    public function testAddSKUUsageDataConflict()
     {
         // Combination of projectId and externalId already exists
         $this->skuUsageData['projectId'] = 'projectId_test_duplicate';
