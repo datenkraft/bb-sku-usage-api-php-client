@@ -34,7 +34,7 @@ class SKUUsageConsumerTest extends TestCase
     {
         parent::setUp();
 
-        // Initialize the mock server config from environment variables
+        // Initialize the config of the mock server from environment variables
         $this->config = new MockServerEnvConfig();
 
         // Try to open a connection to the mock server to verify that it was started with the PactTestListener
@@ -73,8 +73,8 @@ class SKUUsageConsumerTest extends TestCase
             ],
         ];
 
-        // Authorization Token for the request header
-        // To be replaced by a valid token later to successfully verify the contract with the provider
+        // Authorization token for the request header
+        // To be replaced by an actually valid token later to successfully verify the contract with the provider
         $this->token = 'valid_token';
     }
 
@@ -85,7 +85,6 @@ class SKUUsageConsumerTest extends TestCase
 
         // Verify that all registered interactions actually took place
         $this->builder->verify();
-        // A method to revert the POST interactions with the server may be inserted here when the PHP client is implemented
     }
 
     /**
@@ -128,8 +127,7 @@ class SKUUsageConsumerTest extends TestCase
             ->willRespondWith($response);
 
         // Make the request
-        // Uses GuzzleHttp/Client for now
-        // To be replaced with real method(s) when the PHP client is implemented
+        // Uses GuzzleHttp/Client for now, to be replaced with real method(s) when the PHP client is implemented
         $httpClient = new Client(['base_uri' => $this->config->getBaseUri()]);
         $response = $httpClient->request(
             'POST',
@@ -144,7 +142,6 @@ class SKUUsageConsumerTest extends TestCase
         );
 
         // Make assertions that the expected data in the response is correct
-        // This may be refined when the PHP client is implemented
         $this->assertEquals(201, $response->getStatusCode());
         $this->assertJson($response->getBody());
         $this->assertEquals($this->skuUsageData['skuId'], json_decode($response->getBody())->skuId);
@@ -156,7 +153,7 @@ class SKUUsageConsumerTest extends TestCase
     public
     function testAddSKUUsageDataUnauthorized()
     {
-        // JWT Token for request header (invalid)
+        // Invalid token
         $this->token = 'invalid_token';
 
         // Error code in response is 401, extra is not defined
@@ -183,7 +180,7 @@ class SKUUsageConsumerTest extends TestCase
             ->with($request)
             ->willRespondWith($response);
 
-        // The request should throw an Exception, because the server sends 401
+        // The request should throw an Exception, because the server sends a 401
         $this->expectException(ClientException::class);
         $this->expectExceptionMessageMatches('~401~');
 
@@ -207,7 +204,7 @@ class SKUUsageConsumerTest extends TestCase
     public
     function testAddSKUUsageDataForbidden()
     {
-        // JWT Token for request header (invalid scope)
+        // Token with invalid scope
         $this->token = 'valid_token_invalid_scope';
 
         // Error code in response is 403, extra is not defined
@@ -234,7 +231,7 @@ class SKUUsageConsumerTest extends TestCase
             ->with($request)
             ->willRespondWith($response);
 
-        // The request should throw an Exception, because the server sends 403
+        // The request should throw an Exception, because the server sends a 403
         $this->expectException(ClientException::class);
         $this->expectExceptionMessageMatches('~403~');
 
@@ -281,7 +278,7 @@ class SKUUsageConsumerTest extends TestCase
             ->with($request)
             ->willRespondWith($response);
 
-        // The request should throw an Exception, because the server sends 400
+        // The request should throw an Exception, because the server sends a 400
         $this->expectException(ClientException::class);
         $this->expectExceptionMessageMatches('~400~');
 
@@ -330,7 +327,7 @@ class SKUUsageConsumerTest extends TestCase
             ->with($request)
             ->willRespondWith($response);
 
-        // The request should throw an Exception, because the server sends 422
+        // The request should throw an Exception, because the server sends a 422
         $this->expectException(ClientException::class);
         $this->expectExceptionMessageMatches('~422~');
 
@@ -384,7 +381,7 @@ class SKUUsageConsumerTest extends TestCase
             ->with($request)
             ->willRespondWith($response);
 
-        // The request should throw an Exception, because the server sends 409
+        // The request should throw an Exception, because the server sends a 409
         $this->expectException(ClientException::class);
         $this->expectExceptionMessageMatches('~409~');
 
