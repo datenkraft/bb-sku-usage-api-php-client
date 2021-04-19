@@ -1,0 +1,26 @@
+version: "3"
+services:
+  bb-sku-usage-api-php-client:
+    image: europe-docker.pkg.dev/dk-gg-rgstry/base/php:dev-linux
+    container_name: bb_sku_usage_api_php_client
+    volumes:
+      - ./:/var/www
+    working_dir: /var/www
+    ports:
+      - "30280:3000"
+  bb-sku-usage-api-php-client-pact-mock-service:
+    image: pactfoundation/pact-cli
+    container_name: bb_sku_usage_api_php_client_pact_mock_service
+    volumes:
+      - ./pacts/:/pacts
+    ports:
+      - "30287:30287"
+    command: [
+        "mock-service",
+        "--port", "30287",
+        "--host", "0.0.0.0",
+        "--pact-file-write-mode", "overwrite",
+        "--consumer", "skuUsageConsumer",
+        "--provider", "skuUsageProvider",
+        "--pact-dir", "/pacts"
+    ]
