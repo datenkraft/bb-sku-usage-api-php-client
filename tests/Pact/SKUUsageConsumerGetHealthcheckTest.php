@@ -2,17 +2,8 @@
 
 namespace Pact;
 
-use DateTime;
-use DateInterval;
 use Exception;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use PhpPact\Consumer\InteractionBuilder;
-use PhpPact\Standalone\MockService\MockServerEnvConfig;
-use PHPUnit\Framework\TestCase;
-use PhpPact\Consumer\Model\ConsumerRequest;
-use PhpPact\Consumer\Model\ProviderResponse;
-use GuzzleHttp\Client;
 
 /**
  * Class SKUUsageConsumerAddSKUUsageTest

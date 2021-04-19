@@ -4,15 +4,9 @@ namespace Pact;
 
 use DateTime;
 use DateInterval;
+use DateTimeInterface;
 use Exception;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use PhpPact\Consumer\InteractionBuilder;
-use PhpPact\Standalone\MockService\MockServerEnvConfig;
-use PHPUnit\Framework\TestCase;
-use PhpPact\Consumer\Model\ConsumerRequest;
-use PhpPact\Consumer\Model\ProviderResponse;
-use GuzzleHttp\Client;
 
 /**
  * Class SKUUsageConsumerAddSKUUsageTest
@@ -42,8 +36,8 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             'skuId' => 'skuId_test',
             'quantity' => 1,
             'projectId' => 'projectId_test',
-            'usageStart' => (new DateTime())->format(DateTime::ATOM),
-            'usageEnd' => (new DateTime())->add(new DateInterval('P1D'))->format(DateTime::ATOM),
+            'usageStart' => (new DateTime())->format(DateTimeInterface::ATOM),
+            'usageEnd' => (new DateTime())->add(new DateInterval('P1D'))->format(DateTimeInterface::ATOM),
             'externalId' => 'externalId_test',
             'meta' => [
                 'amount' => 10000,

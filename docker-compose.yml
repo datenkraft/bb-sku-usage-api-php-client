@@ -10,7 +10,7 @@ services:
       - "30280:3000"
   pact-mock-service:
     image: pactfoundation/pact-cli
-    container_name: pact-mock-service
+    container_name: bb_sku_usage_api_php_client_pact_mock_service
     volumes:
       - ./pacts/:/pacts
     ports:
