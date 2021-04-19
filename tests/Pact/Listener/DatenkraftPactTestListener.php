@@ -8,9 +8,12 @@ use PhpPact\Http\GuzzleClient;
 use PhpPact\Standalone\MockService\MockServerConfigInterface;
 use PhpPact\Standalone\MockService\MockServerEnvConfig;
 use PhpPact\Standalone\MockService\Service\MockServerHttpService;
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestListener;
 use PHPUnit\Framework\TestListenerDefaultImplementation;
 use PHPUnit\Framework\TestSuite;
+use PHPUnit\Framework\Test;
+use Throwable;
 
 /**
  * Class DatenkraftPactTestListener
@@ -37,6 +40,16 @@ class DatenkraftPactTestListener implements TestListener
     {
         $this->testSuiteNames = $testSuiteNames;
         $this->mockServerConfig = new MockServerEnvConfig();
+    }
+
+    public function addError(Test $test, Throwable $t, float $time): void
+    {
+        $this->failed = true;
+    }
+
+    public function addFailure(Test $test, AssertionFailedError $e, float $time): void
+    {
+        $this->failed = true;
     }
 
     /**
