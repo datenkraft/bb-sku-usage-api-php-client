@@ -1,0 +1,8 @@
+<?php
+
+return [
+    'openapi-file' => __DIR__ . '/openapi.json',
+    'namespace' => 'Datenkraft\Backbone\SkuUsageClient\Generated',
+    'directory' => __DIR__ . '/src/generated',
+    'use-fixer' => true
+];
