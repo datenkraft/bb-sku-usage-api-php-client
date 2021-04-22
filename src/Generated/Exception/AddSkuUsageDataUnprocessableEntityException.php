@@ -8,13 +8,13 @@ declare(strict_types=1);
  * Do no edit it directly.
  */
 
-namespace Datenkraft\Backbone\SkuUsageClient\Generated\Exception;
+namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
 class AddSkuUsageDataUnprocessableEntityException extends \RuntimeException implements ClientException
 {
     private $errorModel;
 
-    public function __construct(\Datenkraft\Backbone\SkuUsageClient\Generated\Model\ErrorModel $errorModel)
+    public function __construct(\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorModel $errorModel)
     {
         parent::__construct('Unprocessable Entity', 422);
         $this->errorModel = $errorModel;

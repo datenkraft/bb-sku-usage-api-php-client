@@ -8,16 +8,10 @@ declare(strict_types=1);
  * Do no edit it directly.
  */
 
-namespace Datenkraft\Backbone\SkuUsageClient\Generated\Model;
+namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class SkuUsageData
+class NewSkuUsageData
 {
-    /**
-     * SKU Usage Id.
-     *
-     * @var int
-     */
-    protected $skuUsageId;
     /**
      * SKU Id.
      *
@@ -58,24 +52,6 @@ class SkuUsageData
      * @var Meta
      */
     protected $meta;
-
-    /**
-     * SKU Usage Id.
-     */
-    public function getSkuUsageId(): int
-    {
-        return $this->skuUsageId;
-    }
-
-    /**
-     * SKU Usage Id.
-     */
-    public function setSkuUsageId(int $skuUsageId): self
-    {
-        $this->skuUsageId = $skuUsageId;
-
-        return $this;
-    }
 
     /**
      * SKU Id.

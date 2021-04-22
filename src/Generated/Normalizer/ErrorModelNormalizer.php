@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Do no edit it directly.
  */
 
-namespace Datenkraft\Backbone\SkuUsageClient\Generated\Normalizer;
+namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
 use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
 use Jane\JsonSchemaRuntime\Reference;
@@ -27,12 +27,12 @@ class ErrorModelNormalizer implements DenormalizerInterface, NormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\SkuUsageClient\\Generated\\Model\\ErrorModel';
+        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorModel';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\SkuUsageClient\\Generated\\Model\\ErrorModel';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorModel';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -43,11 +43,11 @@ class ErrorModelNormalizer implements DenormalizerInterface, NormalizerInterface
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\SkuUsageClient\Generated\Model\ErrorModel();
+        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorModel();
         if (\array_key_exists('errors', $data)) {
             $values = [];
             foreach ($data['errors'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\SkuUsageClient\\Generated\\Model\\Error', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Error', 'json', $context);
             }
             $object->setErrors($values);
         }

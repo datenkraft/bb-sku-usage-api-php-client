@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Do no edit it directly.
  */
 
-namespace Datenkraft\Backbone\SkuUsageClient\Generated\Endpoint;
+namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint;
 
 class GetOpenApiInFormat extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Endpoint
 {

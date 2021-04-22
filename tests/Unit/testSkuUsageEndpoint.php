@@ -2,52 +2,41 @@
 
 namespace Unit;
 
-use Datenkraft\Backbone\SkuUsageClient\Client;
+use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
+use Datenkraft\Backbone\Client\SkuUsageApi\Client;
 use PHPUnit\Framework\TestCase;
 
 class testSkuUsageEndpoint extends TestCase
 {
-    private Client $object;
+    private $object;
 
     protected function setUp(): void
     {
-        require __DIR__ . '/../../vendor/autoload.php';
+        //require __DIR__ . '/../../vendor/autoload.php';
         parent::setUp();
 
-        // $clientFactory = new ClientFactory([
-        //  "clientId" => "asdfasdf",
-        //  "clientSecret" => "asdfasdf",
-        //  "oauthUrlAccessToken" => "https://auth.datenkraft.cloud/oauth/token",
-        //  "oauthScopes" => [
-        //      "sku-usage:add",
-        //      ...
-        //  ],
-        //]);
-        //$clientFactory->createClient(string $clientClass, string $endpointBaseUrl = null): \Jane\OpenApiRuntime\Client\Client {
-        //  $client = $client::create();
-        //
-        //  return $client;
-        //}
+        $oAuthTokenUrl = 'https://localhost:30250/oauth/token';
 
-        $url = 'https://localhost:30280/';
-        //$url = 'https://real url/';
+        // Valid clientId, clientSecret and requested scopes
+        $clientId = '934186c9-c3bb-49c5-a050-47bfbe325515';
+        $clientSecret = 'lzsGABpnE7C7E6srCSbXtkWuIkXmv3DwlfwTzxh0';
+        $oAuthScopes = [];
+        $config['clientId'] = $clientId;
+        $config['clientSecret'] = $clientSecret;
+        $config['oauthScopes'] = $oAuthScopes;
+        $config['oAuthTokenUrl'] = $oAuthTokenUrl;
 
-        $httpClient = new \GuzzleHttp\Client(['verify' => false]);
+        $factory = new ClientFactory($config);
 
-        $plugins = [];
-        $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri($url);
-        $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
-        $plugins[] = new \Http\Client\Common\Plugin\HeaderAppendPlugin(['Authorization' => "helllo"]);
+        $this->object = $factory->createClient(Client::class, 'https://localhost:30280');
 
-        $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
 
-        $this->object = Client::create($httpClient);
     }
 
     public function testGetOpenApi()
     {
         //$response = $this->object->getOpenApi();
-        $response = $this->object->getOpenApi(\Datenkraft\Backbone\SkuUsageClient\Generated\Client::FETCH_RESPONSE);
+        $response = $this->object->getOpenApi(\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Client::FETCH_RESPONSE);
         echo $response->getBody();
         //var_dump($response);
     }

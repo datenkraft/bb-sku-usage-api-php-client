@@ -33,7 +33,7 @@ require __DIR__ . '/vendor/autoload.php';
 ~~~~ bash
 return [
     'openapi-file' => __DIR__ . '/openapi.json',
-    'namespace' => 'Datenkraft\Backbone\SkuUsageClient\Generated',
+    'namespace' => 'Datenkraft\Backbone\Client\SkuUsageApi\Generated',
     'directory' => __DIR__ . '/src/generated',
     'use-fixer' => true
 ];

@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Do no edit it directly.
  */
 
-namespace Datenkraft\Backbone\SkuUsageClient\Generated\Model;
+namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
 class Error
 {

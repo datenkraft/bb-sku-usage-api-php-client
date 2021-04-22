@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Do no edit it directly.
  */
 
-namespace Datenkraft\Backbone\SkuUsageClient\Generated\Normalizer;
+namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
 use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
 use Jane\JsonSchemaRuntime\Reference;
@@ -27,12 +27,12 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\SkuUsageClient\\Generated\\Model\\Error';
+        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Error';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\SkuUsageClient\\Generated\\Model\\Error';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Error';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -43,7 +43,7 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\SkuUsageClient\Generated\Model\Error();
+        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Error();
         if (\array_key_exists('code', $data)) {
             $object->setCode($data['code']);
         }
@@ -51,7 +51,7 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
             $object->setMessage($data['message']);
         }
         if (\array_key_exists('extra', $data)) {
-            $object->setExtra($this->denormalizer->denormalize($data['extra'], 'Datenkraft\\Backbone\\SkuUsageClient\\Generated\\Model\\Extra', 'json', $context));
+            $object->setExtra($this->denormalizer->denormalize($data['extra'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Extra', 'json', $context));
         }
 
         return $object;

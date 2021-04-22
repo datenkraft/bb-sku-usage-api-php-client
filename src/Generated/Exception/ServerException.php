@@ -8,8 +8,8 @@ declare(strict_types=1);
  * Do no edit it directly.
  */
 
-namespace Datenkraft\Backbone\SkuUsageClient\Generated\Exception;
+namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-interface ApiException extends \Throwable
+interface ServerException extends ApiException
 {
 }

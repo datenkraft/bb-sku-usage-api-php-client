@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Do no edit it directly.
  */
 
-namespace Datenkraft\Backbone\SkuUsageClient\Generated\Normalizer;
+namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
 use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
 use Jane\JsonSchemaRuntime\Reference;
@@ -27,12 +27,12 @@ class SkuUsageDataNormalizer implements DenormalizerInterface, NormalizerInterfa
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\SkuUsageClient\\Generated\\Model\\SkuUsageData';
+        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageData';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\SkuUsageClient\\Generated\\Model\\SkuUsageData';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageData';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -43,7 +43,7 @@ class SkuUsageDataNormalizer implements DenormalizerInterface, NormalizerInterfa
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\SkuUsageClient\Generated\Model\SkuUsageData();
+        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageData();
         if (\array_key_exists('skuUsageId', $data)) {
             $object->setSkuUsageId($data['skuUsageId']);
         }
@@ -66,7 +66,7 @@ class SkuUsageDataNormalizer implements DenormalizerInterface, NormalizerInterfa
             $object->setExternalId($data['externalId']);
         }
         if (\array_key_exists('meta', $data)) {
-            $object->setMeta($this->denormalizer->denormalize($data['meta'], 'Datenkraft\\Backbone\\SkuUsageClient\\Generated\\Model\\Meta', 'json', $context));
+            $object->setMeta($this->denormalizer->denormalize($data['meta'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Meta', 'json', $context));
         }
 
         return $object;

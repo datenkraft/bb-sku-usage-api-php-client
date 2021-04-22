@@ -1,8 +1,8 @@
 <?php
 
-namespace Datenkraft\Backbone\SkuUsageClient;
+namespace Datenkraft\Backbone\Client\SkuUsageApi;
 
-class Client extends Generated\Client
+class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Client
 {
 
 }
