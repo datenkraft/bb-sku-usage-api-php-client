@@ -56,3 +56,5 @@ pacts/
 # PHPUnit
 .phpunit.cache/
 .phpunit.result.cache
+
+.composer/

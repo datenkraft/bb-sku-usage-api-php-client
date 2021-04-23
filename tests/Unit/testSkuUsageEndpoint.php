@@ -29,8 +29,6 @@ class testSkuUsageEndpoint extends TestCase
         $factory = new ClientFactory($config);
 
         $this->object = $factory->createClient(Client::class, 'https://localhost:30280');
-
-
     }
 
     public function testGetOpenApi()
