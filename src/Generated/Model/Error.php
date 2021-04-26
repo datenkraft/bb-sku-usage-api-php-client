@@ -25,7 +25,7 @@ class Error
      */
     protected $message;
     /**
-     * @var Extra
+     * @var ErrorExtra
      */
     protected $extra;
 
@@ -65,12 +65,12 @@ class Error
         return $this;
     }
 
-    public function getExtra(): Extra
+    public function getExtra(): ErrorExtra
     {
         return $this->extra;
     }
 
-    public function setExtra(Extra $extra): self
+    public function setExtra(ErrorExtra $extra): self
     {
         $this->extra = $extra;
 

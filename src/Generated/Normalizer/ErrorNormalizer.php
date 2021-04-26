@@ -51,7 +51,7 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
             $object->setMessage($data['message']);
         }
         if (\array_key_exists('extra', $data)) {
-            $object->setExtra($this->denormalizer->denormalize($data['extra'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Extra', 'json', $context));
+            $object->setExtra($this->denormalizer->denormalize($data['extra'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorExtra', 'json', $context));
         }
 
         return $object;

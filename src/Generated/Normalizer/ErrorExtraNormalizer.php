@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class ErrorModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class ErrorExtraNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -27,12 +27,12 @@ class ErrorModelNormalizer implements DenormalizerInterface, NormalizerInterface
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorModel';
+        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorExtra';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorModel';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorExtra';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -43,13 +43,9 @@ class ErrorModelNormalizer implements DenormalizerInterface, NormalizerInterface
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorModel();
-        if (\array_key_exists('errors', $data)) {
-            $values = [];
-            foreach ($data['errors'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Error', 'json', $context);
-            }
-            $object->setErrors($values);
+        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorExtra();
+        if (\array_key_exists('externalId', $data)) {
+            $object->setExternalId($data['externalId']);
         }
 
         return $object;
@@ -58,12 +54,8 @@ class ErrorModelNormalizer implements DenormalizerInterface, NormalizerInterface
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getErrors()) {
-            $values = [];
-            foreach ($object->getErrors() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['errors'] = $values;
+        if (null !== $object->getExternalId()) {
+            $data['externalId'] = $object->getExternalId();
         }
 
         return $data;

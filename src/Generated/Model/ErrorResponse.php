@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class ErrorModel
+class ErrorResponse
 {
     /**
      * errors.

@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class ExtraNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class SkuUsageMetaNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -27,12 +27,12 @@ class ExtraNormalizer implements DenormalizerInterface, NormalizerInterface, Den
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Extra';
+        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageMeta';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Extra';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageMeta';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -43,9 +43,15 @@ class ExtraNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Extra();
-        if (\array_key_exists('externalId', $data)) {
-            $object->setExternalId($data['externalId']);
+        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageMeta();
+        if (\array_key_exists('amount', $data)) {
+            $object->setAmount($data['amount']);
+        }
+        if (\array_key_exists('currency', $data)) {
+            $object->setCurrency($data['currency']);
+        }
+        if (\array_key_exists('description', $data)) {
+            $object->setDescription($data['description']);
         }
 
         return $object;
@@ -54,8 +60,14 @@ class ExtraNormalizer implements DenormalizerInterface, NormalizerInterface, Den
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getExternalId()) {
-            $data['externalId'] = $object->getExternalId();
+        if (null !== $object->getAmount()) {
+            $data['amount'] = $object->getAmount();
+        }
+        if (null !== $object->getCurrency()) {
+            $data['currency'] = $object->getCurrency();
+        }
+        if (null !== $object->getDescription()) {
+            $data['description'] = $object->getDescription();
         }
 
         return $data;

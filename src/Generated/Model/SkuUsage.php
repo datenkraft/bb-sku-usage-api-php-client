@@ -10,8 +10,14 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class NewSkuUsageData
+class SkuUsage
 {
+    /**
+     * SKU Usage Id.
+     *
+     * @var int
+     */
+    protected $skuUsageId;
     /**
      * SKU Id.
      *
@@ -49,9 +55,27 @@ class NewSkuUsageData
      */
     protected $externalId;
     /**
-     * @var Meta
+     * @var SkuUsageMeta
      */
     protected $meta;
+
+    /**
+     * SKU Usage Id.
+     */
+    public function getSkuUsageId(): int
+    {
+        return $this->skuUsageId;
+    }
+
+    /**
+     * SKU Usage Id.
+     */
+    public function setSkuUsageId(int $skuUsageId): self
+    {
+        $this->skuUsageId = $skuUsageId;
+
+        return $this;
+    }
 
     /**
      * SKU Id.
@@ -161,12 +185,12 @@ class NewSkuUsageData
         return $this;
     }
 
-    public function getMeta(): Meta
+    public function getMeta(): SkuUsageMeta
     {
         return $this->meta;
     }
 
-    public function setMeta(Meta $meta): self
+    public function setMeta(SkuUsageMeta $meta): self
     {
         $this->meta = $meta;
 

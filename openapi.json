@@ -7,20 +7,20 @@
     },
     "servers": [
         {
-            "url": "https://localhost:30280",
+            "url": "UNDEFINED",
             "description": "Production server"
         },
         {
-            "url": "https://localhost:30280",
+            "url": "UNDEFINED",
             "description": "Staging server"
         },
         {
-            "url": "https://localhost:30280",
+            "url": "https://localhost:30210",
             "description": "Development server"
         }
     ],
     "paths": {
-        "/info.php": {
+        "/docs": {
             "get": {
                 "tags": [
                     "docs"
@@ -72,13 +72,13 @@
                 ],
                 "summary": "Add SKU Usage data",
                 "description": "Add SKU Usage data",
-                "operationId": "addSkuUsageData",
+                "operationId": "addSkuUsage",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/addSkuUsageDataRequest"
+                                "$ref": "#/components/schemas/addSkuUsageRequest"
                             }
                         }
                     }
@@ -89,7 +89,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/addSkuUsageDataResponse"
+                                    "$ref": "#/components/schemas/addSkuUsageResponse"
                                 }
                             }
                         }
@@ -99,7 +99,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/errorModel"
+                                    "$ref": "#/components/schemas/errorResponse"
                                 }
                             }
                         }
@@ -109,7 +109,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/errorModel"
+                                    "$ref": "#/components/schemas/errorResponse"
                                 }
                             }
                         }
@@ -119,7 +119,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/errorModel"
+                                    "$ref": "#/components/schemas/errorResponse"
                                 }
                             }
                         }
@@ -129,7 +129,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/errorModel"
+                                    "$ref": "#/components/schemas/errorResponse"
                                 }
                             }
                         }
@@ -139,7 +139,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/errorModel"
+                                    "$ref": "#/components/schemas/errorResponse"
                                 }
                             }
                         }
@@ -157,7 +157,7 @@
     },
     "components": {
         "schemas": {
-            "errorModel": {
+            "errorResponse": {
                 "properties": {
                     "errors": {
                         "description": "errors",
@@ -184,12 +184,12 @@
                         "type": "string"
                     },
                     "extra": {
-                        "$ref": "#/components/schemas/extra"
+                        "$ref": "#/components/schemas/errorExtra"
                     }
                 },
                 "type": "object"
             },
-            "extra": {
+            "errorExtra": {
                 "properties": {
                     "externalId": {
                         "description": "External Id",
@@ -198,7 +198,10 @@
                 },
                 "type": "object"
             },
-            "skuUsageData": {
+            "skuUsage": {
+                "required": [
+                    "skuUsageId"
+                ],
                 "type": "object",
                 "allOf": [
                     {
@@ -211,11 +214,11 @@
                         "type": "object"
                     },
                     {
-                        "$ref": "#/components/schemas/newSkuUsageData"
+                        "$ref": "#/components/schemas/skuUsageBase"
                     }
                 ]
             },
-            "newSkuUsageData": {
+            "skuUsageBase": {
                 "required": [
                     "skuId",
                     "quantity",
@@ -252,12 +255,12 @@
                         "type": "string"
                     },
                     "meta": {
-                        "$ref": "#/components/schemas/meta"
+                        "$ref": "#/components/schemas/skuUsageMeta"
                     }
                 },
                 "type": "object"
             },
-            "meta": {
+            "skuUsageMeta": {
                 "properties": {
                     "amount": {
                         "description": "Amount",
@@ -274,16 +277,16 @@
                 },
                 "type": "object"
             },
-            "addSkuUsageDataRequest": {
+            "addSkuUsageRequest": {
                 "type": "array",
                 "items": {
-                    "$ref": "#/components/schemas/newSkuUsageData"
+                    "$ref": "#/components/schemas/skuUsageBase"
                 }
             },
-            "addSkuUsageDataResponse": {
+            "addSkuUsageResponse": {
                 "type": "array",
                 "items": {
-                    "$ref": "#/components/schemas/skuUsageData"
+                    "$ref": "#/components/schemas/skuUsage"
                 }
             }
         },
@@ -293,10 +296,10 @@
                 "description": "OAuth2 Authorization",
                 "flows": {
                     "clientCredentials": {
-                        "tokenUrl": "UNDEFINED",
-                        "refreshUrl": "https://www.google.com/refreshUrl",
+                        "tokenUrl": "https://localhost:30250/oauth/token",
+                        "refreshUrl": "UNDEFINED",
                         "scopes": {
-                            "sku-usage:add": "Add SKU Usage Data"
+                            "sku-usage-add": "Add SKU Usage Data"
                         }
                     }
                 }

@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class NewSkuUsageDataNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class SkuUsageBaseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -27,12 +27,12 @@ class NewSkuUsageDataNormalizer implements DenormalizerInterface, NormalizerInte
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\NewSkuUsageData';
+        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageBase';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\NewSkuUsageData';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageBase';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -43,7 +43,7 @@ class NewSkuUsageDataNormalizer implements DenormalizerInterface, NormalizerInte
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsageData();
+        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageBase();
         if (\array_key_exists('skuId', $data)) {
             $object->setSkuId($data['skuId']);
         }
@@ -63,7 +63,7 @@ class NewSkuUsageDataNormalizer implements DenormalizerInterface, NormalizerInte
             $object->setExternalId($data['externalId']);
         }
         if (\array_key_exists('meta', $data)) {
-            $object->setMeta($this->denormalizer->denormalize($data['meta'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Meta', 'json', $context));
+            $object->setMeta($this->denormalizer->denormalize($data['meta'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageMeta', 'json', $context));
         }
 
         return $object;

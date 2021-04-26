@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class MetaNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class ErrorResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -27,12 +27,12 @@ class MetaNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Meta';
+        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse';
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Meta';
+        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse';
     }
 
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -43,15 +43,13 @@ class MetaNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Meta();
-        if (\array_key_exists('amount', $data)) {
-            $object->setAmount($data['amount']);
-        }
-        if (\array_key_exists('currency', $data)) {
-            $object->setCurrency($data['currency']);
-        }
-        if (\array_key_exists('description', $data)) {
-            $object->setDescription($data['description']);
+        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse();
+        if (\array_key_exists('errors', $data)) {
+            $values = [];
+            foreach ($data['errors'] as $value) {
+                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Error', 'json', $context);
+            }
+            $object->setErrors($values);
         }
 
         return $object;
@@ -60,14 +58,12 @@ class MetaNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getAmount()) {
-            $data['amount'] = $object->getAmount();
-        }
-        if (null !== $object->getCurrency()) {
-            $data['currency'] = $object->getCurrency();
-        }
-        if (null !== $object->getDescription()) {
-            $data['description'] = $object->getDescription();
+        if (null !== $object->getErrors()) {
+            $values = [];
+            foreach ($object->getErrors() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['errors'] = $values;
         }
 
         return $data;

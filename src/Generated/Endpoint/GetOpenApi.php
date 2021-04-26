@@ -21,7 +21,7 @@ class GetOpenApi extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Ja
 
     public function getUri(): string
     {
-        return '/info.php';
+        return '/docs';
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array

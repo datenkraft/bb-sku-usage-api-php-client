@@ -78,7 +78,7 @@
             "dist": {
                 "type": "path",
                 "url": "../bb-base-api-php-client",
-                "reference": "5cde5e5b2108c7bede6364c41cb2dee9a7724705"
+                "reference": "be1233a5f3bab49af942464b59eca729aea95ad1"
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.3",

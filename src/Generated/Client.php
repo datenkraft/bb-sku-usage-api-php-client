@@ -38,20 +38,20 @@ class Client extends \Jane\OpenApiRuntime\Client\Client
     /**
      * Add SKU Usage data.
      *
-     * @param \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsageData[] $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageBase[] $requestBody
+     * @param string                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageDataUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageDataForbiddenException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageDataUnprocessableEntityException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageDataConflictException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageDataBadRequestException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageForbiddenException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageUnprocessableEntityException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageConflictException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageBadRequestException
      *
-     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageData[]|\Psr\Http\Message\ResponseInterface|null
+     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage[]|\Psr\Http\Message\ResponseInterface|null
      */
-    public function addSkuUsageData(array $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function addSkuUsage(array $requestBody, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\AddSkuUsageData($requestBody), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\AddSkuUsage($requestBody), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [])
@@ -59,8 +59,8 @@ class Client extends \Jane\OpenApiRuntime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://localhost');
-            $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('/UNDEFINED');
+            $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
             }
