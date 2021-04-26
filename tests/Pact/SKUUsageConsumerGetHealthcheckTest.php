@@ -28,7 +28,7 @@ class SKUUsageConsumerGetHealthcheckTest extends SKUUsageConsumerTest
 
         $this->requestData = [];
         $this->responseData = [
-            'currentDate' => date('Y-m-d H:i:s'),
+            'date' => $this->matcher->like(date('Y-m-d H:i:s')),
         ];
 
         $this->path = '/healthcheck';

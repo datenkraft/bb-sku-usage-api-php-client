@@ -7,6 +7,7 @@ use DateInterval;
 use DateTimeInterface;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
+use PhpPact\Consumer\Matcher\Matcher;
 
 /**
  * Class SKUUsageConsumerAddSKUUsageTest
@@ -33,25 +34,29 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         ];
 
         $this->requestData = [
-            'skuId' => 'skuId_test',
-            'quantity' => 1,
-            'projectId' => 'projectId_test',
-            'usageStart' => (new DateTime())->format(DateTimeInterface::ATOM),
-            'usageEnd' => (new DateTime())->add(new DateInterval('P1D'))->format(DateTimeInterface::ATOM),
-            'externalId' => 'externalId_test',
-            'meta' => [
-                'amount' => 10000,
-                'currency' => 'EUR',
-                'description' => 'Test description'
+            [
+                'skuId' => 'skuId_test',
+                'quantity' => 1,
+                'projectId' => 'projectId_test',
+                'usageStart' => (new DateTime())->format(DateTimeInterface::ATOM),
+                'usageEnd' => (new DateTime())->add(new DateInterval('P1D'))->format(DateTimeInterface::ATOM),
+                'externalId' => 'externalId_test',
+                'meta' => [
+                    'amount' => 10000,
+                    'currency' => 'EUR',
+                    'description' => 'Test description'
+                ]
             ]
         ];
 
-        $this->responseData = array_merge(
-            [
-                'skuUsageId' => 1,
-            ],
-            $this->requestData
-        );
+        $this->responseData = [
+            array_merge(
+                [
+                    'skuUsageId' => $this->matcher->like(1),
+                ],
+                $this->requestData[0]
+            )
+        ];
 
         $this->path = '/sku-usage';
     }
@@ -106,7 +111,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
     public function testAddSKUUsageDataForbidden()
     {
         // Token with invalid scope
-        $this->token = 'valid_token_invalid_scope';
+        $this->token = getenv('VALID_TOKEN_READ');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         // Error code in response is 403, extra is not defined
@@ -146,13 +151,17 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
     public function testAddSKUUsageDataUnprocessableEntity()
     {
         // SKU with skuId does not exist
-        $this->requestData['skuId'] = 'skuId_test_invalid';
+        $this->requestData[0]['skuId'] = 'skuId_test_invalid';
+
+        // New Combination of projectId and externalId that does not exist yet
+        $this->requestData[0]['projectId'] = 'projectId_2';
+        $this->requestData[0]['externalId'] = 'externalId_2';
 
         // Error code in response is 422
         $this->expectedStatusCode = '422';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
         $this->errorResponse['errors'][0]['extra'] = [
-            'externalId' => $this->requestData['externalId']
+            'externalId' => $this->requestData[0]['externalId']
         ];
 
         $this->builder
@@ -168,14 +177,14 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
     public function testAddSKUUsageDataConflict()
     {
         // Combination of projectId and externalId already exists
-        $this->requestData['projectId'] = 'projectId_test_duplicate';
-        $this->requestData['externalId'] = 'projectId_test_duplicate';
+        $this->requestData[0]['projectId'] = 'projectId_test_duplicate';
+        $this->requestData[0]['externalId'] = 'externalId_test_duplicate';
 
         // Error code in response is 409
         $this->expectedStatusCode = '409';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
         $this->errorResponse['errors'][0]['extra'] = [
-            'externalId' => $this->requestData['externalId']
+            'externalId' => $this->requestData[0]['externalId']
         ];
 
         $this->builder
