@@ -5,6 +5,7 @@ namespace Pact;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use PhpPact\Consumer\InteractionBuilder;
+use PhpPact\Consumer\Matcher\Matcher;
 use PhpPact\Standalone\MockService\MockServerEnvConfig;
 use PHPUnit\Framework\TestCase;
 use PhpPact\Consumer\Model\ConsumerRequest;
@@ -36,6 +37,8 @@ abstract class SKUUsageConsumerTest extends TestCase
     protected array $responseData;
     protected array $errorResponse;
 
+    protected Matcher $matcher;
+
 
     /**
      * @throws Exception
@@ -43,6 +46,9 @@ abstract class SKUUsageConsumerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        // Matcher for interactions with the mock server
+        $this->matcher = new Matcher();
 
         // Initialize the config of the mock server from environment variables
         $this->config = new MockServerEnvConfig();
@@ -65,14 +71,14 @@ abstract class SKUUsageConsumerTest extends TestCase
             'errors' => [
                 [
                     'code' => '0',
-                    'message' => 'Example error message'
+                    'message' => $this->matcher->like('Example error message'),
                 ]
             ]
         ];
 
         // Authorization token for the request header
         // To be replaced by an actually valid token later to successfully verify the contract with the provider
-        $this->token = 'valid_token';
+        $this->token = getenv('VALID_TOKEN_ADD');
     }
 
     protected function tearDown(): void
@@ -98,7 +104,6 @@ abstract class SKUUsageConsumerTest extends TestCase
 
         $this->assertEquals($this->expectedStatusCode, $response->getStatusCode());
         $this->assertJson($response->getBody());
-        $this->assertEquals($this->responseData, json_decode($response->getBody(), true));
     }
 
     /**
