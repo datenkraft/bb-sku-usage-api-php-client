@@ -26,6 +26,65 @@ require __DIR__ . '/vendor/autoload.php';
 
 ## Using the library
 
+###Creating a client
+~~~~ bash
+require __DIR__ . '/vendor/autoload.php';
+$oAuthTokenUrl = 'https://bb_authorization_api:3000/oauth/token';
+$skuUsageApiUrl = 'https://bb_sku_usage_api:3000';
+
+// Valid clientId, clientSecret and requested scopes
+$clientId = '9348d5e5-207b-4007-b04b-2de94c23a661';
+$clientSecret = 'VzWDpPwsGAkdaekYTQI0iAm919sgkp2QxbyFHTIH';
+$oAuthScopes = ['sku-usage:add'];
+$config['clientId'] = $clientId;
+$config['clientSecret'] = $clientSecret;
+$config['oAuthScopes'] = $oAuthScopes;
+$config['oAuthTokenUrl'] = $oAuthTokenUrl;
+
+$factory = new ClientFactory($config);
+
+$client= $factory->createClient(Client::class, $skuUsageApiUrl);
+~~~~
+
+###Sending SKU Usage data 
+~~~~ bash
+$data = [];
+
+$meta = new SkuUsageMeta();
+$meta->setAmount(101)->setCurrency('EUR')->setDescription('description');
+
+$base = new SkuUsageBase();
+$base->setExternalId('12')
+    ->setMeta($meta)
+    ->setProjectId('2')
+    ->setQuantity(1)
+    ->setSkuId('ab')
+    ->setUsageEnd(new \DateTime())
+    ->setUsageStart(new \DateTime());
+
+$meta2 = new SkuUsageMeta();
+$meta2->setAmount(101)->setCurrency('EUR')->setDescription('description');
+
+$base2 = new SkuUsageBase();
+$base2->setExternalId('14')
+    ->setMeta($meta2)
+    ->setProjectId('2')
+    ->setQuantity(1)
+    ->setSkuId('newab')
+    ->setUsageEnd(new \DateTime())
+    ->setUsageStart(new \DateTime());
+
+$data = [$base, $base2];
+
+$response = $client->addSkuUsage(
+    $data,
+    \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Client::FETCH_RESPONSE
+);
+echo "Response:";
+echo $response->getBody();
+~~~~
+
+
 ## Generating the Models, Endpoints and Normalizers
 1. Copy openapi.json to the project root folder
 2. Check the Jane Php configuration file, should look like this
@@ -34,7 +93,7 @@ require __DIR__ . '/vendor/autoload.php';
 return [
     'openapi-file' => __DIR__ . '/openapi.json',
     'namespace' => 'Datenkraft\Backbone\Client\SkuUsageApi\Generated',
-    'directory' => __DIR__ . '/src/generated',
+    'directory' => __DIR__ . '/src/Generated',
     'use-fixer' => true
 ];
 ~~~~

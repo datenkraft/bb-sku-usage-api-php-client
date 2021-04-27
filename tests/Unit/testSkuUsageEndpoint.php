@@ -42,7 +42,16 @@ class testSkuUsageEndpoint extends TestCase
         $meta->setAmount(101)->setCurrency('EUR')->setDescription('description');
 
         $base = new SkuUsageBase();
-        $base->setExternalId('1')
+        $base->setExternalId('12')
+            ->setMeta($meta)
+            ->setProjectId('2')
+            ->setQuantity(1)
+            ->setSkuId('ab')
+            ->setUsageEnd(new \DateTime())
+            ->setUsageStart(new \DateTime());
+
+        $base2 = new SkuUsageBase();
+        $base2->setExternalId('14')
             ->setMeta($meta)
             ->setProjectId('2')
             ->setQuantity(1)
@@ -51,6 +60,7 @@ class testSkuUsageEndpoint extends TestCase
             ->setUsageStart(new \DateTime());
 
         $data[] = $base;
+        $data[] = $base2;
         $response = $this->object->addSkuUsage(
             $data,
             \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Client::FETCH_RESPONSE
