@@ -27,14 +27,14 @@ require __DIR__ . '/vendor/autoload.php';
 ## Using the library
 
 ###Creating a client
-~~~~ bash
+~~~~ php
 require __DIR__ . '/vendor/autoload.php';
 $oAuthTokenUrl = 'https://bb_authorization_api:3000/oauth/token';
 $skuUsageApiUrl = 'https://bb_sku_usage_api:3000';
 
 // Valid clientId, clientSecret and requested scopes
-$clientId = '9348d5e5-207b-4007-b04b-2de94c23a661';
-$clientSecret = 'VzWDpPwsGAkdaekYTQI0iAm919sgkp2QxbyFHTIH';
+$clientId = '1234';
+$clientSecret = 'abcd';
 $oAuthScopes = ['sku-usage:add'];
 $config['clientId'] = $clientId;
 $config['clientSecret'] = $clientSecret;
@@ -47,7 +47,7 @@ $client= $factory->createClient(Client::class, $skuUsageApiUrl);
 ~~~~
 
 ###Sending SKU Usage data 
-~~~~ bash
+~~~~ php
 $data = [];
 
 $meta = new SkuUsageMeta();
@@ -76,10 +76,7 @@ $base2->setExternalId('14')
 
 $data = [$base, $base2];
 
-$response = $client->addSkuUsage(
-    $data,
-    \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Client::FETCH_RESPONSE
-);
+$response = $client->addSkuUsage($data);
 echo "Response:";
 echo $response->getBody();
 ~~~~
@@ -89,7 +86,7 @@ echo $response->getBody();
 1. Copy openapi.json to the project root folder
 2. Check the Jane Php configuration file, should look like this
 
-~~~~ bash
+~~~~ php
 return [
     'openapi-file' => __DIR__ . '/openapi.json',
     'namespace' => 'Datenkraft\Backbone\Client\SkuUsageApi\Generated',
@@ -103,4 +100,4 @@ php vendor/bin/jane-openapi generate
 ~~~~
 
 ## Licence
-This repository is available under the [MIT license](https://github.com/Adyen/adyen-php-api-library/blob/master/LICENSE).
+This repository is available under the [MIT license](https://opensource.org/licenses/MIT).

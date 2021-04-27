@@ -35,38 +35,35 @@ class testSkuUsageEndpoint extends TestCase
 
     public function testGetOpenApi()
     {
-        //$response = $this->object->getOpenApi();
+//        //$response = $this->object->getOpenApi();
 //        $data = [];
 //
 //        $meta = new SkuUsageMeta();
 //        $meta->setAmount(101)->setCurrency('EUR')->setDescription('description');
 //
 //        $base = new SkuUsageBase();
-//        $base->setExternalId('12')
+//        $base->setExternalId('1rt2')
 //            ->setMeta($meta)
 //            ->setProjectId('2')
 //            ->setQuantity(1)
-//            ->setSkuId('ab')
+//            ->setSkuId('ab234')
 //            ->setUsageEnd(new \DateTime())
 //            ->setUsageStart(new \DateTime());
 //
 //        $base2 = new SkuUsageBase();
-//        $base2->setExternalId('14')
+//        $base2->setExternalId('1ert4')
 //            ->setMeta($meta)
 //            ->setProjectId('2')
 //            ->setQuantity(1)
-//            ->setSkuId('ab')
+//            ->setSkuId('ab34')
 //            ->setUsageEnd(new \DateTime())
 //            ->setUsageStart(new \DateTime());
 //
 //        $data[] = $base;
 //        $data[] = $base2;
-//        $response = $this->object->addSkuUsage(
-//            $data,
-//            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Client::FETCH_RESPONSE
-//        );
+//        $response = $this->object->addSkuUsage($data);
 //        echo "Response:";
-//        echo $response->getBody();
+//        var_dump($response);
 //        //var_dump($response);
     }
 }
