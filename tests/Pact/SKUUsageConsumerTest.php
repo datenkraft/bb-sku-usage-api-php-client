@@ -10,8 +10,6 @@ use PhpPact\Standalone\MockService\MockServerEnvConfig;
 use PHPUnit\Framework\TestCase;
 use PhpPact\Consumer\Model\ConsumerRequest;
 use PhpPact\Consumer\Model\ProviderResponse;
-use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class SKUUsageConsumerTest
@@ -89,39 +87,14 @@ abstract class SKUUsageConsumerTest extends TestCase
         $this->builder->verify();
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    protected function testSuccessResponse(): void
+    protected function testResponse(): void
     {
         $this->prepareTest();
 
-        $response = $this->doRequest(
-            $this->method,
-            $this->path,
-            ['headers' => $this->requestHeaders, 'body' => json_encode($this->requestData)]
-        );
+        $response = $this->doClientRequest();
 
         $this->assertEquals($this->expectedStatusCode, $response->getStatusCode());
         $this->assertJson($response->getBody());
-    }
-
-    /**
-     * @throws GuzzleException
-     */
-    protected function testErrorResponse(): void
-    {
-        $this->responseData = $this->errorResponse;
-        $this->prepareTest();
-
-        $this->expectException($this->expectedExceptionClass);
-        $this->expectExceptionMessageMatches('~' . $this->expectedStatusCode . '~');
-
-        $this->doRequest(
-            $this->method,
-            $this->path,
-            ['headers' => $this->requestHeaders, 'body' => json_encode($this->requestData)]
-        );
     }
 
     protected function prepareTest(): void
@@ -185,17 +158,5 @@ abstract class SKUUsageConsumerTest extends TestCase
         return $response;
     }
 
-    /**
-     * @param string $method
-     * @param string $path
-     * @param array $options
-     * @return ResponseInterface
-     * @throws GuzzleException
-     */
-    protected function doRequest(string $method, string $path, array $options): ResponseInterface
-    {
-        // Uses GuzzleHttp/Client for now, to be replaced with real method(s) when the PHP client is implemented
-        $httpClient = new Client(['base_uri' => $this->config->getBaseUri()]);
-        return $httpClient->request($method, $path, $options);
-    }
+    abstract protected function doClientRequest();
 }
