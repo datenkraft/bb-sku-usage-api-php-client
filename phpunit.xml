@@ -20,19 +20,4 @@
             </arguments>
         </listener>
     </listeners>
-
-    <!-- Environment variables for testing -->
-    <php>
-        <env name="PACT_MOCK_SERVER_HOST" value="bb_sku_usage_api_php_client_pact_mock_service"/>
-        <env name="PACT_MOCK_SERVER_PORT" value="30287"/>
-        <env name="PACT_CONSUMER_NAME" value="skuUsageConsumer"/>
-        <env name="PACT_CONSUMER_VERSION" value="1.0.0"/>
-        <env name="PACT_CONSUMER_TAG" value="main"/>
-        <env name="PACT_PROVIDER_NAME" value="skuUsageProvider"/>
-        <env name="PACT_OUTPUT_DIR" value="pacts"/>
-        <env name="PACT_MOCK_SERVER_HEALTH_CHECK_TIMEOUT" value="10"/>
-        <env name="PACT_BROKER_URI" value="https://datenkraft.pactflow.io/"/>
-        <env name="PACT_BROKER_BEARER_TOKEN" value="Nn10zhsOIaNxghh4k0SqGw"/>
-    </php>
-
 </phpunit>
