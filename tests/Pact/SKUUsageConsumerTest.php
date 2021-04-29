@@ -87,7 +87,7 @@ abstract class SKUUsageConsumerTest extends TestCase
         $this->builder->verify();
     }
 
-    protected function testResponse(): void
+    protected function beginTest(): void
     {
         $this->prepareTest();
 

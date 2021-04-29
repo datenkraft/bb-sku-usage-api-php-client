@@ -82,7 +82,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             )
             ->uponReceiving('Successful POST request to /sku-usage');
 
-        $this->testResponse();
+        $this->beginTest();
     }
 
     public function testAddSKUUsageDataUnauthorized()
@@ -101,7 +101,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ->uponReceiving('Unauthorized POST request to /sku-usage');
 
         $this->responseData = $this->errorResponse;
-        $this->testResponse();
+        $this->beginTest();
     }
 
     public function testAddSKUUsageDataForbidden()
@@ -120,7 +120,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ->uponReceiving('Forbidden POST request to /sku-usage');
 
         $this->responseData = $this->errorResponse;
-        $this->testResponse();
+        $this->beginTest();
     }
 
     public function testAddSKUUsageDataBadRequest()
@@ -141,7 +141,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ->uponReceiving('Bad POST request to /sku-usage');
 
         $this->responseData = $this->errorResponse;
-        $this->testResponse();
+        $this->beginTest();
     }
 
     public function testAddSKUUsageDataUnprocessableEntity()
@@ -165,7 +165,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ->uponReceiving('POST request to /sku-usage with non-existent skuId');
 
         $this->responseData = $this->errorResponse;
-        $this->testResponse();
+        $this->beginTest();
     }
 
     public function testAddSKUUsageDataConflict()
@@ -186,7 +186,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ->uponReceiving('POST request to /sku-usage with already existent combination of projectId and externalId');
 
         $this->responseData = $this->errorResponse;
-        $this->testResponse();
+        $this->beginTest();
     }
 
     /**
