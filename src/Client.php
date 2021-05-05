@@ -19,7 +19,7 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Client
      */
     public static function createWithFactory(ClientFactory $clientFactory, string $endpointUrl = null): self
     {
-        $endpointUrl = $endpointUrl ?? getenv('X_DATENKRAFT_SKU_USAGE_URL') ?: null;
+        $endpointUrl = $endpointUrl ?? getenv('X_DATENKRAFT_SKU_USAGE_API_URL') ?: null;
 
         return $clientFactory->createClient(static::class, $endpointUrl);
     }

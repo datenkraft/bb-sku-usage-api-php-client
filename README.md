@@ -21,16 +21,16 @@ composer require datenkraft/bb-sku-usage-api-php-client
 In your PHP script, make sure you include the autoloader:
 
 ~~~~ php
-require __DIR__ . '/vendor/autoload.php';
+require 'path/to/vendor/autoload.php';
 ~~~~
 
 ## Using the library
 
 ###Creating a client
 ~~~~ php
-require __DIR__ . '/vendor/autoload.php';
-$oAuthTokenUrl = 'https://bb_authorization_api:3000/oauth/token';
-$skuUsageApiUrl = 'https://bb_sku_usage_api:3000';
+require 'path/to/vendor/autoload.php';
+$oAuthTokenUrl = 'https://authorization-server-url/oauth/token';
+$skuUsageApiUrl = 'https://sku-usage-server-url';
 
 // Valid clientId, clientSecret and requested scopes
 $clientId = '1234';
@@ -77,8 +77,6 @@ $base2->setExternalId('14')
 $data = [$base, $base2];
 
 $response = $client->addSkuUsage($data);
-echo "Response:";
-echo $response->getBody();
 ~~~~
 
 
