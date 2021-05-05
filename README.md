@@ -42,8 +42,8 @@ $config['oAuthScopes'] = $oAuthScopes;
 $config['oAuthTokenUrl'] = $oAuthTokenUrl;
 
 $factory = new ClientFactory($config);
-
-$client= $factory->createClient(Client::class, $skuUsageApiUrl);
+$client = \Datenkraft\Backbone\Client\SkuUsageApi\Client::createWithFactory($factory);
+$response = $client->addSkuUsage();
 ~~~~
 
 ###Sending SKU Usage data 
@@ -53,7 +53,7 @@ $data = [];
 $meta = new SkuUsageMeta();
 $meta->setAmount(101)->setCurrency('EUR')->setDescription('description');
 
-$base = new SkuUsageBase();
+$base = new NewSkuUsage();
 $base->setExternalId('12')
     ->setMeta($meta)
     ->setProjectId('2')
@@ -65,7 +65,7 @@ $base->setExternalId('12')
 $meta2 = new SkuUsageMeta();
 $meta2->setAmount(101)->setCurrency('EUR')->setDescription('description');
 
-$base2 = new SkuUsageBase();
+$base2 = new NewSkuUsage();
 $base2->setExternalId('14')
     ->setMeta($meta2)
     ->setProjectId('2')

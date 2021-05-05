@@ -214,11 +214,11 @@
                         "type": "object"
                     },
                     {
-                        "$ref": "#/components/schemas/skuUsageBase"
+                        "$ref": "#/components/schemas/newSkuUsage"
                     }
                 ]
             },
-            "skuUsageBase": {
+            "newSkuUsage": {
                 "required": [
                     "skuId",
                     "quantity",
@@ -280,7 +280,7 @@
             "addSkuUsageRequest": {
                 "type": "array",
                 "items": {
-                    "$ref": "#/components/schemas/skuUsageBase"
+                    "$ref": "#/components/schemas/newSkuUsage"
                 }
             },
             "addSkuUsageResponse": {

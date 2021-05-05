@@ -17,7 +17,7 @@ class AddSkuUsage extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
     /**
      * Add SKU Usage data.
      *
-     * @param \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageBase[] $requestBody
+     * @param \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage[] $requestBody
      */
     public function __construct(array $requestBody)
     {
@@ -36,7 +36,7 @@ class AddSkuUsage extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        if (is_array($this->body) and isset($this->body[0]) and $this->body[0] instanceof \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageBase) {
+        if (is_array($this->body) and isset($this->body[0]) and $this->body[0] instanceof \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage) {
             return [['Content-Type' => ['application/json']], $serializer->serialize($this->body, 'json')];
         }
 

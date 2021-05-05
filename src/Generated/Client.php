@@ -38,8 +38,8 @@ class Client extends \Jane\OpenApiRuntime\Client\Client
     /**
      * Add SKU Usage data.
      *
-     * @param \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageBase[] $requestBody
-     * @param string                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage[] $requestBody
+     * @param string                                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageForbiddenException
