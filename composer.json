@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": "^7.2",
-        "datenkraft/bb-base-api-php-client": "@dev"
+        "datenkraft/bb-base-api-php-client": "1.*"
     },
     "license": "MIT",
     "authors": [
@@ -30,11 +30,5 @@
       "classmap": [
         "tests/"
       ]
-    },
-    "repositories": {
-        "local": {
-            "type": "path",
-            "url": "../bb-base-api-php-client"
-        }
     }
 }
