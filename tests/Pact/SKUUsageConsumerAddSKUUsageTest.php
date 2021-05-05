@@ -218,4 +218,48 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
 
         return $client->addSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
     }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function testAddSKUUsageDataMultipleErrors()
+    {
+        // A SKU ID is not provided
+        unset($this->requestData[0]['skuId']);
+
+        // Combination of projectId and externalId already exists
+        $this->requestData[0]['projectId'] = 'projectId_test_duplicate';
+        $this->requestData[0]['externalId'] = 'externalId_test_duplicate';
+
+        // Status code of the response is 400
+        $this->expectedStatusCode = '400';
+
+        // Error code of first error is 400
+        $this->errorResponse['errors'][0] = [
+            'code' => '400',
+            'message' => $this->matcher->like('Example error message'),
+            'extra' => [
+                'externalId' => $this->requestData[0]['externalId']
+            ]
+        ];
+
+        // Error code of second error is 409
+        $this->errorResponse['errors'][1] = [
+            'code' => '409',
+            'message' => $this->matcher->like('Example error message'),
+            'extra' => [
+                'externalId' => $this->requestData[0]['externalId']
+            ]
+        ];
+
+        $this->builder
+            ->given('No skuId is provided in the request, the combination of projectId and externalId already exists')
+            ->uponReceiving(
+                'POST request to /sku-usage without a skuId and an already existent combination of projectId ' .
+                'and externalId'
+            );
+
+        $this->testErrorResponse();
+    }
 }
