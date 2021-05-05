@@ -5,6 +5,7 @@ namespace Pact;
 use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
 use Datenkraft\Backbone\Client\SkuUsageApi\Client;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageBase;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageMeta;
 use DateTime;
@@ -199,10 +200,9 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ['clientId' => 'test', 'clientSecret' => 'test', 'oAuthTokenUrl' => 'test', 'oAuthScopes' => ['test']]
         );
         $factory->setToken($this->token);
+        $client = Client::createWithFactory($factory);
 
-        $client = $factory->createClient(Client::class, $this->config->getBaseUri());
-
-        $skuUsage = (new SkuUsageBase())
+        $skuUsage = (new SkuUsage())
             ->setSkuId($this->requestData[0]['skuId'])
             ->setProjectId($this->requestData[0]['projectId'])
             ->setExternalId($this->requestData[0]['externalId'])
