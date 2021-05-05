@@ -5,8 +5,7 @@ namespace Pact;
 use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
 use Datenkraft\Backbone\Client\SkuUsageApi\Client;
-use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage;
-use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageBase;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageMeta;
 use DateTime;
 use DateInterval;
@@ -191,42 +190,12 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
     }
 
     /**
-     * @throws ConfigException
-     * @throws Exception
-     */
-    protected function doClientRequest(): ResponseInterface
-    {
-        $factory = new ClientFactory(
-            ['clientId' => 'test', 'clientSecret' => 'test', 'oAuthTokenUrl' => 'test', 'oAuthScopes' => ['test']]
-        );
-        $factory->setToken($this->token);
-        $client = Client::createWithFactory($factory);
-
-        $skuUsage = (new SkuUsage())
-            ->setSkuId($this->requestData[0]['skuId'])
-            ->setProjectId($this->requestData[0]['projectId'])
-            ->setExternalId($this->requestData[0]['externalId'])
-            ->setQuantity($this->requestData[0]['quantity'])
-            ->setUsageStart(new DateTime($this->requestData[0]['usageStart']))
-            ->setUsageEnd(new DateTime($this->requestData[0]['usageEnd']))
-            ->setMeta(
-                (new SkuUsageMeta())
-                    ->setAmount($this->requestData[0]['meta']['amount'])
-                    ->setCurrency($this->requestData[0]['meta']['currency'])
-                    ->setDescription($this->requestData[0]['meta']['description'])
-            );
-
-        return $client->addSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
-    }
-
-    /**
-     * @throws GuzzleException
      * @throws Exception
      */
     public function testAddSKUUsageDataMultipleErrors()
     {
-        // A SKU ID is not provided
-        unset($this->requestData[0]['skuId']);
+        // SkuId is empty
+        $this->requestData[0]['skuId'] = '';
 
         // Combination of projectId and externalId already exists
         $this->requestData[0]['projectId'] = 'projectId_test_duplicate';
@@ -260,6 +229,36 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
                 'and externalId'
             );
 
-        $this->testErrorResponse();
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    /**
+     * @throws ConfigException
+     * @throws Exception
+     */
+    protected function doClientRequest(): ResponseInterface
+    {
+        $factory = new ClientFactory(
+            ['clientId' => 'test', 'clientSecret' => 'test', 'oAuthTokenUrl' => 'test', 'oAuthScopes' => ['test']]
+        );
+        $factory->setToken($this->token);
+        $client = Client::createWithFactory($factory, $this->config->getBaseUri());
+
+        $skuUsage = (new NewSkuUsage())
+            ->setSkuId($this->requestData[0]['skuId'])
+            ->setProjectId($this->requestData[0]['projectId'])
+            ->setExternalId($this->requestData[0]['externalId'])
+            ->setQuantity($this->requestData[0]['quantity'])
+            ->setUsageStart(new DateTime($this->requestData[0]['usageStart']))
+            ->setUsageEnd(new DateTime($this->requestData[0]['usageEnd']))
+            ->setMeta(
+                (new SkuUsageMeta())
+                    ->setAmount($this->requestData[0]['meta']['amount'])
+                    ->setCurrency($this->requestData[0]['meta']['currency'])
+                    ->setDescription($this->requestData[0]['meta']['description'])
+            );
+
+        return $client->addSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
     }
 }
