@@ -26,7 +26,8 @@ require 'path/to/vendor/autoload.php';
 
 ## Using the library
 
-###Creating a client
+### Creating a client
+
 ~~~~ php
 require 'path/to/vendor/autoload.php';
 
@@ -34,7 +35,8 @@ $factory = new ClientFactory();
 $client = \Datenkraft\Backbone\Client\SkuUsageApi\Client::createWithFactory($factory);
 ~~~~
 
-###Sending SKU Usage data 
+### Sending SKU Usage data
+
 ~~~~ php
 $data = [];
 
