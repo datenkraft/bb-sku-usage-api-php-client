@@ -26,91 +26,65 @@ require 'path/to/vendor/autoload.php';
 
 ## Using the library
 
+The library can be used to communicate with the SKU Usage Resource Server.
+The Client includes functionalities for every endpoint defined in the openapi.json.
+The Client also is auto generated with jane-php using an openapi.json file.
+
 ### Creating a client
 
 ~~~~ php
 require 'path/to/vendor/autoload.php';
 
-$factory = new ClientFactory();
-$client = \Datenkraft\Backbone\Client\SkuUsageApi\Client::createWithFactory($factory);
+// Valid clientId, clientSecret and requested scopes
+$clientId = '1234';
+$clientSecret = 'abcd';
+$oAuthScopes = ['sku-usage:add'];
+
+$config['clientId'] = $clientId;
+$config['clientSecret'] = $clientSecret;
+$config['oAuthScopes'] = $oAuthScopes;
+
+$factory = new ClientFactory($config);
+$client = Client::createWithFactory($factory);
 ~~~~
 
-### Sending SKU Usage data
+### Example Endpoint: Add SKU Usage
 
 ~~~~ php
 $data = [];
 
-$meta = new SkuUsageMeta();
-$meta->setAmount(101)->setCurrency('EUR')->setDescription('description');
+$skuUsageMeta = new SkuUsageMeta();
+$skuUsageMeta->setAmount(101)
+    ->setCurrency('EUR')
+    ->setDescription('description');
 
-$base = new NewSkuUsage();
-$base->setExternalId('12')
-    ->setMeta($meta)
+$skuUsage = new NewSkuUsage();
+$skuUsage->setExternalId('12')
+    ->setMeta($skuUsageMeta)
     ->setProjectId('2')
     ->setQuantity(1)
     ->setSkuId('ab')
     ->setUsageEnd(new \DateTime())
     ->setUsageStart(new \DateTime());
 
-$meta2 = new SkuUsageMeta();
-$meta2->setAmount(101)->setCurrency('EUR')->setDescription('description');
+$skuUsageMeta2 = new SkuUsageMeta();
+$skuUsageMeta2->setAmount(101)
+    ->setCurrency('EUR')
+    ->setDescription('description');
 
-$base2 = new NewSkuUsage();
-$base2->setExternalId('14')
-    ->setMeta($meta2)
+$skuUsage2 = new NewSkuUsage();
+$skuUsage->setExternalId('14')
+    ->setMeta($skuUsageMeta2)
     ->setProjectId('2')
     ->setQuantity(1)
     ->setSkuId('newab')
     ->setUsageEnd(new \DateTime())
     ->setUsageStart(new \DateTime());
 
-$data = [$base, $base2];
-
+$data = [$skuUsage, $skuUsage2];
 $response = $client->addSkuUsage($data);
-~~~~
+$response; // skuUsage[]
 
-## Configuration
-Default configuration variables are set in config/config.php
-
-### Changing the default authorisation configuration
-To override default authorization configuration, create a new configuration array and pass it to the factory construct:
-
-~~~~ php
-$clientId = '1234';
-$clientSecret = 'abcd';
-$oAuthScopes = ['sku-usage:add'];
-$oAuthTokenUrl = 'https://authorization-server-url/oauth/token';
-
-$config['clientId'] = $clientId;
-$config['clientSecret'] = $clientSecret;
-$config['oAuthScopes'] = $oAuthScopes;
-$config['oAuthTokenUrl'] = $oAuthTokenUrl;
-
-$factory = new ClientFactory($config);
-~~~~
-
-### Changing the default Sku Usage server Url
-To override Sku Usage server Url, pass the Url when creating Client:
-~~~~ php
-$skuUsageApiUrl = 'https://sku-usage-server-url';
-$client = \Datenkraft\Backbone\Client\SkuUsageApi\Client::createWithFactory($factory, $skuUsageApiUrl);
-~~~~
-
-## Development notes
-### Generating the Models, Endpoints and Normalizers
-1. Copy openapi.json to the project root folder
-2. Check the Jane Php configuration file, should look like this
-~~~~ php
-return [
-    'openapi-file' => __DIR__ . '/openapi.json',
-    'namespace' => 'Datenkraft\Backbone\Client\SkuUsageApi\Generated',
-    'directory' => __DIR__ . '/src/Generated',
-    'use-fixer' => true
-];
-~~~~
-3. Run the generator from CLI
-~~~~ bash
-php vendor/bin/jane-openapi generate
 ~~~~
 
 ## Licence
