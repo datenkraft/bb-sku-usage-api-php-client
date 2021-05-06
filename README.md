@@ -29,21 +29,9 @@ require 'path/to/vendor/autoload.php';
 ###Creating a client
 ~~~~ php
 require 'path/to/vendor/autoload.php';
-$oAuthTokenUrl = 'https://authorization-server-url/oauth/token';
-$skuUsageApiUrl = 'https://sku-usage-server-url';
 
-// Valid clientId, clientSecret and requested scopes
-$clientId = '1234';
-$clientSecret = 'abcd';
-$oAuthScopes = ['sku-usage:add'];
-$config['clientId'] = $clientId;
-$config['clientSecret'] = $clientSecret;
-$config['oAuthScopes'] = $oAuthScopes;
-$config['oAuthTokenUrl'] = $oAuthTokenUrl;
-
-$factory = new ClientFactory($config);
+$factory = new ClientFactory();
 $client = \Datenkraft\Backbone\Client\SkuUsageApi\Client::createWithFactory($factory);
-$response = $client->addSkuUsage();
 ~~~~
 
 ###Sending SKU Usage data 
@@ -79,11 +67,37 @@ $data = [$base, $base2];
 $response = $client->addSkuUsage($data);
 ~~~~
 
+## Configuration
+Default configuration variables are set in config/config.php
 
-## Generating the Models, Endpoints and Normalizers
+### Changing the default authorisation configuration
+To override default authorization configuration, create a new configuration array and pass it to the factory construct:
+
+~~~~ php
+$clientId = '1234';
+$clientSecret = 'abcd';
+$oAuthScopes = ['sku-usage:add'];
+$oAuthTokenUrl = 'https://authorization-server-url/oauth/token';
+
+$config['clientId'] = $clientId;
+$config['clientSecret'] = $clientSecret;
+$config['oAuthScopes'] = $oAuthScopes;
+$config['oAuthTokenUrl'] = $oAuthTokenUrl;
+
+$factory = new ClientFactory($config);
+~~~~
+
+### Changing the default Sku Usage server Url
+To override Sku Usage server Url, pass the Url when creating Client:
+~~~~ php
+$skuUsageApiUrl = 'https://sku-usage-server-url';
+$client = \Datenkraft\Backbone\Client\SkuUsageApi\Client::createWithFactory($factory, $skuUsageApiUrl);
+~~~~
+
+## Development notes
+### Generating the Models, Endpoints and Normalizers
 1. Copy openapi.json to the project root folder
 2. Check the Jane Php configuration file, should look like this
-
 ~~~~ php
 return [
     'openapi-file' => __DIR__ . '/openapi.json',
