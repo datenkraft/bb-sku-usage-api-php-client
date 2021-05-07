@@ -2,12 +2,16 @@
 
 namespace Pact;
 
+use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
+use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
+use Datenkraft\Backbone\Client\SkuUsageApi\Client;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageMeta;
 use DateTime;
 use DateInterval;
 use DateTimeInterface;
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
-use PhpPact\Consumer\Matcher\Matcher;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class SKUUsageConsumerAddSKUUsageTest
@@ -66,9 +70,6 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         parent::tearDown();
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function testAddSKUUsageDataSuccess()
     {
         $this->expectedStatusCode = '201';
@@ -81,12 +82,9 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             )
             ->uponReceiving('Successful POST request to /sku-usage');
 
-        $this->testSuccessResponse();
+        $this->beginTest();
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function testAddSKUUsageDataUnauthorized()
     {
         // Invalid token
@@ -102,12 +100,10 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ->given('The token is invalid')
             ->uponReceiving('Unauthorized POST request to /sku-usage');
 
-        $this->testErrorResponse();
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function testAddSKUUsageDataForbidden()
     {
         // Token with invalid scope
@@ -123,39 +119,39 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ->given('A SKU with skuId exists, the request is valid, the token is valid with an invalid scope')
             ->uponReceiving('Forbidden POST request to /sku-usage');
 
-        $this->testErrorResponse();
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function testAddSKUUsageDataBadRequest()
     {
-        // Error code in response is 400, extra is not defined
+        // Error code in response is 400
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
-        unset($this->errorResponse['errors'][0]['extra']);
 
-        $this->requestData = ['Bad Request'];
+        // SkuId is empty
+        $this->requestData[0]['skuId'] = '';
+
+        // New Combination of projectId and externalId that does not exist yet
+        $this->requestData[0]['projectId'] = 'projectId_2';
+        $this->requestData[0]['externalId'] = 'externalId_2';
 
         $this->builder
-            ->given('The request body is invalid or missing')
+            ->given('The skuId in the request is empty')
             ->uponReceiving('Bad POST request to /sku-usage');
 
-        $this->testErrorResponse();
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function testAddSKUUsageDataUnprocessableEntity()
     {
         // SKU with skuId does not exist
         $this->requestData[0]['skuId'] = 'skuId_test_invalid';
 
         // New Combination of projectId and externalId that does not exist yet
-        $this->requestData[0]['projectId'] = 'projectId_2';
-        $this->requestData[0]['externalId'] = 'externalId_2';
+        $this->requestData[0]['projectId'] = 'projectId_3';
+        $this->requestData[0]['externalId'] = 'externalId_3';
 
         // Error code in response is 422
         $this->expectedStatusCode = '422';
@@ -168,12 +164,10 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ->given('The SKU with skuId does not exist')
             ->uponReceiving('POST request to /sku-usage with non-existent skuId');
 
-        $this->testErrorResponse();
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function testAddSKUUsageDataConflict()
     {
         // Combination of projectId and externalId already exists
@@ -191,17 +185,17 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
             ->given('The combination of projectId and externalId already exists')
             ->uponReceiving('POST request to /sku-usage with already existent combination of projectId and externalId');
 
-        $this->testErrorResponse();
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
     }
 
     /**
-     * @throws GuzzleException
      * @throws Exception
      */
     public function testAddSKUUsageDataMultipleErrors()
     {
-        // A SKU ID is not provided
-        unset($this->requestData[0]['skuId']);
+        // SkuId is empty
+        $this->requestData[0]['skuId'] = '';
 
         // Combination of projectId and externalId already exists
         $this->requestData[0]['projectId'] = 'projectId_test_duplicate';
@@ -235,6 +229,36 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
                 'and externalId'
             );
 
-        $this->testErrorResponse();
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    /**
+     * @throws ConfigException
+     * @throws Exception
+     */
+    protected function doClientRequest(): ResponseInterface
+    {
+        $factory = new ClientFactory(
+            ['clientId' => 'test', 'clientSecret' => 'test', 'oAuthTokenUrl' => 'test', 'oAuthScopes' => ['test']]
+        );
+        $factory->setToken($this->token);
+        $client = Client::createWithFactory($factory, $this->config->getBaseUri());
+
+        $skuUsage = (new NewSkuUsage())
+            ->setSkuId($this->requestData[0]['skuId'])
+            ->setProjectId($this->requestData[0]['projectId'])
+            ->setExternalId($this->requestData[0]['externalId'])
+            ->setQuantity($this->requestData[0]['quantity'])
+            ->setUsageStart(new DateTime($this->requestData[0]['usageStart']))
+            ->setUsageEnd(new DateTime($this->requestData[0]['usageEnd']))
+            ->setMeta(
+                (new SkuUsageMeta())
+                    ->setAmount($this->requestData[0]['meta']['amount'])
+                    ->setCurrency($this->requestData[0]['meta']['currency'])
+                    ->setDescription($this->requestData[0]['meta']['description'])
+            );
+
+        return $client->addSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
     }
 }

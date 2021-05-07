@@ -1,0 +1,309 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "SKU Usage API",
+        "description": "API to insert usage information to a specific project and SKU",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "UNDEFINED",
+            "description": "Production server"
+        },
+        {
+            "url": "UNDEFINED",
+            "description": "Staging server"
+        },
+        {
+            "url": "https://localhost:30210",
+            "description": "Development server"
+        }
+    ],
+    "paths": {
+        "/docs": {
+            "get": {
+                "tags": [
+                    "docs"
+                ],
+                "summary": "Get the openapi documentation as json",
+                "description": "Get the openapi documentation as json",
+                "operationId": "getOpenApi",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/docs/openapi.{format}": {
+            "get": {
+                "tags": [
+                    "docs"
+                ],
+                "summary": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
+                "description": "Get the openapi documentation in the specified format (yaml or json, fallback is json)",
+                "operationId": "getOpenApiInFormat",
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "description": "Openapi file format",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "yaml",
+                                "json"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/sku-usage": {
+            "post": {
+                "tags": [
+                    "skuUsage"
+                ],
+                "summary": "Add SKU Usage data",
+                "description": "Add SKU Usage data",
+                "operationId": "addSkuUsage",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/addSkuUsageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/addSkuUsageResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [
+                            "sku-usage:add"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "errorResponse": {
+                "properties": {
+                    "errors": {
+                        "description": "errors",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "error": {
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "description": "Code",
+                        "type": "string"
+                    },
+                    "message": {
+                        "description": "Message",
+                        "type": "string"
+                    },
+                    "extra": {
+                        "$ref": "#/components/schemas/errorExtra"
+                    }
+                },
+                "type": "object"
+            },
+            "errorExtra": {
+                "properties": {
+                    "externalId": {
+                        "description": "External Id",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "skuUsage": {
+                "required": [
+                    "skuUsageId"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "properties": {
+                            "skuUsageId": {
+                                "description": "SKU Usage Id",
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "$ref": "#/components/schemas/newSkuUsage"
+                    }
+                ]
+            },
+            "newSkuUsage": {
+                "required": [
+                    "skuId",
+                    "quantity",
+                    "projectId",
+                    "usageStart",
+                    "usageEnd",
+                    "externalId"
+                ],
+                "properties": {
+                    "skuId": {
+                        "description": "SKU Id",
+                        "type": "string"
+                    },
+                    "quantity": {
+                        "description": "Quantity",
+                        "type": "integer"
+                    },
+                    "projectId": {
+                        "description": "Project Id",
+                        "type": "string"
+                    },
+                    "usageStart": {
+                        "description": "Start time of the usage",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "usageEnd": {
+                        "description": "End time of the usage",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "externalId": {
+                        "description": "External Id",
+                        "type": "string"
+                    },
+                    "meta": {
+                        "$ref": "#/components/schemas/skuUsageMeta"
+                    }
+                },
+                "type": "object"
+            },
+            "skuUsageMeta": {
+                "properties": {
+                    "amount": {
+                        "description": "Amount",
+                        "type": "integer"
+                    },
+                    "currency": {
+                        "description": "Currency",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "addSkuUsageRequest": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/newSkuUsage"
+                }
+            },
+            "addSkuUsageResponse": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/skuUsage"
+                }
+            }
+        },
+        "securitySchemes": {
+            "oAuthAuthorization": {
+                "type": "oauth2",
+                "description": "OAuth2 Authorization",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://localhost:30250/oauth/token",
+                        "refreshUrl": "UNDEFINED",
+                        "scopes": {
+                            "sku-usage-add": "Add SKU Usage Data"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
