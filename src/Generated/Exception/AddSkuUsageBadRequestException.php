@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-class AddSkuUsageBadRequestException extends \RuntimeException implements ClientException
+class AddSkuUsageBadRequestException extends BadRequestException
 {
     private $errorResponse;
 
