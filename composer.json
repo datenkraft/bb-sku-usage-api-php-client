@@ -30,5 +30,11 @@
       "classmap": [
         "tests/"
       ]
+    },
+    "repositories": {
+        "local": {
+            "type": "path",
+            "url": "../bb-base-api-php-client"
+        }
     }
 }
