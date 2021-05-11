@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
-use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -23,7 +23,7 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    protected $normalizers = ['Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\ErrorResponseNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Error' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\ErrorNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorExtra' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\ErrorExtraNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsage' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\SkuUsageNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\NewSkuUsage' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\NewSkuUsageNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageMeta' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\SkuUsageMetaNormalizer', '\\Jane\\JsonSchemaRuntime\\Reference' => '\\Jane\\JsonSchemaRuntime\\Normalizer\\ReferenceNormalizer'];
+    protected $normalizers = ['Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\ErrorResponseNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Error' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\ErrorNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorExtra' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\ErrorExtraNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsage' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\SkuUsageNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\NewSkuUsage' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\NewSkuUsageNormalizer', 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageMeta' => 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Normalizer\\SkuUsageMetaNormalizer', '\\Jane\\JsonSchemaRuntime\\Reference' => '\\Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Runtime\\Normalizer\\ReferenceNormalizer'];
     protected $normalizersCache = [];
 
     public function supportsDenormalization($data, $type, $format = null)
