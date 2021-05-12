@@ -36,5 +36,6 @@ workflows:
           context: *context-cloud
           filters:
             branches:
-              only:
-                - *branch-main
+              only: *branch-main
+            tags:
+              only: /.*/
