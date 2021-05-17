@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
-use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
 use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -44,6 +44,9 @@ class SkuUsageMetaNormalizer implements DenormalizerInterface, NormalizerInterfa
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageMeta();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
         if (\array_key_exists('amount', $data)) {
             $object->setAmount($data['amount']);
         }

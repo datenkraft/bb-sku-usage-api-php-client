@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
-use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
 use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -44,6 +44,9 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Error();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
         if (\array_key_exists('code', $data)) {
             $object->setCode($data['code']);
         }
@@ -60,12 +63,8 @@ class ErrorNormalizer implements DenormalizerInterface, NormalizerInterface, Den
     public function normalize($object, $format = null, array $context = [])
     {
         $data = [];
-        if (null !== $object->getCode()) {
-            $data['code'] = $object->getCode();
-        }
-        if (null !== $object->getMessage()) {
-            $data['message'] = $object->getMessage();
-        }
+        $data['code'] = $object->getCode();
+        $data['message'] = $object->getMessage();
         if (null !== $object->getExtra()) {
             $data['extra'] = $this->normalizer->normalize($object->getExtra(), 'json', $context);
         }

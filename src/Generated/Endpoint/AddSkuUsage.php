@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint;
 
-class AddSkuUsage extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Endpoint
+class AddSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\Endpoint
 {
-    use \Jane\OpenApiRuntime\Client\EndpointTrait;
+    use \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\EndpointTrait;
 
     /**
      * Add SKU Usage data.
@@ -56,29 +56,38 @@ class AddSkuUsage extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageUnprocessableEntityException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageConflictException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageBadRequestException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage[]|null
+     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|null
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (201 === $status && mb_strpos($contentType, 'application/json') !== false) {
+        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsage[]', 'json');
         }
-        if (401 === $status && mb_strpos($contentType, 'application/json') !== false) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageUnauthorizedException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
-        if (403 === $status && mb_strpos($contentType, 'application/json') !== false) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageForbiddenException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
-        if (422 === $status && mb_strpos($contentType, 'application/json') !== false) {
+        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageUnprocessableEntityException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
-        if (409 === $status && mb_strpos($contentType, 'application/json') !== false) {
+        if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageConflictException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
-        if (400 === $status && mb_strpos($contentType, 'application/json') !== false) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageBadRequestException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
+        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'));
+        }
+        if (mb_strpos($contentType, 'application/json') !== false) {
+            return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json');
+        }
+        throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException($status);
     }
 
     public function getAuthenticationScopes(): array

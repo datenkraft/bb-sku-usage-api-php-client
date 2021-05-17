@@ -10,13 +10,13 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-class AddSkuUsageUnauthorizedException extends UnauthorizedException
+class AddSkuUsageInternalServerErrorException extends InternalServerErrorException
 {
     private $errorResponse;
 
     public function __construct(\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse $errorResponse)
     {
-        parent::__construct('Unauthorized', 401);
+        parent::__construct('Server error', 500);
         $this->errorResponse = $errorResponse;
     }
 
