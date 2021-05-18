@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-class AddSkuUsageUnprocessableEntityException extends \RuntimeException implements ClientException
+class AddSkuUsageUnprocessableEntityException extends UnprocessableEntityException
 {
     private $errorResponse;
 

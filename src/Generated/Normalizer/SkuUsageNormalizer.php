@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
-use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
 use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -44,6 +44,9 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
         if (\array_key_exists('skuUsageId', $data)) {
             $object->setSkuUsageId($data['skuUsageId']);
         }
@@ -78,24 +81,12 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (null !== $object->getSkuUsageId()) {
             $data['skuUsageId'] = $object->getSkuUsageId();
         }
-        if (null !== $object->getSkuId()) {
-            $data['skuId'] = $object->getSkuId();
-        }
-        if (null !== $object->getQuantity()) {
-            $data['quantity'] = $object->getQuantity();
-        }
-        if (null !== $object->getProjectId()) {
-            $data['projectId'] = $object->getProjectId();
-        }
-        if (null !== $object->getUsageStart()) {
-            $data['usageStart'] = $object->getUsageStart()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getUsageEnd()) {
-            $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getExternalId()) {
-            $data['externalId'] = $object->getExternalId();
-        }
+        $data['skuId'] = $object->getSkuId();
+        $data['quantity'] = $object->getQuantity();
+        $data['projectId'] = $object->getProjectId();
+        $data['usageStart'] = $object->getUsageStart()->format('Y-m-d\\TH:i:sP');
+        $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d\\TH:i:sP');
+        $data['externalId'] = $object->getExternalId();
         if (null !== $object->getMeta()) {
             $data['meta'] = $this->normalizer->normalize($object->getMeta(), 'json', $context);
         }

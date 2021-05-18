@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-class AddSkuUsageConflictException extends \RuntimeException implements ClientException
+class AddSkuUsageConflictException extends ConflictException
 {
     private $errorResponse;
 

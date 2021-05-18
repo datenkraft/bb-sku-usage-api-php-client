@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a9505da4841770f7d6f302ad57e4b15",
+    "content-hash": "b5a1adac662267f6037580968c9bbb70",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -74,21 +74,15 @@
         },
         {
             "name": "datenkraft/bb-base-api-php-client",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://bitbucket.org/datenkraft/bb-base-api-php-client.git",
-                "reference": "c8480eb431d7c860a7a0640801065485f6ebf585"
-            },
+            "version": "dev-feature/BB-7-as-a-software-architect-i-want-an-s",
             "dist": {
-                "type": "zip",
-                "url": "https://bitbucket.org/datenkraft/bb-base-api-php-client/get/c8480eb431d7c860a7a0640801065485f6ebf585.zip",
-                "reference": "c8480eb431d7c860a7a0640801065485f6ebf585",
-                "shasum": ""
+                "type": "path",
+                "url": "../bb-base-api-php-client",
+                "reference": "071af537ce4db97bf21f5ab03ac57926aeb21030"
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.3",
-                "jane-php/open-api-runtime": "~6.1.0",
+                "jane-php/open-api-runtime": "^6.1.0",
                 "league/oauth2-client": "^2.6",
                 "nyholm/psr7": "^1.4",
                 "php": "^7.2"
@@ -104,7 +98,11 @@
                     "Datenkraft\\Backbone\\Client\\BaseApi\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -114,17 +112,15 @@
                 }
             ],
             "description": "API Client that enables you to work with Backbone PHP Client packages",
-            "homepage": "https://bitbucket.org/datenkraft/bb-base-api-php-client",
             "keywords": [
                 "apiclient",
                 "backbone",
                 "base",
                 "php"
             ],
-            "support": {
-                "source": "https://bitbucket.org/datenkraft/bb-base-api-php-client/src/c8480eb431d7c860a7a0640801065485f6ebf585/?at=1.0.0"
-            },
-            "time": "2021-05-05T15:42:11+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -361,22 +357,22 @@
         },
         {
             "name": "jane-php/json-schema-runtime",
-            "version": "v6.1.1",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/janephp/json-schema-runtime.git",
-                "reference": "57a0c094e5591d8b305112b28a61878c15be01ec"
+                "reference": "3e3df0557d86662ded68cf52894f2ca60585da90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janephp/json-schema-runtime/zipball/57a0c094e5591d8b305112b28a61878c15be01ec",
-                "reference": "57a0c094e5591d8b305112b28a61878c15be01ec",
+                "url": "https://api.github.com/repos/janephp/json-schema-runtime/zipball/3e3df0557d86662ded68cf52894f2ca60585da90",
+                "reference": "3e3df0557d86662ded68cf52894f2ca60585da90",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "league/uri": "^6.0",
-                "php": ">=7.2",
+                "php": "^7.2 || ^8.0",
                 "php-jsonpointer/php-jsonpointer": "^3.0",
                 "symfony/serializer": "^4.4 || ^5.0",
                 "symfony/yaml": "~4.4.9 || ^5.0"
@@ -390,7 +386,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6-dev"
+                    "dev-next": "6-dev"
                 }
             },
             "autoload": {
@@ -417,28 +413,29 @@
             ],
             "description": "Jane runtime Library",
             "support": {
-                "source": "https://github.com/janephp/json-schema-runtime/tree/master"
+                "source": "https://github.com/janephp/json-schema-runtime/tree/v6.3.7"
             },
-            "time": "2020-08-16T21:42:31+00:00"
+            "time": "2021-02-12T08:51:40+00:00"
         },
         {
             "name": "jane-php/open-api-runtime",
-            "version": "v6.1.1",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/janephp/open-api-runtime.git",
-                "reference": "9e23f27ab30b83905f0e1063fdbc9bff3a4d32a9"
+                "reference": "19080e2ad40a50cf6e6c2a39f23e021f9bd238a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janephp/open-api-runtime/zipball/9e23f27ab30b83905f0e1063fdbc9bff3a4d32a9",
-                "reference": "9e23f27ab30b83905f0e1063fdbc9bff3a4d32a9",
+                "url": "https://api.github.com/repos/janephp/open-api-runtime/zipball/19080e2ad40a50cf6e6c2a39f23e021f9bd238a5",
+                "reference": "19080e2ad40a50cf6e6c2a39f23e021f9bd238a5",
                 "shasum": ""
             },
             "require": {
-                "jane-php/json-schema-runtime": "~6.1.0",
-                "php": ">=7.2",
+                "jane-php/json-schema-runtime": "~6.3.0",
+                "php": "^7.2 || ^8.0",
                 "php-http/client-common": "^2.0",
+                "php-http/discovery": "^1.6",
                 "php-http/message-factory": "^1.0.2",
                 "php-http/multipart-stream-builder": "^1.0",
                 "psr/http-client": "^1.0",
@@ -452,7 +449,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6-dev"
+                    "dev-next": "6-dev"
                 }
             },
             "autoload": {
@@ -479,9 +476,9 @@
             ],
             "description": "Jane OpenAPI Runtime Library, dependencies and utility class for a library generated by jane/openapi",
             "support": {
-                "source": "https://github.com/janephp/open-api-runtime/tree/v6.1.1"
+                "source": "https://github.com/janephp/open-api-runtime/tree/v6.3.7"
             },
-            "time": "2020-09-15T09:54:27+00:00"
+            "time": "2021-03-12T10:13:32+00:00"
         },
         {
             "name": "league/oauth2-client",
@@ -3203,16 +3200,16 @@
         },
         {
             "name": "composer/xdebug-handler",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "31d57697eb1971712a08031cfaff5a846d10bdf5"
+                "reference": "964adcdd3a28bf9ed5d9ac6450064e0d71ed7496"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/31d57697eb1971712a08031cfaff5a846d10bdf5",
-                "reference": "31d57697eb1971712a08031cfaff5a846d10bdf5",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/964adcdd3a28bf9ed5d9ac6450064e0d71ed7496",
+                "reference": "964adcdd3a28bf9ed5d9ac6450064e0d71ed7496",
                 "shasum": ""
             },
             "require": {
@@ -3247,7 +3244,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/xdebug-handler/issues",
-                "source": "https://github.com/composer/xdebug-handler/tree/2.0.0"
+                "source": "https://github.com/composer/xdebug-handler/tree/2.0.1"
             },
             "funding": [
                 {
@@ -3263,7 +3260,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-09T19:40:06+00:00"
+            "time": "2021-05-05T19:37:51+00:00"
         },
         {
             "name": "daverandom/libdns",
@@ -3381,26 +3378,26 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "1.4.4",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "4bd5c1cdfcd00e9e2d8c484f79150f67e5d355d9"
+                "reference": "9cf661f4eb38f7c881cac67c75ea9b00bf97b210"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/4bd5c1cdfcd00e9e2d8c484f79150f67e5d355d9",
-                "reference": "4bd5c1cdfcd00e9e2d8c484f79150f67e5d355d9",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/9cf661f4eb38f7c881cac67c75ea9b00bf97b210",
+                "reference": "9cf661f4eb38f7c881cac67c75ea9b00bf97b210",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0"
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^8.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
+                "doctrine/coding-standard": "^7.0",
+                "phpstan/phpstan": "^0.11",
+                "phpstan/phpstan-phpunit": "^0.11",
+                "phpstan/phpstan-strict-rules": "^0.11",
                 "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
             },
             "type": "library",
@@ -3411,7 +3408,6 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector",
                     "Doctrine\\Inflector\\": "lib/Doctrine/Inflector"
                 }
             },
@@ -3457,7 +3453,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/1.4.4"
+                "source": "https://github.com/doctrine/inflector/tree/2.0.x"
             },
             "funding": [
                 {
@@ -3473,7 +3469,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-16T17:34:40+00:00"
+            "time": "2020-05-29T15:13:26+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -3735,24 +3731,24 @@
         },
         {
             "name": "jane-php/json-schema",
-            "version": "v6.1.1",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/janephp/json-schema.git",
-                "reference": "36f5a2c566227b8edecf751bbbe384d2e212152b"
+                "reference": "52e6917882bd7d5ede0fbcd480fa2dd481e6dbae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janephp/json-schema/zipball/36f5a2c566227b8edecf751bbbe384d2e212152b",
-                "reference": "36f5a2c566227b8edecf751bbbe384d2e212152b",
+                "url": "https://api.github.com/repos/janephp/json-schema/zipball/52e6917882bd7d5ede0fbcd480fa2dd481e6dbae",
+                "reference": "52e6917882bd7d5ede0fbcd480fa2dd481e6dbae",
                 "shasum": ""
             },
             "require": {
-                "doctrine/inflector": "^1.4",
+                "doctrine/inflector": "^1.4 || ^2.0",
                 "ext-json": "*",
-                "jane-php/json-schema-runtime": "~6.1.0",
+                "jane-php/json-schema-runtime": "~6.3.0",
                 "nikic/php-parser": "^4.0",
-                "php": ">=7.2",
+                "php": "^7.2 || ^8.0",
                 "symfony/console": "^4.4 || ^5.0",
                 "symfony/filesystem": "^4.4 || ^5.0",
                 "symfony/options-resolver": "^4.4 || ^5.0",
@@ -3776,7 +3772,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6-dev"
+                    "dev-next": "6-dev"
                 }
             },
             "autoload": {
@@ -3803,30 +3799,30 @@
             ],
             "description": "Generate a serializable / deserializable object model given a json schema",
             "support": {
-                "source": "https://github.com/janephp/json-schema/tree/v6.1.1"
+                "source": "https://github.com/janephp/json-schema/tree/v6.3.7"
             },
-            "time": "2020-09-15T09:54:27+00:00"
+            "time": "2021-03-26T16:36:21+00:00"
         },
         {
             "name": "jane-php/open-api-3",
-            "version": "v6.1.1",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/janephp/open-api-3.git",
-                "reference": "4f0b584a7734ce317a8a6f9236c573b796a0193c"
+                "reference": "4705d97dc913713f3086950082a14bc0d84127d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janephp/open-api-3/zipball/4f0b584a7734ce317a8a6f9236c573b796a0193c",
-                "reference": "4f0b584a7734ce317a8a6f9236c573b796a0193c",
+                "url": "https://api.github.com/repos/janephp/open-api-3/zipball/4705d97dc913713f3086950082a14bc0d84127d0",
+                "reference": "4705d97dc913713f3086950082a14bc0d84127d0",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "jane-php/json-schema": "~6.1.0",
-                "jane-php/open-api-common": "~6.1.0",
+                "jane-php/json-schema": "~6.3.0",
+                "jane-php/open-api-common": "~6.3.0",
                 "nikic/php-parser": "^4.0",
-                "php": ">=7.2",
+                "php": "^7.2 || ^8.0",
                 "symfony/serializer": "^4.4 || ^5.0",
                 "symfony/yaml": "~4.4.9 || ^5.0"
             },
@@ -3834,6 +3830,8 @@
                 "symfony/framework-bundle": "5.1.0"
             },
             "require-dev": {
+                "kriswallsmith/buzz": "^1.1",
+                "nyholm/psr7": "^1.3",
                 "phpunit/phpunit": "^8.0",
                 "symfony/finder": "^4.4 || ^5.0"
             },
@@ -3843,7 +3841,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6-dev"
+                    "dev-next": "6-dev"
                 }
             },
             "autoload": {
@@ -3875,30 +3873,29 @@
                 "swagger"
             ],
             "support": {
-                "issues": "https://github.com/janephp/open-api-3/issues",
-                "source": "https://github.com/janephp/open-api-3/tree/v6.1.1"
+                "source": "https://github.com/janephp/open-api-3/tree/v6.3.7"
             },
-            "time": "2020-09-15T09:54:27+00:00"
+            "time": "2021-03-16T09:27:37+00:00"
         },
         {
             "name": "jane-php/open-api-common",
-            "version": "v6.1.1",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/janephp/open-api-common.git",
-                "reference": "e92c369cb0683547323620bf0186622252ea35f1"
+                "reference": "01ef9951fced90a23ff0107ace5c190aff45a1aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janephp/open-api-common/zipball/e92c369cb0683547323620bf0186622252ea35f1",
-                "reference": "e92c369cb0683547323620bf0186622252ea35f1",
+                "url": "https://api.github.com/repos/janephp/open-api-common/zipball/01ef9951fced90a23ff0107ace5c190aff45a1aa",
+                "reference": "01ef9951fced90a23ff0107ace5c190aff45a1aa",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "jane-php/json-schema": "~6.1.0",
-                "jane-php/open-api-runtime": "~6.1.0",
-                "php": ">=7.2",
+                "jane-php/json-schema": "~6.3.0",
+                "jane-php/open-api-runtime": "~6.3.0",
+                "php": "^7.2 || ^8.0",
                 "symfony/console": "^4.4 || ^5.0",
                 "symfony/filesystem": "^4.4 || ^5.0",
                 "symfony/string": "^5.0",
@@ -3915,7 +3912,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6-dev"
+                    "dev-next": "6-dev"
                 }
             },
             "autoload": {
@@ -3945,10 +3942,9 @@
                 "utility"
             ],
             "support": {
-                "issues": "https://github.com/janephp/open-api-common/issues",
-                "source": "https://github.com/janephp/open-api-common/tree/v6.1.1"
+                "source": "https://github.com/janephp/open-api-common/tree/v6.3.7"
             },
-            "time": "2020-09-15T09:54:27+00:00"
+            "time": "2021-03-16T09:27:37+00:00"
         },
         {
             "name": "kelunik/certificate",
@@ -7677,7 +7673,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "datenkraft/bb-base-api-php-client": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
