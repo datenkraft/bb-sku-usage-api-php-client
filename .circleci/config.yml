@@ -1,8 +1,7 @@
 version: 2.1
 aliases:
-  - &workflow-name-continuous "Continuous Deployment Workflow"
+  - &workflow-name-mirroring "Github Mirroring Workflow"
   - &job-name-mirror "Mirror Repository to Github"
-  - &branch-main "main"
   - &context-cloud "cloud_deployment"
 executors:
   git:
@@ -30,12 +29,10 @@ jobs:
             git push github main --tags
 workflows:
   version: 2
-  *workflow-name-continuous :
+  *workflow-name-mirroring :
     jobs:
-      - *job-name-mirror :
+      - *job-name-mirror:
           context: *context-cloud
           filters:
-            branches:
-              only: *branch-main
             tags:
-              only: /.*/
+              only: /^(v)(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
