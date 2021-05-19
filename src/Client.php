@@ -22,7 +22,6 @@ class Client extends Generated\Client
     public static function createWithFactory(ClientFactory $clientFactory, string $endpointUrl = null): self
     {
         $endpointUrl = $endpointUrl ?? getenv('X_DATENKRAFT_SKU_USAGE_API_URL') ?: null;
-
         return $clientFactory->createClient(static::class, $endpointUrl);
     }
 }
