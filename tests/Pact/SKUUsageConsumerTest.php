@@ -73,10 +73,6 @@ abstract class SKUUsageConsumerTest extends TestCase
                 ]
             ]
         ];
-
-        // Authorization token for the request header
-        // To be replaced by an actually valid token later to successfully verify the contract with the provider
-        $this->token = getenv('VALID_TOKEN_ADD');
     }
 
     protected function tearDown(): void
