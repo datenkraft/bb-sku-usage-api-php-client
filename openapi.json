@@ -62,7 +62,7 @@
                     "200": {
                         "description": "OK"
                     },
-                    "5XX": {
+                    "500": {
                         "description": "Server error",
                         "content": {
                             "application/json": {
@@ -188,7 +188,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "sku-usage:add"
+                            "sku-usage:post"
                         ]
                     }
                 ]
@@ -324,6 +324,7 @@
                 }
             },
             "addSkuUsageResponse": {
+                "description": "Class SkuUsageResource",
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/skuUsage"
@@ -339,7 +340,7 @@
                         "tokenUrl": "https://localhost:30250/oauth/token",
                         "refreshUrl": "UNDEFINED",
                         "scopes": {
-                            "sku-usage-add": "Add SKU Usage Data"
+                            "sku-usage:post": "Add SKU Usage Data"
                         }
                     }
                 }
