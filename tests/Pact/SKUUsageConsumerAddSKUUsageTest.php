@@ -29,6 +29,8 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
 
         $this->method = 'POST';
 
+        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
             'Content-Type' => 'application/json'
@@ -36,6 +38,8 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         $this->responseHeaders = [
             'Content-Type' => 'application/json'
         ];
+
+        $this->path = '/sku-usage';
 
         $this->requestData = [
             [
@@ -56,13 +60,11 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         $this->responseData = [
             array_merge(
                 [
-                    'skuUsageId' => $this->matcher->like(1),
+                    'skuUsageId' => $this->matcher->like('skuUsageId_test'),
                 ],
                 $this->requestData[0]
             )
         ];
-
-        $this->path = '/sku-usage';
     }
 
     public function tearDown(): void
@@ -70,7 +72,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         parent::tearDown();
     }
 
-    public function testAddSKUUsageDataSuccess()
+    public function testAddSKUUsageSuccess()
     {
         $this->expectedStatusCode = '201';
 
@@ -85,7 +87,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testAddSKUUsageDataUnauthorized()
+    public function testAddSKUUsageUnauthorized()
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -94,7 +96,6 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         // Error code in response is 401, extra is not defined
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
-        unset($this->errorResponse['errors'][0]['extra']);
 
         $this->builder
             ->given('The token is invalid')
@@ -104,16 +105,15 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testAddSKUUsageDataForbidden()
+    public function testAddSKUUsageForbidden()
     {
         // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_READ');
+        $this->token = getenv('VALID_TOKEN_SKU_USAGE_GET');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         // Error code in response is 403, extra is not defined
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
-        unset($this->errorResponse['errors'][0]['extra']);
 
         $this->builder
             ->given('A SKU with skuId exists, the request is valid, the token is valid with an invalid scope')
@@ -123,7 +123,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testAddSKUUsageDataBadRequest()
+    public function testAddSKUUsageBadRequest()
     {
         // Error code in response is 400
         $this->expectedStatusCode = '400';
@@ -144,7 +144,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testAddSKUUsageDataUnprocessableEntity()
+    public function testAddSKUUsageUnprocessableEntity()
     {
         // SKU with skuId does not exist
         $this->requestData[0]['skuId'] = 'skuId_test_invalid';
@@ -168,7 +168,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testAddSKUUsageDataConflict()
+    public function testAddSKUUsageConflict()
     {
         // Combination of projectId and externalId already exists
         $this->requestData[0]['projectId'] = 'projectId_test_duplicate';
@@ -192,7 +192,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testAddSKUUsageDataMultipleErrors()
+    public function testAddSKUUsageMultipleErrors()
     {
         // SkuId is empty
         $this->requestData[0]['skuId'] = '';

@@ -17,25 +17,26 @@ use PhpPact\Consumer\Model\ProviderResponse;
  */
 abstract class SKUUsageConsumerTest extends TestCase
 {
-    protected InteractionBuilder $builder;
-    protected MockServerEnvConfig $config;
+    protected $builder;
+    protected $config;
 
-    protected string $expectedExceptionClass = GuzzleException::class;
+    protected $expectedExceptionClass = GuzzleException::class;
 
-    protected string $token;
+    protected $token;
 
-    protected string $method;
-    protected string $path;
+    protected $method;
+    protected $path;
+    protected $query;
 
-    protected array $requestHeaders;
-    protected array $responseHeaders;
-    protected int $expectedStatusCode;
+    protected $requestHeaders;
+    protected $responseHeaders;
+    protected $expectedStatusCode;
 
-    protected array $requestData;
-    protected array $responseData;
-    protected array $errorResponse;
+    protected $requestData;
+    protected $responseData;
+    protected $errorResponse;
 
-    protected Matcher $matcher;
+    protected $matcher;
 
 
     /**
@@ -73,10 +74,6 @@ abstract class SKUUsageConsumerTest extends TestCase
                 ]
             ]
         ];
-
-        // Authorization token for the request header
-        // To be replaced by an actually valid token later to successfully verify the contract with the provider
-        $this->token = getenv('VALID_TOKEN_ADD');
     }
 
     protected function tearDown(): void
@@ -129,6 +126,9 @@ abstract class SKUUsageConsumerTest extends TestCase
     ): ConsumerRequest {
         $request = new ConsumerRequest();
         $request->setMethod($method)->setPath($path);
+        if (isset($this->query)) {
+            $request->setQuery($this->query);
+        }
         foreach ($requestHeaders as $header => $value) {
             $request->addHeader($header, $value);
         }
