@@ -29,6 +29,8 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
 
         $this->method = 'POST';
 
+        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
             'Content-Type' => 'application/json'
@@ -107,7 +109,7 @@ class SKUUsageConsumerAddSKUUsageTest extends SKUUsageConsumerTest
     public function testAddSKUUsageDataForbidden()
     {
         // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_READ');
+        $this->token = getenv('VALID_TOKEN_SKU_USAGE_GET');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         // Error code in response is 403, extra is not defined
