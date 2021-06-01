@@ -33,19 +33,19 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
      *
      * @param \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage[] $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageForbiddenException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageUnprocessableEntityException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageConflictException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageBadRequestException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\AddSkuUsageInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostSkuUsageUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostSkuUsageForbiddenException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostSkuUsageUnprocessableEntityException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostSkuUsageConflictException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostSkuUsageBadRequestException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostSkuUsageInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
      *
      * @return null|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
      */
-    public function addSkuUsage(array $requestBody, string $fetch = self::FETCH_OBJECT)
+    public function postSkuUsage(array $requestBody, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\AddSkuUsage($requestBody), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\PostSkuUsage($requestBody), $fetch);
     }
     public static function create($httpClient = null, array $additionalPlugins = array())
     {

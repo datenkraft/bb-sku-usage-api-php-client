@@ -92,13 +92,13 @@
                 ],
                 "summary": "Add SKU Usage data",
                 "description": "Add SKU Usage data",
-                "operationId": "addSkuUsage",
+                "operationId": "postSkuUsage",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/addSkuUsageRequest"
+                                "$ref": "#/components/schemas/postSkuUsageRequest"
                             }
                         }
                     }
@@ -109,7 +109,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/addSkuUsageResponse"
+                                    "$ref": "#/components/schemas/postSkuUsageResponse"
                                 }
                             }
                         }
@@ -317,13 +317,13 @@
                 },
                 "type": "object"
             },
-            "addSkuUsageRequest": {
+            "postSkuUsageRequest": {
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/newSkuUsage"
                 }
             },
-            "addSkuUsageResponse": {
+            "postSkuUsageResponse": {
                 "description": "Class SkuUsageResource",
                 "type": "array",
                 "items": {

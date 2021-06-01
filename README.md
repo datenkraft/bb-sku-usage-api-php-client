@@ -82,7 +82,7 @@ $skuUsage->setExternalId('14')
     ->setUsageStart(new \DateTime());
 
 $data = [$skuUsage, $skuUsage2];
-$response = $client->addSkuUsage($data);
+$response = $client->postSkuUsage($data);
 $response; // skuUsage[]
 
 ~~~~

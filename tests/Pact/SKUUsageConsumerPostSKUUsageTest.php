@@ -259,6 +259,6 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
                     ->setDescription($this->requestData[0]['meta']['description'])
             );
 
-        return $client->addSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
+        return $client->postSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
     }
 }
