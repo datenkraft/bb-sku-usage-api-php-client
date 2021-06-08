@@ -64,7 +64,8 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
                 'skuId' => 'skuId_test',
                 'quantity' => 1,
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
-                'usageEnd' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
+                'usageEnd' => (new DateTime('2021-01-28'))->add(new DateInterval('P1D'))
+                    ->format(DateTimeInterface::ATOM),
                 'projectId' => 'projectId_test',
                 'externalId' => 'externalId_test',
                 'meta' => [
