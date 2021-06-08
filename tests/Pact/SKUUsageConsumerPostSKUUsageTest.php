@@ -46,8 +46,9 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
                 'skuId' => 'skuId_test',
                 'quantity' => 1,
                 'projectId' => 'projectId_test',
-                'usageStart' => (new DateTime())->format(DateTimeInterface::ATOM),
-                'usageEnd' => (new DateTime())->add(new DateInterval('P1D'))->format(DateTimeInterface::ATOM),
+                'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
+                'usageEnd' => (new DateTime('2021-01-28'))
+                    ->add(new DateInterval('P1D'))->format(DateTimeInterface::ATOM),
                 'externalId' => 'externalId_test',
                 'meta' => [
                     'amount' => 10000,
@@ -58,12 +59,20 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         ];
 
         $this->responseData = [
-            array_merge(
-                [
-                    'skuUsageId' => $this->matcher->like('skuUsageId_test'),
-                ],
-                $this->requestData[0]
-            )
+            [
+                'skuUsageId' => $this->matcher->like(57),
+                'skuId' => 'skuId_test',
+                'quantity' => 1,
+                'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
+                'usageEnd' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
+                'projectId' => 'projectId_test',
+                'externalId' => 'externalId_test',
+                'meta' => [
+                    'amount' => 10000,
+                    'currency' => 'EUR',
+                    'description' => 'Test description'
+                ]
+            ]
         ];
     }
 
@@ -259,6 +268,6 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
                     ->setDescription($this->requestData[0]['meta']['description'])
             );
 
-        return $client->addSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
+        return $client->postSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
     }
 }

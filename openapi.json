@@ -86,19 +86,116 @@
             }
         },
         "/sku-usage": {
+            "get": {
+                "tags": [
+                    "skuUsage"
+                ],
+                "summary": "Query SKU Usage data by projectId and externalId",
+                "description": "Query SKU Usage data by projectId and externalId",
+                "operationId": "getSkuUsage",
+                "parameters": [
+                    {
+                        "name": "filter[projectId]",
+                        "in": "query",
+                        "description": "SKUUsage ProjectId filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter[externalId]",
+                        "in": "query",
+                        "description": "SKUUsage ExternalId filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getSkuUsageResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [
+                            "sku-usage:get"
+                        ]
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "skuUsage"
                 ],
                 "summary": "Add SKU Usage data",
                 "description": "Add SKU Usage data",
-                "operationId": "addSkuUsage",
+                "operationId": "postSkuUsage",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/addSkuUsageRequest"
+                                "$ref": "#/components/schemas/postSkuUsageRequest"
                             }
                         }
                     }
@@ -109,7 +206,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/addSkuUsageResponse"
+                                    "$ref": "#/components/schemas/postSkuUsageResponse"
                                 }
                             }
                         }
@@ -317,13 +414,19 @@
                 },
                 "type": "object"
             },
-            "addSkuUsageRequest": {
+            "postSkuUsageRequest": {
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/newSkuUsage"
                 }
             },
-            "addSkuUsageResponse": {
+            "postSkuUsageResponse": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/skuUsage"
+                }
+            },
+            "getSkuUsageResponse": {
                 "description": "Class SkuUsageResource",
                 "type": "array",
                 "items": {

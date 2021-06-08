@@ -2,10 +2,13 @@
 
 namespace Pact;
 
+use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
+use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
+use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
+use Datenkraft\Backbone\Client\SkuUsageApi\Client;
 use DateTime;
 use DateTimeInterface;
 use Exception;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
@@ -15,7 +18,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
 {
-
     protected $projectId;
     protected $externalId;
 
@@ -32,7 +34,6 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
-            'Content-Type' => 'application/json'
         ];
         $this->responseHeaders = [
             'Content-Type' => 'application/json'
@@ -40,20 +41,23 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
 
         $this->path = '/sku-usage';
 
-        $this->projectId = 'projectId_test';
-        $this->externalId = 'externalId_test';
-        $this->query = sprintf('filter[projectId]=%s&filter[externalId]=%s', $this->projectId, $this->externalId);
+        $this->projectId = 'b1fedb36-c774-11eb-b8bc-0242ac130003';
+        $this->externalId = 'externalId_test_duplicate';
+        $this->queryParams = [
+            'filter[projectId]' => 'b1fedb36-c774-11eb-b8bc-0242ac130003',
+            'filter[externalId]' => 'externalId_test_duplicate',
+        ];
 
         $this->requestData = [];
         $this->responseData = [
             [
-                'skuUsageId' => $this->matcher->like('skuUsageId_test'),
+                'skuUsageId' => $this->matcher->like(67),
                 'skuId' => $this->matcher->like('skuId_test'),
                 'quantity' => $this->matcher->like(1),
                 'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
-                'projectId' => 'projectId_test',
-                'externalId' => 'externalId_test',
+                'projectId' => 'b1fedb36-c774-11eb-b8bc-0242ac130003',
+                'externalId' => 'externalId_test_duplicate',
                 'meta' => [
                     'amount' => $this->matcher->like(10000),
                     'currency' => $this->matcher->like('EUR'),
@@ -106,33 +110,19 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testGetSKUUsageBadRequest()
-    {
-        $this->expectedStatusCode = '400';
-        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
-
-        $this->query = '';
-
-        $this->builder
-            ->given('The query is invalid')
-            ->uponReceiving('Bad GET request to /sku-usage');
-
-        $this->responseData = $this->errorResponse;
-        $this->beginTest();
-    }
-
     /**
      * @return ResponseInterface
-     * @throws GuzzleException
+     * @throws AuthException
+     * @throws ConfigException
      */
     protected function doClientRequest(): ResponseInterface
     {
-        $client = new Client(['base_uri' => $this->config->getBaseUri()]);
-        $options = [
-            'headers' => $this->requestHeaders,
-            'query' => $this->query,
-            'http_errors' => false,
-        ];
-        return $client->get($this->path, $options);
+        $factory = new ClientFactory(
+            ['clientId' => 'test', 'clientSecret' => 'test', 'oAuthTokenUrl' => 'test', 'oAuthScopes' => ['test']]
+        );
+        $factory->setToken($this->token);
+        $client = Client::createWithFactory($factory, $this->config->getBaseUri());
+
+        return $client->getSkuUsage($this->queryParams, Client::FETCH_RESPONSE);
     }
 }
