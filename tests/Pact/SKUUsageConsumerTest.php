@@ -27,6 +27,7 @@ abstract class SKUUsageConsumerTest extends TestCase
     protected $method;
     protected $path;
     protected $query;
+    protected $queryParams = [];
 
     protected $requestHeaders;
     protected $responseHeaders;
@@ -128,6 +129,9 @@ abstract class SKUUsageConsumerTest extends TestCase
         $request->setMethod($method)->setPath($path);
         if (isset($this->query)) {
             $request->setQuery($this->query);
+        }
+        foreach ($this->queryParams as $queryParam => $value) {
+            $request->addQueryParameter($queryParam, $value);
         }
         foreach ($requestHeaders as $header => $value) {
             $request->addHeader($header, $value);
