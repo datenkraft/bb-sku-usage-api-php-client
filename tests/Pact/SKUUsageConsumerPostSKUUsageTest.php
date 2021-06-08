@@ -61,16 +61,16 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->responseData = [
             [
                 'skuUsageId' => $this->matcher->like(57),
-                'skuId' => $this->matcher->like('skuId_test'),
-                'quantity' => $this->matcher->like(1),
-                'usageStart' => $this->matcher->like((new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM)),
-                'usageEnd' => $this->matcher->like((new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM)),
+                'skuId' => 'skuId_test',
+                'quantity' => 1,
+                'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
+                'usageEnd' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
                 'projectId' => 'projectId_test',
                 'externalId' => 'externalId_test',
                 'meta' => [
-                    'amount' => $this->matcher->like(10000),
-                    'currency' => $this->matcher->like('EUR'),
-                    'description' => $this->matcher->like('Test description')
+                    'amount' => 10000,
+                    'currency' => 'EUR',
+                    'description' => 'Test description'
                 ]
             ]
         ];
