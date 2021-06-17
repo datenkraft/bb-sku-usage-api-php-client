@@ -412,7 +412,8 @@
                         "type": "string"
                     }
                 },
-                "type": "object"
+                "type": "object",
+                "nullable": true
             },
             "postSkuUsageRequest": {
                 "type": "array",
