@@ -43,7 +43,7 @@ class NewSkuUsage
     /**
      * 
      *
-     * @var SkuUsageMeta
+     * @var SkuUsageMeta|null
      */
     protected $meta;
     /**
@@ -175,20 +175,20 @@ class NewSkuUsage
     /**
      * 
      *
-     * @return SkuUsageMeta
+     * @return SkuUsageMeta|null
      */
-    public function getMeta() : SkuUsageMeta
+    public function getMeta() : ?SkuUsageMeta
     {
         return $this->meta;
     }
     /**
      * 
      *
-     * @param SkuUsageMeta $meta
+     * @param SkuUsageMeta|null $meta
      *
      * @return self
      */
-    public function setMeta(SkuUsageMeta $meta) : self
+    public function setMeta(?SkuUsageMeta $meta) : self
     {
         $this->meta = $meta;
         return $this;

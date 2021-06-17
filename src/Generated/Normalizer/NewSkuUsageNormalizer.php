@@ -54,8 +54,11 @@ class NewSkuUsageNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (\array_key_exists('externalId', $data)) {
             $object->setExternalId($data['externalId']);
         }
-        if (\array_key_exists('meta', $data)) {
+        if (\array_key_exists('meta', $data) && $data['meta'] !== null) {
             $object->setMeta($this->denormalizer->denormalize($data['meta'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageMeta', 'json', $context));
+        }
+        elseif (\array_key_exists('meta', $data) && $data['meta'] === null) {
+            $object->setMeta(null);
         }
         return $object;
     }
