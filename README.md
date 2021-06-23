@@ -53,10 +53,11 @@ $client = Client::createWithFactory($factory);
 ~~~~ php
 $data = [];
 
-$skuUsageMeta = new SkuUsageMeta();
-$skuUsageMeta->setAmount(101)
-    ->setCurrency('EUR')
-    ->setDescription('description');
+$skuUsageMeta = [
+    'description' => 'description',
+    'amount' => 99.9,
+    'currency' => 'EUR',
+];
 
 $skuUsage = new NewSkuUsage();
 $skuUsage->setExternalId('12')
@@ -67,14 +68,8 @@ $skuUsage->setExternalId('12')
     ->setUsageEnd(new \DateTime())
     ->setUsageStart(new \DateTime());
 
-$skuUsageMeta2 = new SkuUsageMeta();
-$skuUsageMeta2->setAmount(101)
-    ->setCurrency('EUR')
-    ->setDescription('description');
-
 $skuUsage2 = new NewSkuUsage();
 $skuUsage->setExternalId('14')
-    ->setMeta($skuUsageMeta2)
     ->setProjectId('2')
     ->setQuantity(1)
     ->setSkuId('newab')
