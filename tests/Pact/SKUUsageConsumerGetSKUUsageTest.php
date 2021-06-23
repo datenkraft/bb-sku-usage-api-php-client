@@ -9,7 +9,6 @@ use Datenkraft\Backbone\Client\SkuUsageApi\Client;
 use DateTime;
 use DateTimeInterface;
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -58,11 +57,6 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'projectId' => 'b1fedb36-c774-11eb-b8bc-0242ac130003',
                 'externalId' => 'externalId_test_duplicate',
-                'meta' => [
-                    'amount' => $this->matcher->like(10000),
-                    'currency' => $this->matcher->like('EUR'),
-                    'description' => $this->matcher->like('Test description'),
-                ]
             ]
         ];
     }

@@ -41,9 +41,9 @@ class NewSkuUsage
      */
     protected $externalId;
     /**
-     * 
+     * Meta
      *
-     * @var SkuUsageMeta|null
+     * @var mixed
      */
     protected $meta;
     /**
@@ -173,22 +173,22 @@ class NewSkuUsage
         return $this;
     }
     /**
-     * 
+     * Meta
      *
-     * @return SkuUsageMeta|null
+     * @return mixed
      */
-    public function getMeta() : ?SkuUsageMeta
+    public function getMeta()
     {
         return $this->meta;
     }
     /**
-     * 
+     * Meta
      *
-     * @param SkuUsageMeta|null $meta
+     * @param mixed $meta
      *
      * @return self
      */
-    public function setMeta(?SkuUsageMeta $meta) : self
+    public function setMeta($meta) : self
     {
         $this->meta = $meta;
         return $this;

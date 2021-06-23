@@ -57,11 +57,8 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (\array_key_exists('externalId', $data)) {
             $object->setExternalId($data['externalId']);
         }
-        if (\array_key_exists('meta', $data) && $data['meta'] !== null) {
-            $object->setMeta($this->denormalizer->denormalize($data['meta'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsageMeta', 'json', $context));
-        }
-        elseif (\array_key_exists('meta', $data) && $data['meta'] === null) {
-            $object->setMeta(null);
+        if (\array_key_exists('meta', $data)) {
+            $object->setMeta($data['meta']);
         }
         return $object;
     }
@@ -78,7 +75,7 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
         $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d\\TH:i:sP');
         $data['externalId'] = $object->getExternalId();
         if (null !== $object->getMeta()) {
-            $data['meta'] = $this->normalizer->normalize($object->getMeta(), 'json', $context);
+            $data['meta'] = $object->getMeta();
         }
         return $data;
     }
