@@ -62,7 +62,7 @@ $skuUsageMeta = [
 $skuUsage = new NewSkuUsage();
 $skuUsage->setExternalId('12')
     ->setMeta($skuUsageMeta)
-    ->setProjectId('2')
+    ->setProjectId('26e6a22f-6cb1-456a-861e-fde46e3988b2')
     ->setQuantity(1)
     ->setSkuId('ab')
     ->setUsageEnd(new \DateTime())
@@ -70,7 +70,7 @@ $skuUsage->setExternalId('12')
 
 $skuUsage2 = new NewSkuUsage();
 $skuUsage->setExternalId('14')
-    ->setProjectId('2')
+    ->setProjectId('6ea1cb54-3a78-46b8-90ab-300b2eaef9dd')
     ->setQuantity(1)
     ->setSkuId('newab')
     ->setUsageEnd(new \DateTime())
