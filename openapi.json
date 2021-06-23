@@ -392,28 +392,11 @@
                         "type": "string"
                     },
                     "meta": {
-                        "$ref": "#/components/schemas/skuUsageMeta"
+                        "description": "Meta",
+                        "type": "object"
                     }
                 },
                 "type": "object"
-            },
-            "skuUsageMeta": {
-                "properties": {
-                    "amount": {
-                        "description": "Amount",
-                        "type": "integer"
-                    },
-                    "currency": {
-                        "description": "Currency",
-                        "type": "string"
-                    },
-                    "description": {
-                        "description": "Description",
-                        "type": "string"
-                    }
-                },
-                "type": "object",
-                "nullable": true
             },
             "postSkuUsageRequest": {
                 "type": "array",

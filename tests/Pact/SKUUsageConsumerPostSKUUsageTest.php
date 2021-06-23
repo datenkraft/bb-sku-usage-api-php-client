@@ -6,7 +6,6 @@ use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
 use Datenkraft\Backbone\Client\SkuUsageApi\Client;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage;
-use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsageMeta;
 use DateTime;
 use DateInterval;
 use DateTimeInterface;
@@ -51,9 +50,12 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
                     ->add(new DateInterval('P1D'))->format(DateTimeInterface::ATOM),
                 'externalId' => 'externalId_test',
                 'meta' => [
-                    'amount' => 10000,
-                    'currency' => 'EUR',
-                    'description' => 'Test description'
+                    'meta1' => 0,
+                    'meta2' => 9.99,
+                    'meta3' => 'test',
+                    'meta4' => [
+                        'test' => 'test'
+                    ]
                 ]
             ]
         ];
@@ -69,9 +71,12 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
                 'projectId' => 'projectId_test',
                 'externalId' => 'externalId_test',
                 'meta' => [
-                    'amount' => 10000,
-                    'currency' => 'EUR',
-                    'description' => 'Test description'
+                    'meta1' => 0,
+                    'meta2' => 9.99,
+                    'meta3' => 'test',
+                    'meta4' => [
+                        'test' => 'test'
+                    ]
                 ]
             ]
         ];
@@ -262,12 +267,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
             ->setQuantity($this->requestData[0]['quantity'])
             ->setUsageStart(new DateTime($this->requestData[0]['usageStart']))
             ->setUsageEnd(new DateTime($this->requestData[0]['usageEnd']))
-            ->setMeta(
-                (new SkuUsageMeta())
-                    ->setAmount($this->requestData[0]['meta']['amount'])
-                    ->setCurrency($this->requestData[0]['meta']['currency'])
-                    ->setDescription($this->requestData[0]['meta']['description'])
-            );
+            ->setMeta($this->requestData[0]['meta']);
 
         return $client->postSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
     }
