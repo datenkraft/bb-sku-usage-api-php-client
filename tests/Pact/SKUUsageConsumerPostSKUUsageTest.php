@@ -44,7 +44,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
             [
                 'skuId' => 'skuId_test',
                 'quantity' => 1,
-                'projectId' => 'projectId_test',
+                'projectId' => 'bab93c53-1281-4a0e-8759-3f12a0f25350',
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
                 'usageEnd' => (new DateTime('2021-01-28'))
                     ->add(new DateInterval('P1D'))->format(DateTimeInterface::ATOM),
@@ -62,13 +62,13 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
 
         $this->responseData = [
             [
-                'skuUsageId' => $this->matcher->like(57),
+                'skuUsageId' => 'skuusage_id_test_post',
                 'skuId' => 'skuId_test',
                 'quantity' => 1,
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
                 'usageEnd' => (new DateTime('2021-01-28'))->add(new DateInterval('P1D'))
                     ->format(DateTimeInterface::ATOM),
-                'projectId' => 'projectId_test',
+                'projectId' => 'bab93c53-1281-4a0e-8759-3f12a0f25350',
                 'externalId' => 'externalId_test',
                 'meta' => [
                     'meta1' => 0,
