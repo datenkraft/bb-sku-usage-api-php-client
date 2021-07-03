@@ -42,7 +42,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
 
         $this->requestData = [
             [
-                'skuId' => 'skuId_test',
+                'skuId' => 'skuId_test_post',
                 'quantity' => 1,
                 'projectId' => 'bab93c53-1281-4a0e-8759-3f12a0f25350',
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
@@ -63,7 +63,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->responseData = [
             [
                 'skuUsageId' => $this->matcher->uuid(),
-                'skuId' => 'skuId_test',
+                'skuId' => 'skuId_test_post',
                 'quantity' => 1,
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
                 'usageEnd' => (new DateTime('2021-01-28'))->add(new DateInterval('P1D'))
@@ -138,6 +138,9 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
+    /**
+     * @throws Exception
+     */
     public function testPostSKUUsageBadRequest()
     {
         // Error code in response is 400
@@ -148,7 +151,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->requestData[0]['skuId'] = '';
 
         // New Combination of projectId and externalId that does not exist yet
-        $this->requestData[0]['projectId'] = 'projectId_2';
+        $this->requestData[0]['projectId'] = $this->matcher->uuid()['data']['generate'];
         $this->requestData[0]['externalId'] = 'externalId_2';
 
         $this->builder
@@ -159,13 +162,16 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
+    /**
+     * @throws Exception
+     */
     public function testPostSKUUsageUnprocessableEntity()
     {
         // SKU with skuId does not exist
         $this->requestData[0]['skuId'] = 'skuId_test_invalid';
 
         // New Combination of projectId and externalId that does not exist yet
-        $this->requestData[0]['projectId'] = 'projectId_3';
+        $this->requestData[0]['projectId'] = $this->matcher->uuid()['data']['generate'];
         $this->requestData[0]['externalId'] = 'externalId_3';
 
         // Error code in response is 422
