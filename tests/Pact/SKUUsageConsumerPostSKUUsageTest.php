@@ -62,7 +62,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
 
         $this->responseData = [
             [
-                'skuUsageId' => 'skuusage_id_test_post',
+                'skuUsageId' => $this->matcher->uuid(),
                 'skuId' => 'skuId_test',
                 'quantity' => 1,
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
@@ -177,7 +177,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
 
         $this->builder
             ->given('The SKU with skuId does not exist')
-            ->uponReceiving('POST request to /sku-usage with non-existent skuId');
+            ->uponReceiving('Unprocessable Entity POST request to /sku-usage with non-existent skuId');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -198,7 +198,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
 
         $this->builder
             ->given('The combination of projectId and externalId already exists')
-            ->uponReceiving('POST request to /sku-usage with already existent combination of projectId and externalId');
+            ->uponReceiving('Conflict POST request to /sku-usage with already existent combination of projectId and externalId');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -240,7 +240,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->builder
             ->given('No skuId is provided in the request, the combination of projectId and externalId already exists')
             ->uponReceiving(
-                'POST request to /sku-usage without a skuId and an already existent combination of projectId ' .
+                'Multiple Errors POST request to /sku-usage without a skuId and an already existent combination of projectId ' .
                 'and externalId'
             );
 
