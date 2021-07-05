@@ -39,6 +39,22 @@ abstract class SKUUsageConsumerTest extends TestCase
 
     protected $matcher;
 
+    /** @var string */
+    protected $skuId;
+    /** @var string */
+    protected $projectId;
+    /** @var string */
+    protected $projectIdDuplicate;
+    /** @var string */
+    protected $externalId;
+    /** @var string */
+    protected $externalIdDuplicate;
+    /** @var string */
+    protected $taskIdGet;
+    /** @var string */
+    protected $taskIdPatch;
+    /** @var string */
+    protected $taskIdPost;
 
     /**
      * @throws Exception
@@ -75,6 +91,15 @@ abstract class SKUUsageConsumerTest extends TestCase
                 ]
             ]
         ];
+
+        $this->skuId = 'skuId_test';
+        $this->projectId = 'b1fedb36-c774-11eb-b8bc-0242ac130003';
+        $this->projectIdDuplicate = '7c2c564c-dd62-11eb-ba80-0242ac130004';
+        $this->externalId = 'externalId_test';
+        $this->externalIdDuplicate = 'externalId_test_duplicate';
+        $this->taskIdGet = 'a84da9b8-dd8c-11eb-ba80-0242ac130004';
+        $this->taskIdPatch = 'f5f25fba-dd8c-11eb-ba80-0242ac130004';
+        $this->taskIdPost = 'ff007ace-dd8c-11eb-ba80-0242ac130004';
     }
 
     protected function tearDown(): void

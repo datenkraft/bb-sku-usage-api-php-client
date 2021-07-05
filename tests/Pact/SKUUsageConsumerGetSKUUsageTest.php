@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
 {
-    protected $projectId;
+    /** @var string */
     protected $externalId;
 
     /**
@@ -38,27 +38,26 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
             'Content-Type' => 'application/json'
         ];
 
-        $this->path = '/sku-usage';
-
-        $this->projectId = 'b1fedb36-c774-11eb-b8bc-0242ac130003';
-        $this->externalId = 'externalId_test_duplicate';
+        $this->externalId = $this->externalIdDuplicate;
         $this->queryParams = [
             'filter[projectId]' => 'b1fedb36-c774-11eb-b8bc-0242ac130003',
-            'filter[externalId]' => 'externalId_test_duplicate',
+            'filter[externalId]' => $this->externalIdDuplicate,
         ];
 
         $this->requestData = [];
         $this->responseData = [
             [
-                'skuUsageId' => $this->matcher->like(67),
-                'skuId' => $this->matcher->like('skuId_test'),
+                'skuUsageId' => $this->matcher->like('skuusage_id_test'),
+                'skuId' => $this->matcher->like($this->skuId),
                 'quantity' => $this->matcher->like(1),
                 'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'projectId' => 'b1fedb36-c774-11eb-b8bc-0242ac130003',
-                'externalId' => 'externalId_test_duplicate',
+                'externalId' => $this->externalIdDuplicate,
             ]
         ];
+
+        $this->path = '/sku-usage';
     }
 
     public function testGetSKUUsageSuccess()

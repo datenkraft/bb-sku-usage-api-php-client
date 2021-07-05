@@ -290,6 +290,530 @@
                     }
                 ]
             }
+        },
+        "/task/{taskId}": {
+            "get": {
+                "tags": [
+                    "task"
+                ],
+                "summary": "Query Task data by taskId",
+                "description": "Query Task data by taskId",
+                "operationId": "getTask",
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/task"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [
+                            "bb-sku-usage-api/task:get"
+                        ]
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "task"
+                ],
+                "summary": "Update a Task",
+                "description": "Update one or more fields of a Task",
+                "operationId": "patchTask",
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/updateTask"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/updateResponseTask"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [
+                            "bb-sku-usage-api/task:patch"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/task/{taskId}/transaction/{transactionId}": {
+            "get": {
+                "tags": [
+                    "transaction"
+                ],
+                "summary": "Get Transactions from a Task",
+                "description": "Get Transactions From a Task",
+                "operationId": "getTransaction",
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "transactionId",
+                        "in": "path",
+                        "description": "Transaction id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/task"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [
+                            "bb-sku-usage-api/transaction:get"
+                        ]
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "transaction"
+                ],
+                "summary": "Update a Transaction",
+                "description": "Update one or more fields of a Transaction",
+                "operationId": "patchTransaction",
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "transactionId",
+                        "in": "path",
+                        "description": "Transaction id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/patchTransaction"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/patchResponseTransaction"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [
+                            "bb-sku-usage-api/transaction:patch"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/task/{taskId}/transaction/sku-usage": {
+            "post": {
+                "tags": [
+                    "transaction"
+                ],
+                "summary": "Add a Transaction to a Task",
+                "description": "Add a Transaction to a Task",
+                "operationId": "postTransaction",
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/postSkuUsageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/postResponseTransaction"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oAuthAuthorization": [
+                            "bb-sku-usage-api/transaction:post"
+                        ]
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -416,6 +940,141 @@
                 "items": {
                     "$ref": "#/components/schemas/skuUsage"
                 }
+            },
+            "updateTask": {
+                "required": [
+                    "taskStatus"
+                ],
+                "properties": {
+                    "taskStatus": {
+                        "description": "Task Status",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "updateResponseTask": {
+                "description": "Class PatchTaskResource",
+                "required": [
+                    "taskId",
+                    "taskStatus"
+                ],
+                "properties": {
+                    "taskId": {
+                        "description": "Task Id",
+                        "type": "string"
+                    },
+                    "taskStatus": {
+                        "description": "Task Status",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "task": {
+                "description": "Class TaskResource",
+                "required": [
+                    "taskId",
+                    "taskStatus",
+                    "entryCount",
+                    "transactions"
+                ],
+                "properties": {
+                    "taskId": {
+                        "description": "Task Id",
+                        "type": "string"
+                    },
+                    "taskStatus": {
+                        "description": "Task Status",
+                        "type": "string"
+                    },
+                    "entryCount": {
+                        "description": "Entry Count",
+                        "type": "integer"
+                    },
+                    "transactions": {
+                        "$ref": "#/components/schemas/patchResponseTransaction"
+                    }
+                },
+                "type": "object"
+            },
+            "patchTransaction": {
+                "required": [
+                    "transactionSeen"
+                ],
+                "properties": {
+                    "transactionSeen": {
+                        "description": "Transaction has been seen",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "patchResponseTransaction": {
+                "description": "Class PatchTransactionResource",
+                "required": [
+                    "transactionId",
+                    "transactionStatus",
+                    "transactionSeen"
+                ],
+                "properties": {
+                    "transactionId": {
+                        "description": "Transaction Id",
+                        "type": "string"
+                    },
+                    "transactionStatus": {
+                        "description": "Transaction Status",
+                        "type": "string"
+                    },
+                    "transactionSeen": {
+                        "description": "Transaction has been seen",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "postResponseTransaction": {
+                "description": "Class PostTransactionResource",
+                "required": [
+                    "transactionId"
+                ],
+                "properties": {
+                    "transactionId": {
+                        "description": "Transaction Id",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "transaction": {
+                "description": "Class TransactionResource",
+                "properties": {
+                    "taskId": {
+                        "description": "Transaction Id",
+                        "type": "string"
+                    },
+                    "transactionStatus": {
+                        "description": "Transaction Status",
+                        "type": "string"
+                    },
+                    "transactionResourceType": {
+                        "description": "Transaction Resource Type",
+                        "type": "string"
+                    },
+                    "entryCount": {
+                        "description": "Entry Count",
+                        "type": "integer"
+                    },
+                    "requestData": {
+                        "description": "Request Data",
+                        "type": "object"
+                    },
+                    "responseData": {
+                        "description": "Response Data",
+                        "type": "object"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
