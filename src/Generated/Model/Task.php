@@ -23,9 +23,9 @@ class Task
      */
     protected $entryCount;
     /**
-     * 
+     * Class PatchTransactionResource
      *
-     * @var PatchTransaction
+     * @var PatchResponseTransaction
      */
     protected $transactions;
     /**
@@ -92,22 +92,22 @@ class Task
         return $this;
     }
     /**
-     * 
+     * Class PatchTransactionResource
      *
-     * @return PatchTransaction
+     * @return PatchResponseTransaction
      */
-    public function getTransactions() : PatchTransaction
+    public function getTransactions() : PatchResponseTransaction
     {
         return $this->transactions;
     }
     /**
-     * 
+     * Class PatchTransactionResource
      *
-     * @param PatchTransaction $transactions
+     * @param PatchResponseTransaction $transactions
      *
      * @return self
      */
-    public function setTransactions(PatchTransaction $transactions) : self
+    public function setTransactions(PatchResponseTransaction $transactions) : self
     {
         $this->transactions = $transactions;
         return $this;

@@ -38,17 +38,15 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
             'Content-Type' => 'application/json'
         ];
 
-        $this->path = '/sku-usage';
-
         $this->requestData = [
             [
-                'skuId' => 'skuId_test_post',
+                'skuId' => $this->skuId,
                 'quantity' => 1,
-                'projectId' => 'bab93c53-1281-4a0e-8759-3f12a0f25350',
+                'projectId' => $this->projectId,
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
                 'usageEnd' => (new DateTime('2021-01-28'))
                     ->add(new DateInterval('P1D'))->format(DateTimeInterface::ATOM),
-                'externalId' => 'externalId_test',
+                'externalId' => $this->externalId,
                 'meta' => [
                     'meta1' => 0,
                     'meta2' => 9.99,
@@ -63,13 +61,13 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->responseData = [
             [
                 'skuUsageId' => $this->matcher->uuid(),
-                'skuId' => 'skuId_test_post',
+                'skuId' => $this->skuId,
                 'quantity' => 1,
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
                 'usageEnd' => (new DateTime('2021-01-28'))->add(new DateInterval('P1D'))
                     ->format(DateTimeInterface::ATOM),
-                'projectId' => 'bab93c53-1281-4a0e-8759-3f12a0f25350',
-                'externalId' => 'externalId_test',
+                'projectId' => $this->projectId,
+                'externalId' => $this->externalId,
                 'meta' => [
                     'meta1' => 0,
                     'meta2' => 9.99,
@@ -80,6 +78,8 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
                 ]
             ]
         ];
+
+        $this->path = '/sku-usage';
     }
 
     public function tearDown(): void
@@ -192,8 +192,8 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
     public function testPostSKUUsageConflict()
     {
         // Combination of projectId and externalId already exists
-        $this->requestData[0]['projectId'] = 'projectId_test_duplicate';
-        $this->requestData[0]['externalId'] = 'externalId_test_duplicate';
+        $this->requestData[0]['projectId'] = $this->projectIdDuplicate;
+        $this->requestData[0]['externalId'] = $this->externalIdDuplicate;
 
         // Error code in response is 409
         $this->expectedStatusCode = '409';
@@ -219,8 +219,8 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->requestData[0]['skuId'] = '';
 
         // Combination of projectId and externalId already exists
-        $this->requestData[0]['projectId'] = 'projectId_test_duplicate';
-        $this->requestData[0]['externalId'] = 'externalId_test_duplicate';
+        $this->requestData[0]['projectId'] = $this->projectIdDuplicate;
+        $this->requestData[0]['externalId'] = $this->externalIdDuplicate;
 
         // Status code of the response is 400
         $this->expectedStatusCode = '400';
@@ -266,15 +266,18 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        $skuUsage = (new NewSkuUsage())
-            ->setSkuId($this->requestData[0]['skuId'])
-            ->setProjectId($this->requestData[0]['projectId'])
-            ->setExternalId($this->requestData[0]['externalId'])
-            ->setQuantity($this->requestData[0]['quantity'])
-            ->setUsageStart(new DateTime($this->requestData[0]['usageStart']))
-            ->setUsageEnd(new DateTime($this->requestData[0]['usageEnd']))
-            ->setMeta($this->requestData[0]['meta']);
+        $skuUsages = [];
+        foreach ($this->requestData as $requestData) {
+            $skuUsages[] = (new NewSkuUsage())
+                ->setSkuId($requestData['skuId'])
+                ->setProjectId($requestData['projectId'])
+                ->setExternalId($requestData['externalId'])
+                ->setQuantity($requestData['quantity'])
+                ->setUsageStart(new DateTime($requestData['usageStart']))
+                ->setUsageEnd(new DateTime($requestData['usageEnd']))
+                ->setMeta($requestData['meta']);
+        }
 
-        return $client->postSkuUsage([$skuUsage], Client::FETCH_RESPONSE);
+        return $client->postSkuUsage($skuUsages, Client::FETCH_RESPONSE);
     }
 }

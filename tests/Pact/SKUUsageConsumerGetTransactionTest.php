@@ -10,18 +10,20 @@ use Exception;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class SKUUsageConsumerGetTaskTest
+ * Class SKUUsageConsumerGetTransactionTest
  * @package Pact
  */
-class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
+class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
 {
 
     /** @var string */
     protected $taskId;
     /** @var string */
-    protected $taskIdValid;
+    protected $transactionId;
     /** @var string */
-    protected $taskIdInvalid;
+    protected $transactionIdValid;
+    /** @var string */
+    protected $transactionIdInvalid;
 
     /**
      * @throws Exception
@@ -32,7 +34,7 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
 
         $this->method = 'GET';
 
-        $this->token = getenv('VALID_TOKEN_BB_SKU_USAGE_TASK_GET');
+        $this->token = getenv('VALID_TOKEN_BB_SKU_USAGE_TRANSACTION_GET');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer '.$this->token,
@@ -41,48 +43,40 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
             'Content-Type' => 'application/json',
         ];
 
-        $this->taskIdValid = $this->taskIdGet;
-        $this->taskIdInvalid = 'taskId_test_invalid';
-        $this->taskId = $this->taskIdValid;
+        $this->taskId = 'taskId_test_get';
 
-        $taskStatus = 'finished';
-        $transactions = [
-            [
-                'transactionId' => 'transactionId_test1_get',
-                'transactionStatus' => 'success',
-                'transactionSeen' => true,
-            ],
-            [
-                'transactionId' => 'transactionId_test2_get',
-                'transactionStatus' => 'failure',
-                'transactionSeen' => false,
-            ],
-        ];
-        $entryCount = 2;
+        $this->transactionIdValid = 'transactionId_test1_get';
+        $this->transactionIdInvalid = 'transactionId_test_invalid';
+        $this->transactionId = $this->transactionIdValid;
 
         $this->requestData = [];
         $this->responseData = [
-            'taskId' => $this->taskId,
-            'taskStatus' => $taskStatus,
-            'entryCount' => $entryCount,
-            'transactions' => $transactions,
+            'transactionId' => $this->transactionId,
+            'transactionStatus' => 'success',
+            'transactionSeen' => true,
+            'transactionResourceType' => 'transactionResourceType_test',
+            'entryCount' => 1,
+            'requestData' => [
+                'body' => ['test' => 'test'],
+            ],
+            'responseData' => null,
         ];
 
-        $this->path = '/task/'.$this->taskId;
+        $this->path = '/task/'.$this->taskId.'/transaction/'.$this->transactionId;
     }
 
-    public function testGetTaskSuccess()
+    public function testGetTransactionSuccess()
     {
         $this->expectedStatusCode = '200';
 
         $this->builder
-            ->given('A task with taskId exists')
-            ->uponReceiving('Successful GET request to /task/{taskId}');
+            ->given('A transaction with transactionId exists')
+            ->uponReceiving('Successful GET request to /task/{taskId}/transaction/{transactionId}');
 
         $this->beginTest();
     }
 
-    public function testGetTaskUnauthorized()
+    public function testGetTransactionUnauthorized()
     {
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
@@ -92,13 +86,13 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized GET request to /task/{taskId}');
+            ->uponReceiving('Unauthorized GET request to /task/{taskId}/transaction/{transactionId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetTaskForbidden()
+    public function testGetTransactionForbidden()
     {
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
@@ -108,17 +102,17 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
 
         $this->builder
             ->given('The token is valid with an invalid scope')
-            ->uponReceiving('Forbidden GET request to /task/{taskId}');
+            ->uponReceiving('Forbidden GET request to /task/{taskId}/transaction/{transactionId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetTaskNotFound(): void
+    public function testGetTransactionNotFound(): void
     {
-        // Path with taskId for non existent task
-        $this->taskId = $this->taskIdInvalid;
-        $this->path = '/task/'.$this->taskId;
+        // Path with transactionId for non existent transaction
+        $this->transactionId = $this->transactionIdInvalid;
+        $this->path = '/task/'.$this->taskId.'/transaction/'.$this->transactionId;
 
         // Error code in response is 404
         $this->expectedStatusCode = '404';
@@ -126,9 +120,9 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
 
         $this->builder
             ->given(
-                'A task with taskId does not exist'
+                'A transaction with transactionId does not exist'
             )
-            ->uponReceiving('Not Found GET request to /task/{taskId}');
+            ->uponReceiving('Not Found GET request to /task/{taskId}/transaction/{transactionId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -147,6 +141,6 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getTask($this->taskId, Client::FETCH_RESPONSE);
+        return $client->getTransaction($this->taskId, $this->transactionId, Client::FETCH_RESPONSE);
     }
 }

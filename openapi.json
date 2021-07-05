@@ -715,7 +715,7 @@
                 ]
             }
         },
-        "/task/{taskID}/transaction/sku-usage": {
+        "/task/{taskId}/transaction/sku-usage": {
             "post": {
                 "tags": [
                     "transaction"
@@ -745,8 +745,8 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "OK",
+                    "202": {
+                        "description": "Accepted",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -993,7 +993,7 @@
                         "type": "integer"
                     },
                     "transactions": {
-                        "$ref": "#/components/schemas/patchTransaction"
+                        "$ref": "#/components/schemas/patchResponseTransaction"
                     }
                 },
                 "type": "object"

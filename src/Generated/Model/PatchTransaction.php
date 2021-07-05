@@ -7,26 +7,26 @@ class PatchTransaction
     /**
      * Transaction has been seen
      *
-     * @var mixed
+     * @var bool
      */
     protected $transactionSeen;
     /**
      * Transaction has been seen
      *
-     * @return mixed
+     * @return bool
      */
-    public function getTransactionSeen()
+    public function getTransactionSeen() : bool
     {
         return $this->transactionSeen;
     }
     /**
      * Transaction has been seen
      *
-     * @param mixed $transactionSeen
+     * @param bool $transactionSeen
      *
      * @return self
      */
-    public function setTransactionSeen($transactionSeen) : self
+    public function setTransactionSeen(bool $transactionSeen) : self
     {
         $this->transactionSeen = $transactionSeen;
         return $this;

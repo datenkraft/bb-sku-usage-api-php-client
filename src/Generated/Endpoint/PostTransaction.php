@@ -23,7 +23,7 @@ class PostTransaction extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\
     }
     public function getUri() : string
     {
-        return str_replace(array('{taskId}'), array($this->taskId), '/task/{taskID}/transaction/sku-usage');
+        return str_replace(array('{taskId}'), array($this->taskId), '/task/{taskId}/transaction/sku-usage');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
@@ -49,7 +49,7 @@ class PostTransaction extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (202 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\PostResponseTransaction', 'json');
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {

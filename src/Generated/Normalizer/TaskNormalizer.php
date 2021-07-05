@@ -46,7 +46,7 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             $object->setEntryCount($data['entryCount']);
         }
         if (\array_key_exists('transactions', $data)) {
-            $object->setTransactions($this->denormalizer->denormalize($data['transactions'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\PatchTransaction', 'json', $context));
+            $object->setTransactions($this->denormalizer->denormalize($data['transactions'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\PatchResponseTransaction', 'json', $context));
         }
         return $object;
     }
