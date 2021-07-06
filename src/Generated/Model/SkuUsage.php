@@ -7,7 +7,7 @@ class SkuUsage
     /**
      * SKU Usage Id
      *
-     * @var int
+     * @var string
      */
     protected $skuUsageId;
     /**
@@ -55,20 +55,20 @@ class SkuUsage
     /**
      * SKU Usage Id
      *
-     * @return int
+     * @return string
      */
-    public function getSkuUsageId() : int
+    public function getSkuUsageId() : string
     {
         return $this->skuUsageId;
     }
     /**
      * SKU Usage Id
      *
-     * @param int $skuUsageId
+     * @param string $skuUsageId
      *
      * @return self
      */
-    public function setSkuUsageId(int $skuUsageId) : self
+    public function setSkuUsageId(string $skuUsageId) : self
     {
         $this->skuUsageId = $skuUsageId;
         return $this;
