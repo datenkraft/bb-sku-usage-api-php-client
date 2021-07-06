@@ -178,7 +178,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "sku-usage:get"
+                            "bb-sku-usage-api/sku-usage:get"
                         ]
                     }
                 ]
@@ -285,7 +285,7 @@
                 "security": [
                     {
                         "oAuthAuthorization": [
-                            "sku-usage:post"
+                            "bb-sku-usage-api/sku-usage:post"
                         ]
                     }
                 ]
@@ -869,7 +869,7 @@
                         "properties": {
                             "skuUsageId": {
                                 "description": "SKU Usage Id",
-                                "type": "integer"
+                                "type": "string"
                             }
                         },
                         "type": "object"
@@ -1086,7 +1086,8 @@
                         "tokenUrl": "https://localhost:30250/oauth/token",
                         "refreshUrl": "UNDEFINED",
                         "scopes": {
-                            "sku-usage:post": "Add SKU Usage Data"
+                            "bb-sku-usage-api/sku-usage:get": "Get SKU Usages from the SKU Usage API",
+                            "bb-sku-usage-api/sku-usage:post": "Add SKU Usages to the SKU Usage API"
                         }
                     }
                 }
