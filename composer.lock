@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45d5fa3809324125b0e1faa37cd6fcf5",
+    "content-hash": "06d63ab37fd232c0c90457699a51d2da",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -74,16 +74,16 @@
         },
         {
             "name": "datenkraft/bb-base-api-php-client",
-            "version": "v1.0.6",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datenkraft/bb-base-api-php-client.git",
-                "reference": "4e04880228adeccfc3aacb6ea77e6bab48368502"
+                "reference": "ab7e1f8cc67c548346617c5cb090f18342117cb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datenkraft/bb-base-api-php-client/zipball/4e04880228adeccfc3aacb6ea77e6bab48368502",
-                "reference": "4e04880228adeccfc3aacb6ea77e6bab48368502",
+                "url": "https://api.github.com/repos/datenkraft/bb-base-api-php-client/zipball/ab7e1f8cc67c548346617c5cb090f18342117cb0",
+                "reference": "ab7e1f8cc67c548346617c5cb090f18342117cb0",
                 "shasum": ""
             },
             "require": {
@@ -91,7 +91,7 @@
                 "jane-php/open-api-runtime": "^6.3.0",
                 "league/oauth2-client": "^2.6",
                 "nyholm/psr7": "^1.4",
-                "php": "^7.2"
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
                 "ext-json": "*",
@@ -122,9 +122,9 @@
             ],
             "support": {
                 "issues": "https://github.com/datenkraft/bb-base-api-php-client/issues",
-                "source": "https://github.com/datenkraft/bb-base-api-php-client/tree/v1.0.6"
+                "source": "https://github.com/datenkraft/bb-base-api-php-client/tree/v1.0.7"
             },
-            "time": "2021-06-15T15:07:28+00:00"
+            "time": "2021-06-25T05:16:42+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2289,16 +2289,16 @@
         },
         {
             "name": "amphp/cache",
-            "version": "v1.5.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/cache.git",
-                "reference": "2b6b5dbb70e54cc914df9952ba7c012bc4cbcd28"
+                "reference": "e7bccc526fc2a555d59e6ee8380eeb39a95c0835"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/cache/zipball/2b6b5dbb70e54cc914df9952ba7c012bc4cbcd28",
-                "reference": "2b6b5dbb70e54cc914df9952ba7c012bc4cbcd28",
+                "url": "https://api.github.com/repos/amphp/cache/zipball/e7bccc526fc2a555d59e6ee8380eeb39a95c0835",
+                "reference": "e7bccc526fc2a555d59e6ee8380eeb39a95c0835",
                 "shasum": ""
             },
             "require": {
@@ -2308,14 +2308,14 @@
                 "php": ">=7.1"
             },
             "conflict": {
-                "amphp/file": "<0.2 || >=3"
+                "amphp/file": "<0.2 || >=2"
             },
             "require-dev": {
-                "amphp/file": "^1 || ^2",
+                "amphp/file": "^1",
                 "amphp/php-cs-fixer-config": "dev-master",
                 "amphp/phpunit-util": "^1.1",
                 "phpunit/phpunit": "^6 | ^7 | ^8 | ^9",
-                "vimeo/psalm": "^4"
+                "vimeo/psalm": "^3.11@dev"
             },
             "type": "library",
             "autoload": {
@@ -2342,15 +2342,9 @@
             "support": {
                 "irc": "irc://irc.freenode.org/amphp",
                 "issues": "https://github.com/amphp/cache/issues",
-                "source": "https://github.com/amphp/cache/tree/v1.5.0"
+                "source": "https://github.com/amphp/cache/tree/v1.4.0"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/amphp",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-06-29T17:12:43+00:00"
+            "time": "2020-04-19T16:10:08+00:00"
         },
         {
             "name": "amphp/dns",
@@ -2914,16 +2908,16 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v1.1.3",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "b9064b98742d12f8f438eaf73369bdd7d8446331"
+                "reference": "a8af9f5d0a66c5fe9567da45a51509e592788fe6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/b9064b98742d12f8f438eaf73369bdd7d8446331",
-                "reference": "b9064b98742d12f8f438eaf73369bdd7d8446331",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/a8af9f5d0a66c5fe9567da45a51509e592788fe6",
+                "reference": "a8af9f5d0a66c5fe9567da45a51509e592788fe6",
                 "shasum": ""
             },
             "require": {
@@ -2987,9 +2981,15 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/socket/issues",
-                "source": "https://github.com/amphp/socket/tree/master"
+                "source": "https://github.com/amphp/socket/tree/v1.2.0"
             },
-            "time": "2020-06-25T18:55:28+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/amphp",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-07-09T18:18:48+00:00"
         },
         {
             "name": "amphp/sync",
@@ -4314,52 +4314,49 @@
         },
         {
             "name": "pact-foundation/pact-php",
-            "version": "7.0.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pact-foundation/pact-php.git",
-                "reference": "3ff58ad9bb4efcb4a02259118513cadb699fa8ff"
+                "reference": "aceafe615ba9364806671d89e467f21356b6ac7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pact-foundation/pact-php/zipball/3ff58ad9bb4efcb4a02259118513cadb699fa8ff",
-                "reference": "3ff58ad9bb4efcb4a02259118513cadb699fa8ff",
+                "url": "https://api.github.com/repos/pact-foundation/pact-php/zipball/aceafe615ba9364806671d89e467f21356b6ac7f",
+                "reference": "aceafe615ba9364806671d89e467f21356b6ac7f",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^2.5.1",
                 "amphp/byte-stream": "^1.8",
+                "amphp/cache": "v1.4.0",
                 "amphp/dns": "^1.2.3",
                 "amphp/hpack": "^3.1.0",
                 "amphp/http-server": "^2.1",
                 "amphp/log": "^1.1",
-                "amphp/process": "^1.1",
+                "amphp/process": "^1.1.1",
                 "amphp/serialization": "^1.0",
                 "amphp/socket": "^1.1.3",
                 "amphp/sync": "^1.4.0",
+                "amphp/windows-registry": "v0.3.3",
                 "composer/semver": "^3.2.4",
                 "ext-json": "*",
                 "ext-openssl": "*",
                 "guzzlehttp/guzzle": "^7.2.0",
-                "php": "^7.3"
+                "php": "^7.3 |^8.0",
+                "phpunit/phpunit": ">=8.2.3"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.19",
                 "mockery/mockery": "^1.4.2",
-                "php-amqplib/php-amqplib": "^2.12",
-                "phpunit/phpunit": "^9.4.3",
-                "roave/security-advisories": "dev-master",
+                "php-amqplib/php-amqplib": "^3.0",
+                "phpstan/phpstan": "^0.12.90",
+                "roave/security-advisories": "dev-latest",
                 "slim/psr7": "^1.2.0",
-                "slim/slim": "^4.6",
-                "tm/tooly-composer-script": "^1.2"
+                "slim/slim": "^4.6"
             },
+            "default-branch": true,
             "type": "library",
-            "extra": {
-                "tools": {
-                    "php-cs-fixer": {
-                        "url": "http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar"
-                    }
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "PhpPact\\": "src/PhpPact"
@@ -4387,9 +4384,9 @@
             ],
             "support": {
                 "issues": "https://github.com/pact-foundation/pact-php/issues",
-                "source": "https://github.com/pact-foundation/pact-php/tree/7.0.1"
+                "source": "https://github.com/pact-foundation/pact-php/tree/master"
             },
-            "time": "2020-12-30T03:53:20+00:00"
+            "time": "2021-07-05T16:03:06+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -7757,11 +7754,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "pact-foundation/pact-php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2"
+        "php": "^7.2 || ^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
