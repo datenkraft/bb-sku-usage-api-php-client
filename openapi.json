@@ -533,7 +533,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/task"
+                                    "$ref": "#/components/schemas/transaction"
                                 }
                             }
                         }
@@ -1053,7 +1053,7 @@
             "transaction": {
                 "description": "Class TransactionResource",
                 "properties": {
-                    "taskId": {
+                    "transactionId": {
                         "description": "Transaction Id",
                         "type": "string"
                     },

@@ -36,8 +36,8 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('taskId', $data)) {
-            $object->setTaskId($data['taskId']);
+        if (\array_key_exists('transactionId', $data)) {
+            $object->setTransactionId($data['transactionId']);
         }
         if (\array_key_exists('transactionStatus', $data)) {
             $object->setTransactionStatus($data['transactionStatus']);
@@ -59,8 +59,8 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getTaskId()) {
-            $data['taskId'] = $object->getTaskId();
+        if (null !== $object->getTransactionId()) {
+            $data['transactionId'] = $object->getTransactionId();
         }
         if (null !== $object->getTransactionStatus()) {
             $data['transactionStatus'] = $object->getTransactionStatus();

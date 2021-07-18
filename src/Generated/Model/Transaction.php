@@ -9,7 +9,7 @@ class Transaction
      *
      * @var string
      */
-    protected $taskId;
+    protected $transactionId;
     /**
      * Transaction Status
      *
@@ -45,20 +45,20 @@ class Transaction
      *
      * @return string
      */
-    public function getTaskId() : string
+    public function getTransactionId() : string
     {
-        return $this->taskId;
+        return $this->transactionId;
     }
     /**
      * Transaction Id
      *
-     * @param string $taskId
+     * @param string $transactionId
      *
      * @return self
      */
-    public function setTaskId(string $taskId) : self
+    public function setTransactionId(string $transactionId) : self
     {
-        $this->taskId = $taskId;
+        $this->transactionId = $transactionId;
         return $this;
     }
     /**
