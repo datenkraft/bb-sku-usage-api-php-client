@@ -881,7 +881,7 @@
             },
             "newSkuUsage": {
                 "required": [
-                    "skuId",
+                    "skuCode",
                     "quantity",
                     "projectId",
                     "usageStart",
@@ -889,8 +889,8 @@
                     "externalId"
                 ],
                 "properties": {
-                    "skuId": {
-                        "description": "SKU Id",
+                    "skuCode": {
+                        "description": "SKU Code",
                         "type": "string"
                     },
                     "quantity": {

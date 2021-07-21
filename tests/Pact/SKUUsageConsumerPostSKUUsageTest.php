@@ -40,7 +40,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
 
         $this->requestData = [
             [
-                'skuId' => $this->skuId,
+                'skuCode' => $this->skuCode,
                 'quantity' => 1,
                 'projectId' => $this->projectId,
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
@@ -61,7 +61,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->responseData = [
             [
                 'skuUsageId' => $this->matcher->uuid(),
-                'skuId' => $this->skuId,
+                'skuCode' => $this->skuCode,
                 'quantity' => 1,
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
                 'usageEnd' => (new DateTime('2021-01-28'))->add(new DateInterval('P1D'))
@@ -94,7 +94,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         // Build and register the interaction
         $this->builder
             ->given(
-                'A SKU with skuId exists, the combination of projectId and externalId is unique, ' .
+                'A SKU with skuCode exists, the combination of projectId and externalId is unique, ' .
                 'the request is valid, the token is valid and has a valid scope'
             )
             ->uponReceiving('Successful POST request to /sku-usage');
@@ -131,7 +131,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('A SKU with skuId exists, the request is valid, the token is valid with an invalid scope')
+            ->given('A SKU with skuCode exists, the request is valid, the token is valid with an invalid scope')
             ->uponReceiving('Forbidden POST request to /sku-usage');
 
         $this->responseData = $this->errorResponse;
@@ -147,15 +147,15 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
-        // SkuId is empty
-        $this->requestData[0]['skuId'] = '';
+        // SkuCode is empty
+        $this->requestData[0]['skuCode'] = '';
 
         // New Combination of projectId and externalId that does not exist yet
         $this->requestData[0]['projectId'] = $this->matcher->uuid()['data']['generate'];
         $this->requestData[0]['externalId'] = 'externalId_2';
 
         $this->builder
-            ->given('The skuId in the request is empty')
+            ->given('The skuCode in the request is empty')
             ->uponReceiving('Bad POST request to /sku-usage');
 
         $this->responseData = $this->errorResponse;
@@ -167,8 +167,8 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
      */
     public function testPostSKUUsageUnprocessableEntity()
     {
-        // SKU with skuId does not exist
-        $this->requestData[0]['skuId'] = 'skuId_test_invalid';
+        // SKU with skuCode does not exist
+        $this->requestData[0]['skuCode'] = 'skuCode_test_invalid';
 
         // New Combination of projectId and externalId that does not exist yet
         $this->requestData[0]['projectId'] = $this->matcher->uuid()['data']['generate'];
@@ -182,8 +182,8 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         ];
 
         $this->builder
-            ->given('The SKU with skuId does not exist')
-            ->uponReceiving('Unprocessable Entity POST request to /sku-usage with non-existent skuId');
+            ->given('The SKU with skuCode does not exist')
+            ->uponReceiving('Unprocessable Entity POST request to /sku-usage with non-existent skuCode');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -204,7 +204,10 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
 
         $this->builder
             ->given('The combination of projectId and externalId already exists')
-            ->uponReceiving('Conflict POST request to /sku-usage with already existent combination of projectId and externalId');
+            ->uponReceiving(
+                'Conflict POST request to /sku-usage with already existent combination of projectId and  ' .
+                'externalId'
+            );
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -215,8 +218,8 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
      */
     public function testPostSKUUsageMultipleErrors()
     {
-        // SkuId is empty
-        $this->requestData[0]['skuId'] = '';
+        // SkuCode is empty
+        $this->requestData[0]['skuCode'] = '';
 
         // Combination of projectId and externalId already exists
         $this->requestData[0]['projectId'] = $this->projectIdDuplicate;
@@ -244,10 +247,10 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         ];
 
         $this->builder
-            ->given('No skuId is provided in the request, the combination of projectId and externalId already exists')
+            ->given('No skuCode is provided in the request, the combination of projectId and externalId already exists')
             ->uponReceiving(
-                'Multiple Errors POST request to /sku-usage without a skuId and an already existent combination of projectId ' .
-                'and externalId'
+                'Multiple Errors POST request to /sku-usage without a skuCode and an already existent combination of ' .
+                'projectId and externalId'
             );
 
         $this->responseData = $this->errorResponse;
@@ -269,7 +272,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $skuUsages = [];
         foreach ($this->requestData as $requestData) {
             $skuUsages[] = (new NewSkuUsage())
-                ->setSkuId($requestData['skuId'])
+                ->setSkuCode($requestData['skuCode'])
                 ->setProjectId($requestData['projectId'])
                 ->setExternalId($requestData['externalId'])
                 ->setQuantity($requestData['quantity'])
