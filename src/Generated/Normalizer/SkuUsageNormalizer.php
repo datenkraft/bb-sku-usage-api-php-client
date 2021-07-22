@@ -39,8 +39,8 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (\array_key_exists('skuUsageId', $data)) {
             $object->setSkuUsageId($data['skuUsageId']);
         }
-        if (\array_key_exists('skuId', $data)) {
-            $object->setSkuId($data['skuId']);
+        if (\array_key_exists('skuCode', $data)) {
+            $object->setSkuCode($data['skuCode']);
         }
         if (\array_key_exists('quantity', $data)) {
             $object->setQuantity($data['quantity']);
@@ -68,7 +68,7 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (null !== $object->getSkuUsageId()) {
             $data['skuUsageId'] = $object->getSkuUsageId();
         }
-        $data['skuId'] = $object->getSkuId();
+        $data['skuCode'] = $object->getSkuCode();
         $data['quantity'] = $object->getQuantity();
         $data['projectId'] = $object->getProjectId();
         $data['usageStart'] = $object->getUsageStart()->format('Y-m-d\\TH:i:sP');

@@ -38,7 +38,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
         $this->token = getenv('VALID_TOKEN_BB_SKU_USAGE_TRANSACTION_POST');
 
         $this->requestHeaders = [
-            'Authorization' => 'Bearer '.$this->token,
+            'Authorization' => 'Bearer ' . $this->token,
             'Content-Type' => 'application/json',
         ];
         $this->responseHeaders = [
@@ -51,7 +51,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
 
         $this->requestData = [
             [
-                'skuId' => $this->skuId,
+                'skuCode' => $this->skuCode,
                 'quantity' => 1,
                 'projectId' => $this->projectId,
                 'usageStart' => (new DateTime('2021-01-28'))->format(DateTimeInterface::ATOM),
@@ -73,7 +73,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
             'transactionId' => $this->matcher->uuid(),
         ];
 
-        $this->path = '/task/'.$this->taskId.'/transaction/sku-usage';
+        $this->path = '/task/' . $this->taskId . '/transaction/sku-usage';
     }
 
     public function tearDown(): void
@@ -99,7 +99,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
     {
         // Invalid token
         $this->token = 'invalid_token';
-        $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
+        $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         // Error code in response is 401, extra is not defined
         $this->expectedStatusCode = '401';
@@ -117,14 +117,14 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_GET');
-        $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
+        $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         // Error code in response is 403, extra is not defined
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('A SKU with skuId exists, the request is valid, the token is valid with an invalid scope')
+            ->given('A SKU with skuCode exists, the request is valid, the token is valid with an invalid scope')
             ->uponReceiving('Forbidden POST request to /task/{taskId}/transaction/sku-usage');
 
         $this->responseData = $this->errorResponse;
@@ -145,11 +145,11 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
-        // empty skuId
-        $this->requestData[0]['skuId'] = '';
+        // empty skuCode
+        $this->requestData[0]['skuCode'] = '';
 
         $this->builder
-            ->given('The skuId in the request is empty')
+            ->given('The skuCode in the request is empty')
             ->uponReceiving('Bad POST request to /task/{taskId}/transaction/sku-usage');
 
         $this->responseData = $this->errorResponse;
@@ -172,7 +172,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
         $skuUsages = [];
         foreach ($this->requestData as $requestData) {
             $skuUsages[] = (new NewSkuUsage())
-                ->setSkuId($requestData['skuId'])
+                ->setSkuCode($requestData['skuCode'])
                 ->setProjectId($requestData['projectId'])
                 ->setExternalId($requestData['externalId'])
                 ->setQuantity($requestData['quantity'])

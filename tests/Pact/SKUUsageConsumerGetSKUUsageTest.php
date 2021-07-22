@@ -48,7 +48,7 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
         $this->responseData = [
             [
                 'skuUsageId' => $this->matcher->like('skuusage_id_test'),
-                'skuId' => $this->matcher->like($this->skuId),
+                'skuCode' => $this->matcher->like($this->skuCode),
                 'quantity' => $this->matcher->like(1),
                 'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),

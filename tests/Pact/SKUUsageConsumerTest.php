@@ -40,7 +40,7 @@ abstract class SKUUsageConsumerTest extends TestCase
     protected $matcher;
 
     /** @var string */
-    protected $skuId;
+    protected $skuCode;
     /** @var string */
     protected $projectId;
     /** @var string */
@@ -92,7 +92,7 @@ abstract class SKUUsageConsumerTest extends TestCase
             ]
         ];
 
-        $this->skuId = 'skuId_test';
+        $this->skuCode = 'skuCode_test';
         $this->projectId = 'b1fedb36-c774-11eb-b8bc-0242ac130003';
         $this->projectIdDuplicate = '7c2c564c-dd62-11eb-ba80-0242ac130004';
         $this->externalId = 'externalId_test';
