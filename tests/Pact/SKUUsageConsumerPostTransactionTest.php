@@ -10,6 +10,7 @@ use DateTime;
 use DateInterval;
 use DateTimeInterface;
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -81,7 +82,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
         parent::tearDown();
     }
 
-    public function testPostTransactionSuccess()
+    public function testPostTransactionSuccess(): void
     {
         $this->expectedStatusCode = '202';
 
@@ -95,7 +96,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostTransactionUnauthorized()
+    public function testPostTransactionUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -113,7 +114,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostTransactionForbidden()
+    public function testPostTransactionForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_GET');
@@ -133,28 +134,33 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
 
     /**
      * @throws Exception
+     * @throws GuzzleException
      */
-    public function testPostTransactionBadRequest()
+    public function testPostTransactionBadRequest(): void
     {
-        $this->markTestSkipped(
-            'Cannot be tested because there is no validation of the request data for the transaction'
-        );
+        $this->requestData = [];
 
-        /*
         // Error code in response is 400
         $this->expectedStatusCode = '400';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
-        // empty skuCode
-        $this->requestData[0]['skuCode'] = '';
-
         $this->builder
-            ->given('The skuCode in the request is empty')
+            ->given('The body in the request is empty')
             ->uponReceiving('Bad POST request to /task/{taskId}/transaction/sku-usage');
 
         $this->responseData = $this->errorResponse;
-        $this->beginTest();
-        */
+
+        // use guzzle because with our client it is not possible to post empty "NewSkuUsage"s
+        $this->prepareTest();
+        $options = [
+            'headers' => $this->requestHeaders,
+            'http_errors' => false,
+            'body' => json_encode($this->requestData),
+        ];
+        $response = $this->guzzleClient->post($this->path, $options);
+
+        $this->assertEquals($this->expectedStatusCode, $response->getStatusCode());
+        $this->assertJson($response->getBody());
     }
 
     /**

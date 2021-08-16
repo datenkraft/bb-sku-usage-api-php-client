@@ -3,6 +3,7 @@
 namespace Pact;
 
 use Exception;
+use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 use PhpPact\Consumer\InteractionBuilder;
 use PhpPact\Consumer\Matcher\Matcher;
@@ -19,6 +20,8 @@ abstract class SKUUsageConsumerTest extends TestCase
 {
     protected $builder;
     protected $config;
+
+    protected $guzzleClient;
 
     protected $expectedExceptionClass = GuzzleException::class;
 
@@ -78,6 +81,8 @@ abstract class SKUUsageConsumerTest extends TestCase
                 $exception->getMessage()
             );
         }
+
+        $this->guzzleClient = new GuzzleHttpClient(['base_uri' => $this->config->getBaseUri()]);
 
         // Create the interaction builder
         $this->builder = new InteractionBuilder($this->config);
