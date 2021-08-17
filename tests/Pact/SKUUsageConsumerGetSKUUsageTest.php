@@ -60,7 +60,7 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
         $this->path = '/sku-usage';
     }
 
-    public function testGetSKUUsageSuccess()
+    public function testGetSKUUsageSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
@@ -71,7 +71,7 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testGetSKUUsageUnauthorized()
+    public function testGetSKUUsageUnauthorized(): void
     {
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
@@ -87,7 +87,7 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testGetSKUUsageForbidden()
+    public function testGetSKUUsageForbidden(): void
     {
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
@@ -98,6 +98,24 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
         $this->builder
             ->given('The token is valid with an invalid scope')
             ->uponReceiving('Forbidden GET request to /sku-usage');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testGetSKUUsageBadRequest(): void
+    {
+        $this->queryParams = [
+            'filter[projectId]' => 'invalid_uuid',
+            'filter[externalId]' => $this->externalIdDuplicate,
+        ];
+
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The request body or query is invalid')
+            ->uponReceiving('Bad GET request to /sku-usage');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();

@@ -8,6 +8,7 @@ use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
 use Datenkraft\Backbone\Client\SkuUsageApi\Client;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\PatchTransaction;
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -131,12 +132,11 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function testPatchTaskBadRequest(): void
     {
-        $this->markTestSkipped('Cannot be tested because empty string transactionSeen = false ' .
-        '(Client throws Exception if transactionSeen is not set/null)');
-
-        /*
         // transactionSeen is not defined
         $this->requestData['transactionSeen'] = "";
 
@@ -149,8 +149,19 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
             ->uponReceiving('Bad PATCH request to /task/{taskId}/transaction/{transactionId}');
 
         $this->responseData = $this->errorResponse;
-        $this->beginTest();
-        */
+
+        // use guzzle because our client throws an exception if you set 'transactionSeen' to a non boolean value
+        $this->prepareTest();
+
+        $options = [
+            'headers' => $this->requestHeaders,
+            'http_errors' => false,
+            'body' => json_encode($this->requestData),
+        ];
+        $response = $this->guzzleClient->patch($this->path, $options);
+
+        $this->assertEquals($this->expectedStatusCode, $response->getStatusCode());
+        $this->assertJson($response->getBody());
     }
 
 
