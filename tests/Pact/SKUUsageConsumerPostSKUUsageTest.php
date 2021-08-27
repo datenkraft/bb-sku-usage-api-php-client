@@ -87,7 +87,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         parent::tearDown();
     }
 
-    public function testPostSKUUsageSuccess()
+    public function testPostSKUUsageSuccess(): void
     {
         $this->expectedStatusCode = '201';
 
@@ -102,7 +102,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostSKUUsageUnauthorized()
+    public function testPostSKUUsageUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -120,7 +120,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostSKUUsageForbidden()
+    public function testPostSKUUsageForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_GET');
@@ -141,7 +141,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testPostSKUUsageBadRequest()
+    public function testPostSKUUsageBadRequest(): void
     {
         // Error code in response is 400
         $this->expectedStatusCode = '400';
@@ -165,7 +165,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testPostSKUUsageUnprocessableEntity()
+    public function testPostSKUUsageUnprocessableEntity(): void
     {
         // SKU with skuCode does not exist
         $this->requestData[0]['skuCode'] = 'skuCode_test_invalid';
@@ -189,7 +189,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostSKUUsageConflict()
+    public function testPostSKUUsageConflict(): void
     {
         // Combination of projectId and externalId already exists
         $this->requestData[0]['projectId'] = $this->projectIdDuplicate;
@@ -216,7 +216,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testPostSKUUsageMultipleErrors()
+    public function testPostSKUUsageMultipleErrors(): void
     {
         // Combination of projectId and externalId is not unique inside of request body
         $this->externalId = 'new_external_id';

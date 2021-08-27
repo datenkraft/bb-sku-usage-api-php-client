@@ -37,7 +37,7 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
         $this->token = getenv('VALID_TOKEN_BB_SKU_USAGE_TRANSACTION_GET');
 
         $this->requestHeaders = [
-            'Authorization' => 'Bearer '.$this->token,
+            'Authorization' => 'Bearer ' . $this->token,
         ];
         $this->responseHeaders = [
             'Content-Type' => 'application/json',
@@ -62,10 +62,10 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
             'responseData' => null,
         ];
 
-        $this->path = '/task/'.$this->taskId.'/transaction/'.$this->transactionId;
+        $this->path = '/task/' . $this->taskId . '/transaction/' . $this->transactionId;
     }
 
-    public function testGetTransactionSuccess()
+    public function testGetTransactionSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
@@ -76,10 +76,10 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testGetTransactionUnauthorized()
+    public function testGetTransactionUnauthorized(): void
     {
         $this->token = 'invalid_token';
-        $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
+        $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
@@ -92,10 +92,10 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testGetTransactionForbidden()
+    public function testGetTransactionForbidden(): void
     {
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
-        $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
+        $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
@@ -112,7 +112,7 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
     {
         // Path with transactionId for non existent transaction
         $this->transactionId = $this->transactionIdInvalid;
-        $this->path = '/task/'.$this->taskId.'/transaction/'.$this->transactionId;
+        $this->path = '/task/' . $this->taskId . '/transaction/' . $this->transactionId;
 
         // Error code in response is 404
         $this->expectedStatusCode = '404';

@@ -35,7 +35,7 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $this->token = getenv('VALID_TOKEN_BB_SKU_USAGE_TASK_GET');
 
         $this->requestHeaders = [
-            'Authorization' => 'Bearer '.$this->token,
+            'Authorization' => 'Bearer ' . $this->token,
         ];
         $this->responseHeaders = [
             'Content-Type' => 'application/json',
@@ -68,10 +68,10 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
             'transactions' => $transactions,
         ];
 
-        $this->path = '/task/'.$this->taskId;
+        $this->path = '/task/' . $this->taskId;
     }
 
-    public function testGetTaskSuccess()
+    public function testGetTaskSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
@@ -82,10 +82,10 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testGetTaskUnauthorized()
+    public function testGetTaskUnauthorized(): void
     {
         $this->token = 'invalid_token';
-        $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
+        $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
@@ -98,10 +98,10 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testGetTaskForbidden()
+    public function testGetTaskForbidden(): void
     {
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
-        $this->requestHeaders['Authorization'] = 'Bearer '.$this->token;
+        $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
@@ -118,7 +118,7 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
     {
         // Path with taskId for non existent task
         $this->taskId = $this->taskIdInvalid;
-        $this->path = '/task/'.$this->taskId;
+        $this->path = '/task/' . $this->taskId;
 
         // Error code in response is 404
         $this->expectedStatusCode = '404';
