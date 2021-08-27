@@ -218,31 +218,32 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
      */
     public function testPostSKUUsageMultipleErrors()
     {
-        // SkuCode is empty
-        $this->requestData[0]['skuCode'] = '';
+        // Combination of projectId and externalId is not unique inside of request body
+        $this->externalId = 'new_external_id';
+        $this->requestData[0]['externalId'] = $this->externalId;
+        $this->requestData[1] = $this->requestData[0];
 
-        // Combination of projectId and externalId already exists
-        $this->requestData[0]['projectId'] = $this->projectIdDuplicate;
-        $this->requestData[0]['externalId'] = $this->externalIdDuplicate;
+        // SkuCode is empty
+        $this->requestData[1]['skuCode'] = '';
 
         // Status code of the response is 400
         $this->expectedStatusCode = '400';
 
-        // Error code of first error is 400
+        // Error code of second error is 422
         $this->errorResponse['errors'][0] = [
-            'code' => '400',
+            'code' => '422',
             'message' => $this->matcher->like('Example error message'),
             'extra' => [
-                'externalId' => $this->requestData[0]['externalId']
+                'externalId' => $this->requestData[0]['externalId'],
             ]
         ];
 
-        // Error code of second error is 409
+        // Error code of second error is 400
         $this->errorResponse['errors'][1] = [
-            'code' => '409',
+            'code' => '400',
             'message' => $this->matcher->like('Example error message'),
             'extra' => [
-                'externalId' => $this->requestData[0]['externalId']
+                'externalId' => $this->requestData[1]['externalId']
             ]
         ];
 
