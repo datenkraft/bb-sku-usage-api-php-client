@@ -229,7 +229,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         // Status code of the response is 400
         $this->expectedStatusCode = '400';
 
-        // Error code of second error is 422
+        // Error code of first error is 422
         $this->errorResponse['errors'][0] = [
             'code' => '422',
             'message' => $this->matcher->like('Example error message'),
