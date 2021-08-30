@@ -189,13 +189,13 @@
                 ],
                 "summary": "Add SKU Usage data",
                 "description": "Add SKU Usage data",
-                "operationId": "postSkuUsage",
+                "operationId": "postSkuUsageCollection",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/postSkuUsageRequest"
+                                "$ref": "#/components/schemas/postSkuUsageCollectionRequest"
                             }
                         }
                     }
@@ -206,7 +206,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/postSkuUsageResponse"
+                                    "$ref": "#/components/schemas/postSkuUsageCollectionResponse"
                                 }
                             }
                         }
@@ -720,9 +720,9 @@
                 "tags": [
                     "transaction"
                 ],
-                "summary": "Add a Transaction to a Task",
-                "description": "Add a Transaction to a Task",
-                "operationId": "postTransaction",
+                "summary": "Add a Transaction of SKU Usages to a Task",
+                "description": "Add a Transaction of SKU Usages to a Task",
+                "operationId": "postTransactionSkuUsageCollection",
                 "parameters": [
                     {
                         "name": "taskId",
@@ -739,7 +739,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/postSkuUsageRequest"
+                                "$ref": "#/components/schemas/postSkuUsageCollectionRequest"
                             }
                         }
                     }
@@ -922,13 +922,13 @@
                 },
                 "type": "object"
             },
-            "postSkuUsageRequest": {
+            "postSkuUsageCollectionRequest": {
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/newSkuUsage"
                 }
             },
-            "postSkuUsageResponse": {
+            "postSkuUsageCollectionResponse": {
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/skuUsage"
