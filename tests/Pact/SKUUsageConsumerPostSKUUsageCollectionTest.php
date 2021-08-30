@@ -13,10 +13,10 @@ use Exception;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class SKUUsageConsumerPostSKUUsageTest
+ * Class SKUUsageConsumerPostSKUUsageCollectionTest
  * @package Pact
  */
-class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
+class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
 {
 
     /**
@@ -87,7 +87,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         parent::tearDown();
     }
 
-    public function testPostSKUUsageSuccess(): void
+    public function testCollectionSuccess(): void
     {
         $this->expectedStatusCode = '201';
 
@@ -102,7 +102,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostSKUUsageUnauthorized(): void
+    public function testCollectionUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -120,7 +120,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostSKUUsageForbidden(): void
+    public function testCollectionForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_GET');
@@ -141,7 +141,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testPostSKUUsageBadRequest(): void
+    public function testCollectionBadRequest(): void
     {
         // Error code in response is 400
         $this->expectedStatusCode = '400';
@@ -165,7 +165,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testPostSKUUsageUnprocessableEntity(): void
+    public function testCollectionUnprocessableEntity(): void
     {
         // SKU with skuCode does not exist
         $this->requestData[0]['skuCode'] = 'skuCode_test_invalid';
@@ -189,7 +189,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostSKUUsageConflict(): void
+    public function testCollectionConflict(): void
     {
         // Combination of projectId and externalId already exists
         $this->requestData[0]['projectId'] = $this->projectIdDuplicate;
@@ -216,7 +216,7 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testPostSKUUsageMultipleErrors(): void
+    public function testCollectionMultipleErrors(): void
     {
         // Combination of projectId and externalId is not unique inside of request body
         $this->externalId = 'new_external_id';
@@ -282,6 +282,6 @@ class SKUUsageConsumerPostSKUUsageTest extends SKUUsageConsumerTest
                 ->setMeta($requestData['meta']);
         }
 
-        return $client->postSkuUsage($skuUsages, Client::FETCH_RESPONSE);
+        return $client->postSkuUsageCollection($skuUsages, Client::FETCH_RESPONSE);
     }
 }
