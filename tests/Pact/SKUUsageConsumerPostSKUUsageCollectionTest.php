@@ -87,7 +87,7 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
         parent::tearDown();
     }
 
-    public function testCollectionSuccess(): void
+    public function testPostSKUUsageCollectionSuccess(): void
     {
         $this->expectedStatusCode = '201';
 
@@ -102,7 +102,7 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testCollectionUnauthorized(): void
+    public function testPostSKUUsageCollectionUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -120,7 +120,7 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testCollectionForbidden(): void
+    public function testPostSKUUsageCollectionForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_GET');
@@ -141,7 +141,7 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testCollectionBadRequest(): void
+    public function testPostSKUUsageCollectionBadRequest(): void
     {
         // Error code in response is 400
         $this->expectedStatusCode = '400';
@@ -165,7 +165,7 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testCollectionUnprocessableEntity(): void
+    public function testPostSKUUsageCollectionUnprocessableEntity(): void
     {
         // SKU with skuCode does not exist
         $this->requestData[0]['skuCode'] = 'skuCode_test_invalid';
@@ -189,7 +189,7 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testCollectionConflict(): void
+    public function testPostSKUUsageCollectionConflict(): void
     {
         // Combination of projectId and externalId already exists
         $this->requestData[0]['projectId'] = $this->projectIdDuplicate;
@@ -216,7 +216,7 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
     /**
      * @throws Exception
      */
-    public function testCollectionMultipleErrors(): void
+    public function testPostSKUUsageCollectionMultipleErrors(): void
     {
         // Combination of projectId and externalId is not unique inside of request body
         $this->externalId = 'new_external_id';
