@@ -14,10 +14,10 @@ use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class SKUUsageConsumerPostTransactionTest
+ * Class SKUUsageConsumerPostTransactionSkuUsageCollectionTest
  * @package Pact
  */
-class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
+class SKUUsageConsumerPostTransactionSkuUsageCollectionTest extends SKUUsageConsumerTest
 {
 
     /** @var string */
@@ -82,7 +82,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
         parent::tearDown();
     }
 
-    public function testPostTransactionSuccess(): void
+    public function testPostTransactionSkuUsageCollectionSuccess(): void
     {
         $this->expectedStatusCode = '202';
 
@@ -96,7 +96,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostTransactionUnauthorized(): void
+    public function testPostTransactionSkuUsageCollectionUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -114,7 +114,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPostTransactionForbidden(): void
+    public function testPostTransactionSkuUsageCollectionForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_GET');
@@ -136,7 +136,7 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
      * @throws Exception
      * @throws GuzzleException
      */
-    public function testPostTransactionBadRequest(): void
+    public function testPostTransactionSkuUsageCollectionBadRequest(): void
     {
         $this->requestData = [];
 
@@ -187,6 +187,6 @@ class SKUUsageConsumerPostTransactionTest extends SKUUsageConsumerTest
                 ->setMeta($requestData['meta']);
         }
 
-        return $client->postTransaction($this->taskId, $skuUsages, Client::FETCH_RESPONSE);
+        return $client->postTransactionSkuUsageCollection($this->taskId, $skuUsages, Client::FETCH_RESPONSE);
     }
 }
