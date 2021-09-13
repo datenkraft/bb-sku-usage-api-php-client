@@ -42,6 +42,9 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (\array_key_exists('transactionStatus', $data)) {
             $object->setTransactionStatus($data['transactionStatus']);
         }
+        if (\array_key_exists('transactionSeen', $data)) {
+            $object->setTransactionSeen($data['transactionSeen']);
+        }
         if (\array_key_exists('transactionResourceType', $data)) {
             $object->setTransactionResourceType($data['transactionResourceType']);
         }
@@ -64,6 +67,9 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         if (null !== $object->getTransactionStatus()) {
             $data['transactionStatus'] = $object->getTransactionStatus();
+        }
+        if (null !== $object->getTransactionSeen()) {
+            $data['transactionSeen'] = $object->getTransactionSeen();
         }
         if (null !== $object->getTransactionResourceType()) {
             $data['transactionResourceType'] = $object->getTransactionResourceType();

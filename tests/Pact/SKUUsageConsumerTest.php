@@ -105,6 +105,8 @@ abstract class SKUUsageConsumerTest extends TestCase
         $this->taskIdGet = 'a84da9b8-dd8c-11eb-ba80-0242ac130004';
         $this->taskIdPatch = 'f5f25fba-dd8c-11eb-ba80-0242ac130004';
         $this->taskIdPost = 'ff007ace-dd8c-11eb-ba80-0242ac130004';
+
+        $this->queryParams = [];
     }
 
     protected function tearDown(): void
