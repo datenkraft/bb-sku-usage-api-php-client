@@ -6,6 +6,51 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
 {
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionEndpointBadRequestException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionEndpointUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionEndpointForbiddenException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionEndpointInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return null|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleResource[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     */
+    public function getAuthRoleCollectionEndpoint(string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthRoleCollectionEndpoint(), $fetch);
+    }
+    /**
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionEndpointBadRequestException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionEndpointUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionEndpointForbiddenException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionEndpointInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return null|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleIdentityResource[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     */
+    public function getAuthRoleIdentityCollectionEndpoint(string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthRoleIdentityCollectionEndpoint(), $fetch);
+    }
+    /**
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostAuthRoleIdentityCollectionEndpointBadRequestException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostAuthRoleIdentityCollectionEndpointUnauthorizedException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostAuthRoleIdentityCollectionEndpointForbiddenException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostAuthRoleIdentityCollectionEndpointNotFoundException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostAuthRoleIdentityCollectionEndpointConflictException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostAuthRoleIdentityCollectionEndpointUnprocessableEntityException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostAuthRoleIdentityCollectionEndpointInternalServerErrorException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return null|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleIdentityResource[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+     */
+    public function postAuthRoleIdentityCollectionEndpoint(string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\PostAuthRoleIdentityCollectionEndpoint(), $fetch);
+    }
+    /**
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
      *
      * @return null|\Psr\Http\Message\ResponseInterface
