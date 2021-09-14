@@ -1146,29 +1146,6 @@
                     "$ref": "#/components/schemas/authPermissionResource"
                 }
             },
-            "authRoleResource": {
-                "required": [
-                    "roleCode",
-                    "name"
-                ],
-                "properties": {
-                    "roleCode": {
-                        "description": "Role Code",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Name",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "getAuthRoleCollectionResponse": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/authRoleResource"
-                }
-            },
             "authRoleIdentityResource": {
                 "required": [
                     "roleCode",
@@ -1190,6 +1167,29 @@
                 "type": "array",
                 "items": {
                     "$ref": "#/components/schemas/authRoleIdentityResource"
+                }
+            },
+            "authRoleResource": {
+                "required": [
+                    "roleCode",
+                    "name"
+                ],
+                "properties": {
+                    "roleCode": {
+                        "description": "Role Code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "getAuthRoleCollectionResponse": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/authRoleResource"
                 }
             },
             "skuUsage": {
