@@ -65,6 +65,44 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
         $this->path = '/task/' . $this->taskId . '/transaction/' . $this->transactionId;
     }
 
+    public function testGetTransactionWithQuerySuccess(): void
+    {
+        // Set response fields and expected response
+        $this->queryParams['fields'] = 'transactionId,transactionStatus,transactionSeen';
+        $this->responseData = [
+            'transactionId' => $this->transactionId,
+            'transactionStatus' => 'success',
+            'transactionSeen' => true,
+        ];
+
+        $this->expectedStatusCode = '200';
+
+        $this->builder
+            ->given('A transaction with transactionId exists')
+            ->uponReceiving(
+                'Successful GET request to /task/{taskId}/transaction/{transactionId} with response fields set'
+            );
+
+        $this->beginTest();
+    }
+
+    public function testGetTransactionWithQueryBadRequest(): void
+    {
+        // Response field does not exist
+        $this->queryParams['fields'] = 'invalidField';
+
+        // Error code in response is 400
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The specified response field does not exist')
+            ->uponReceiving('Bad GET request to /task/{taskId}/transaction/{transactionId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
     public function testGetTransactionSuccess(): void
     {
         $this->expectedStatusCode = '200';
@@ -141,6 +179,6 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getTransaction($this->taskId, $this->transactionId, Client::FETCH_RESPONSE);
+        return $client->getTransaction($this->taskId, $this->transactionId, $this->queryParams, Client::FETCH_RESPONSE);
     }
 }

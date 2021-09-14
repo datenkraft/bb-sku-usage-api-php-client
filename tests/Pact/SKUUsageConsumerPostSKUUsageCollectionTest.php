@@ -218,13 +218,15 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
      */
     public function testPostSKUUsageCollectionMultipleErrors(): void
     {
-        // Combination of projectId and externalId is not unique inside of request body
+        // New externalId
         $this->externalId = 'new_external_id';
         $this->requestData[0]['externalId'] = $this->externalId;
-        $this->requestData[1] = $this->requestData[0];
+
+        // Combination of projectId, externalId and skuCode is not unique inside of request body
+        $this->requestData[2] = $this->requestData[1] = $this->requestData[0];
 
         // SkuCode is empty
-        $this->requestData[1]['skuCode'] = '';
+        $this->requestData[2]['skuCode'] = '';
 
         // Status code of the response is 400
         $this->expectedStatusCode = '400';
@@ -248,10 +250,13 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
         ];
 
         $this->builder
-            ->given('No skuCode is provided in the request, the combination of projectId and externalId already exists')
+            ->given(
+                'No skuCode is provided in the request, the combination of projectId, externalId and skuCode already ' .
+                'exists'
+            )
             ->uponReceiving(
                 'Multiple Errors POST request to /sku-usage without a skuCode and an already existent combination of ' .
-                'projectId and externalId'
+                'projectId, externalId and skuCode'
             );
 
         $this->responseData = $this->errorResponse;

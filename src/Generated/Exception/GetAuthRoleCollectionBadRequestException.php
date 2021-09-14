@@ -2,12 +2,12 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-class PostAuthRoleIdentityCollectionEndpointConflictException extends ConflictException
+class GetAuthRoleCollectionBadRequestException extends BadRequestException
 {
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse $errorResponse)
     {
-        parent::__construct('Conflict', 409);
+        parent::__construct('Bad Request', 400);
         $this->errorResponse = $errorResponse;
     }
     public function getErrorResponse()

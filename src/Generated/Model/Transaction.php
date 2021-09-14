@@ -17,6 +17,12 @@ class Transaction
      */
     protected $transactionStatus;
     /**
+     * Transaction Seen
+     *
+     * @var bool
+     */
+    protected $transactionSeen;
+    /**
      * Transaction Resource Type
      *
      * @var string
@@ -80,6 +86,27 @@ class Transaction
     public function setTransactionStatus(string $transactionStatus) : self
     {
         $this->transactionStatus = $transactionStatus;
+        return $this;
+    }
+    /**
+     * Transaction Seen
+     *
+     * @return bool
+     */
+    public function getTransactionSeen() : bool
+    {
+        return $this->transactionSeen;
+    }
+    /**
+     * Transaction Seen
+     *
+     * @param bool $transactionSeen
+     *
+     * @return self
+     */
+    public function setTransactionSeen(bool $transactionSeen) : self
+    {
+        $this->transactionSeen = $transactionSeen;
         return $this;
     }
     /**

@@ -2,12 +2,12 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-class PostAuthRoleIdentityCollectionEndpointUnprocessableEntityException extends UnprocessableEntityException
+class PostAuthRoleIdentityCollectionNotFoundException extends NotFoundException
 {
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse $errorResponse)
     {
-        parent::__construct('Unprocessable Entity', 422);
+        parent::__construct('Not Found', 404);
         $this->errorResponse = $errorResponse;
     }
     public function getErrorResponse()

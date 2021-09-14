@@ -11,11 +11,15 @@ class GetTransaction extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\R
      *
      * @param string $taskId Task id
      * @param string $transactionId Transaction id
+     * @param array $queryParameters {
+     *     @var string $fields Fields to include in the response (separated by comma)
+     * }
      */
-    public function __construct(string $taskId, string $transactionId)
+    public function __construct(string $taskId, string $transactionId, array $queryParameters = array())
     {
         $this->taskId = $taskId;
         $this->transactionId = $transactionId;
+        $this->queryParameters = $queryParameters;
     }
     use \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\EndpointTrait;
     public function getMethod() : string
@@ -34,12 +38,22 @@ class GetTransaction extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\R
     {
         return array('Accept' => array('application/json'));
     }
+    protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
+    {
+        $optionsResolver = parent::getQueryOptionsResolver();
+        $optionsResolver->setDefined(array('fields'));
+        $optionsResolver->setRequired(array());
+        $optionsResolver->setDefaults(array());
+        $optionsResolver->setAllowedTypes('fields', array('string'));
+        return $optionsResolver;
+    }
     /**
      * {@inheritdoc}
      *
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTransactionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTransactionForbiddenException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTransactionNotFoundException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTransactionBadRequestException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTransactionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
      *
@@ -58,6 +72,9 @@ class GetTransaction extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\R
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTransactionNotFoundException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'));
+        }
+        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTransactionBadRequestException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'));
         }
         if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTransactionInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'));
