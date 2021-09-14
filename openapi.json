@@ -27,7 +27,7 @@
                 ],
                 "summary": "Get all available roles from this resource server",
                 "description": "Get all available roles from this resource server",
-                "operationId": "getAuthRoleCollectionEndpoint",
+                "operationId": "getAuthRoleCollection",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -99,7 +99,7 @@
                 ],
                 "summary": "Get all role to identity assignments from this resource server",
                 "description": "Get all role to identity assignments from this resource server",
-                "operationId": "GetAuthRoleIdentityCollectionEndpoint",
+                "operationId": "getAuthRoleIdentityCollection",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -169,7 +169,7 @@
                 ],
                 "summary": "Create one or more role to identity assignments in this resource server",
                 "description": "Create one or more role to identity assignments in this resource server",
-                "operationId": "PostAuthRoleIdentityCollectionEndpoint",
+                "operationId": "postAuthRoleIdentityCollection",
                 "responses": {
                     "201": {
                         "description": "Created",

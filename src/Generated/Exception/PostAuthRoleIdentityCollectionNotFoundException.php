@@ -2,12 +2,12 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-class GetAuthRoleCollectionEndpointForbiddenException extends ForbiddenException
+class PostAuthRoleIdentityCollectionNotFoundException extends NotFoundException
 {
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse $errorResponse)
     {
-        parent::__construct('Forbidden', 403);
+        parent::__construct('Not Found', 404);
         $this->errorResponse = $errorResponse;
     }
     public function getErrorResponse()
