@@ -4,6 +4,15 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint;
 
 class PostAuthRoleIdentityCollection extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\Endpoint
 {
+    /**
+     * Create one or more role to identity assignments in this resource server
+     *
+     * @param \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleIdentityResource[] $requestBody 
+     */
+    public function __construct(array $requestBody)
+    {
+        $this->body = $requestBody;
+    }
     use \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\EndpointTrait;
     public function getMethod() : string
     {
@@ -15,6 +24,9 @@ class PostAuthRoleIdentityCollection extends \Datenkraft\Backbone\Client\SkuUsag
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
+        if (is_array($this->body) and isset($this->body[0]) and $this->body[0] instanceof \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleIdentityResource) {
+            return array(array('Content-Type' => array('application/json')), $serializer->serialize($this->body, 'json'));
+        }
         return array(array(), null);
     }
     public function getExtraHeaders() : array
