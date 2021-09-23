@@ -43,9 +43,9 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
             'Content-Type' => 'application/json',
         ];
 
-        $this->taskId = 'taskId_test_get';
+        $this->taskId = $this->taskIdGet;
 
-        $this->transactionIdValid = 'transactionId_test1_get';
+        $this->transactionIdValid = substr($this->taskId, 0, -1) . '1';
         $this->transactionIdInvalid = 'transactionId_test_invalid';
         $this->transactionId = $this->transactionIdValid;
 
@@ -103,6 +103,26 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
+    public function testGetTransactionWithRouteBadRequest(): void
+    {
+        // Path with invalid transactionId
+        $this->transactionId = $this->transactionIdInvalid;
+        $this->path = '/task/' . $this->taskId . '/transaction/' . $this->transactionId;
+
+        // Error code in response is 400
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given(
+                'The transactionId format is invalid'
+            )
+            ->uponReceiving('Bad Request GET request to /task/{taskId}/transaction/{transactionId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
     public function testGetTransactionSuccess(): void
     {
         $this->expectedStatusCode = '200';
@@ -149,7 +169,7 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
     public function testGetTransactionNotFound(): void
     {
         // Path with transactionId for non existent transaction
-        $this->transactionId = $this->transactionIdInvalid;
+        $this->transactionId = '00000000-0000-0000-0000-000000000000';
         $this->path = '/task/' . $this->taskId . '/transaction/' . $this->transactionId;
 
         // Error code in response is 404

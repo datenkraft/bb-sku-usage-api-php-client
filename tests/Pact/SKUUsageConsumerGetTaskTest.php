@@ -48,12 +48,12 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $taskStatus = 'finished';
         $transactions = [
             [
-                'transactionId' => 'transactionId_test1_get',
+                'transactionId' => substr($this->taskId, 0, -1) . '1',
                 'transactionStatus' => 'success',
                 'transactionSeen' => true,
             ],
             [
-                'transactionId' => 'transactionId_test2_get',
+                'transactionId' => substr($this->taskId, 0, -1) . '2',
                 'transactionStatus' => 'failure',
                 'transactionSeen' => false,
             ],
@@ -117,7 +117,7 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
     public function testGetTaskNotFound(): void
     {
         // Path with taskId for non existent task
-        $this->taskId = $this->taskIdInvalid;
+        $this->taskId = $this->taskIdNotFound;
         $this->path = '/task/' . $this->taskId;
 
         // Error code in response is 404
@@ -129,6 +129,26 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
                 'A task with taskId does not exist'
             )
             ->uponReceiving('Not Found GET request to /task/{taskId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testGetTaskWithRouteBadRequest(): void
+    {
+        // Path with invalid taskId
+        $this->taskId = $this->taskIdInvalid;
+        $this->path = '/task/' . $this->taskId;
+
+        // Error code in response is 400
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given(
+                'The taskId format is invalid'
+            )
+            ->uponReceiving('Bad Request GET request to /task/{taskId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();

@@ -58,6 +58,8 @@ abstract class SKUUsageConsumerTest extends TestCase
     protected $taskIdPatch;
     /** @var string */
     protected $taskIdPost;
+    /** @var string */
+    protected $taskIdNotFound;
 
     /**
      * @throws Exception
@@ -102,9 +104,10 @@ abstract class SKUUsageConsumerTest extends TestCase
         $this->projectIdDuplicate = '7c2c564c-dd62-11eb-ba80-0242ac130004';
         $this->externalId = 'externalId_test';
         $this->externalIdDuplicate = 'externalId_test_duplicate';
-        $this->taskIdGet = 'a84da9b8-dd8c-11eb-ba80-0242ac130004';
-        $this->taskIdPatch = 'f5f25fba-dd8c-11eb-ba80-0242ac130004';
-        $this->taskIdPost = 'ff007ace-dd8c-11eb-ba80-0242ac130004';
+        $this->taskIdGet = 'a84da9b8-dd8c-11eb-ba80-000000000000';
+        $this->taskIdPatch = 'f5f25fba-dd8c-11eb-ba80-000000000000';
+        $this->taskIdPost = 'ff007ace-dd8c-11eb-ba80-000000000000';
+        $this->taskIdNotFound = '00000000-0000-0000-0000-000000000000';
 
         $this->queryParams = [];
     }

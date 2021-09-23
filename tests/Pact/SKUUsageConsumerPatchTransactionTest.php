@@ -44,11 +44,11 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
             'Content-Type' => 'application/json'
         ];
 
-        $this->transactionIdValid = 'transactionId_test2_patch';
+        $this->taskId = $this->taskIdPatch;
+
+        $this->transactionIdValid = substr($this->taskId, 0, -1) . '2';
         $this->transactionIdInvalid = 'transactionId_test_invalid';
         $this->transactionId = $this->transactionIdValid;
-
-        $this->taskId = $this->taskIdPatch;
 
         $this->requestData = [
             'transactionSeen' => true,
