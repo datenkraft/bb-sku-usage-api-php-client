@@ -114,9 +114,7 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'The transactionId format is invalid'
-            )
+            ->given('The transactionId format is invalid')
             ->uponReceiving('Bad Request GET request to /task/{taskId}/transaction/{transactionId}');
 
         $this->responseData = $this->errorResponse;
@@ -177,9 +175,7 @@ class SKUUsageConsumerGetTransactionTest extends SKUUsageConsumerTest
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A transaction with transactionId does not exist'
-            )
+            ->given('A transaction with transactionId does not exist')
             ->uponReceiving('Not Found GET request to /task/{taskId}/transaction/{transactionId}');
 
         $this->responseData = $this->errorResponse;

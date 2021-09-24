@@ -125,9 +125,7 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A task with taskId does not exist'
-            )
+            ->given('A task with taskId does not exist')
             ->uponReceiving('Not Found GET request to /task/{taskId}');
 
         $this->responseData = $this->errorResponse;
@@ -145,9 +143,7 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'The taskId format is invalid'
-            )
+            ->given('The taskId format is invalid')
             ->uponReceiving('Bad Request GET request to /task/{taskId}');
 
         $this->responseData = $this->errorResponse;
