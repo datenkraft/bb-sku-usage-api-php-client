@@ -21,6 +21,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
     protected $transactionId;
     protected $transactionIdValid;
     protected $transactionIdInvalid;
+    protected $transactionIdNotFound;
 
     /** @var string */
     protected $taskId;
@@ -48,6 +49,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
 
         $this->transactionIdValid = substr($this->taskId, 0, -1) . '2';
         $this->transactionIdInvalid = 'transactionId_test_invalid';
+        $this->transactionIdNotFound = '00000000-0000-0000-0000-000000000000';
         $this->transactionId = $this->transactionIdValid;
 
         $this->requestData = [
@@ -115,7 +117,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
     public function testPatchTaskNotFound(): void
     {
         // Path with transactionId for non existent Transaction
-        $this->transactionId = $this->transactionIdInvalid;
+        $this->transactionId = $this->transactionIdNotFound;
         $this->path = '/task/' . $this->taskId . '/transaction/' . $this->transactionId;
 
         // Error code in response is 404
@@ -127,6 +129,28 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
                 'A Task with taskId does not exist'
             )
             ->uponReceiving('Not Found PATCH request to /task/{taskId}/transaction/{transactionId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testPatchTaskWithRouteBadRequest(): void
+    {
+        // Path with invalid taskId and transactionId
+        $this->taskId = 'taskId_test_invalid';
+        $this->transactionId = $this->transactionIdInvalid;
+        $this->path = '/task/' . $this->taskId . '/transaction/' . $this->transactionId;
+
+        // Error code in response is 400
+        $this->expectedStatusCode = '400';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+        $this->errorResponse['errors'][1]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given(
+                'The taskId and transactionId format is invalid'
+            )
+            ->uponReceiving('Bad Request PATCH request to /task/{taskId}/transaction/{transactionId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
