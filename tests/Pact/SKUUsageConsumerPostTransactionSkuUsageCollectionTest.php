@@ -88,9 +88,7 @@ class SKUUsageConsumerPostTransactionSkuUsageCollectionTest extends SKUUsageCons
 
         // Build and register the interaction
         $this->builder
-            ->given(
-                'the request is valid, the token is valid and has a valid scope'
-            )
+            ->given('The request is valid, the token is valid and has a valid scope')
             ->uponReceiving('Successful POST request to /task/{taskId}/transaction/sku-usage');
 
         $this->beginTest();

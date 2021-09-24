@@ -6,22 +6,18 @@ use Datenkraft\Backbone\Client\BaseApi\ClientFactory;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\AuthException;
 use Datenkraft\Backbone\Client\BaseApi\Exceptions\ConfigException;
 use Datenkraft\Backbone\Client\SkuUsageApi\Client;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\UpdateTask;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class SKUUsageConsumerGetTaskTest
+ * Class SKUUsageConsumerPatchTransactionTest
  * @package Pact
  */
-class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
+class SKUUsageConsumerPatchTaskTest extends SKUUsageConsumerTest
 {
-
     /** @var string */
     protected $taskId;
-    /** @var string */
-    protected $taskIdValid;
-    /** @var string */
-    protected $taskIdInvalid;
 
     /**
      * @throws Exception
@@ -30,93 +26,84 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
     {
         parent::setUp();
 
-        $this->method = 'GET';
+        $this->method = 'PATCH';
 
-        $this->token = getenv('VALID_TOKEN_BB_SKU_USAGE_TASK_GET');
+        $this->token = getenv('VALID_TOKEN_BB_SKU_USAGE_TASK_PATCH');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
+            'Content-Type' => 'application/json'
         ];
         $this->responseHeaders = [
-            'Content-Type' => 'application/json',
+            'Content-Type' => 'application/json'
         ];
 
-        $this->taskIdValid = $this->taskIdGet;
-        $this->taskIdInvalid = 'taskId_test_invalid';
-        $this->taskId = $this->taskIdValid;
+        $this->taskId = $this->taskIdPatch;
 
-        $taskStatus = 'finished';
-        $transactions = [
-            [
-                'transactionId' => substr($this->taskId, 0, -1) . '1',
-                'transactionStatus' => 'success',
-                'transactionSeen' => true,
-            ],
-            [
-                'transactionId' => substr($this->taskId, 0, -1) . '2',
-                'transactionStatus' => 'failure',
-                'transactionSeen' => false,
-            ],
+        $this->requestData = [
+            'taskStatus' => 'building',
         ];
-        $entryCount = 2;
-
-        $this->requestData = [];
         $this->responseData = [
             'taskId' => $this->taskId,
-            'taskStatus' => $taskStatus,
-            'entryCount' => $entryCount,
-            'transactions' => $transactions,
+            'taskStatus' => 'building',
         ];
 
         $this->path = '/task/' . $this->taskId;
     }
 
-    public function testGetTaskSuccess(): void
+    public function testPatchTaskSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
         $this->builder
-            ->given('A task with taskId exists')
-            ->uponReceiving('Successful GET request to /task/{taskId}');
+            ->given(
+                'A task with taskId exists, ' .
+                'the request is valid, the token is valid and has a valid scope'
+            )
+            ->uponReceiving('Successful PATCH request to /task/{taskId}');
 
         $this->beginTest();
     }
 
-    public function testGetTaskUnauthorized(): void
+    public function testPatchTaskUnauthorized(): void
     {
+        // Invalid token
         $this->token = 'invalid_token';
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
+        // Error code in response is 401
         $this->expectedStatusCode = '401';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
             ->given('The token is invalid')
-            ->uponReceiving('Unauthorized GET request to /task/{taskId}');
+            ->uponReceiving('Unauthorized PATCH request to /task/{taskId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetTaskForbidden(): void
+    public function testPatchTaskForbidden(): void
     {
+        // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
+        // Error code in response is 403
         $this->expectedStatusCode = '403';
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('The token is valid with an invalid scope')
-            ->uponReceiving('Forbidden GET request to /task/{taskId}');
+            ->given('The request is valid, the token is valid with an invalid scope')
+            ->uponReceiving('Forbidden PATCH request to /task/{taskId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetTaskNotFound(): void
+    public function testPatchTaskNotFound(): void
     {
-        // Path with taskId for non existent task
+        // Path with taskId for non existent Task
         $this->taskId = $this->taskIdNotFound;
         $this->path = '/task/' . $this->taskId;
 
@@ -125,17 +112,17 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given('A task with taskId does not exist')
-            ->uponReceiving('Not Found GET request to /task/{taskId}');
+            ->given('A Task with taskId does not exist')
+            ->uponReceiving('Not Found PATCH request to /task/{taskId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testGetTaskWithRouteBadRequest(): void
+    public function testPatchTaskWithRouteBadRequest(): void
     {
         // Path with invalid taskId
-        $this->taskId = $this->taskIdInvalid;
+        $this->taskId = 'taskId_test_invalid';
         $this->path = '/task/' . $this->taskId;
 
         // Error code in response is 400
@@ -144,7 +131,24 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
 
         $this->builder
             ->given('The taskId format is invalid')
-            ->uponReceiving('Bad Request GET request to /task/{taskId}');
+            ->uponReceiving('Bad Request PATCH request to /task/{taskId}');
+
+        $this->responseData = $this->errorResponse;
+        $this->beginTest();
+    }
+
+    public function testPatchTaskUnprocessableEntity(): void
+    {
+        // taskStatus is unknown
+        $this->requestData['taskStatus'] = "invalid";
+
+        // Error code in response is 422
+        $this->expectedStatusCode = '422';
+        $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
+
+        $this->builder
+            ->given('The request body is contains a field with invalid content')
+            ->uponReceiving('Unprocessable Entity PATCH request to /task/{taskId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
@@ -152,8 +156,8 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
 
     /**
      * @return ResponseInterface
-     * @throws AuthException
      * @throws ConfigException
+     * @throws AuthException
      */
     protected function doClientRequest(): ResponseInterface
     {
@@ -163,6 +167,11 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $factory->setToken($this->token);
         $client = Client::createWithFactory($factory, $this->config->getBaseUri());
 
-        return $client->getTask($this->taskId, Client::FETCH_RESPONSE);
+        $task = (new UpdateTask());
+        if (isset($this->requestData['taskStatus'])) {
+            $task->setTaskStatus($this->requestData['taskStatus']);
+        }
+
+        return $client->patchTask($this->taskId, $task, Client::FETCH_RESPONSE);
     }
 }
