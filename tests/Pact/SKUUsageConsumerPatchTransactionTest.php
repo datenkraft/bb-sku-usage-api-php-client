@@ -64,7 +64,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
         $this->path = '/task/' . $this->taskId . '/transaction/' . $this->transactionId;
     }
 
-    public function testPatchTaskSuccess(): void
+    public function testPatchTransactionSuccess(): void
     {
         $this->expectedStatusCode = '200';
 
@@ -78,7 +78,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPatchTaskUnauthorized(): void
+    public function testPatchTransactionUnauthorized(): void
     {
         // Invalid token
         $this->token = 'invalid_token';
@@ -96,7 +96,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPatchTaskForbidden(): void
+    public function testPatchTransactionForbidden(): void
     {
         // Token with invalid scope
         $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
@@ -114,7 +114,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
         $this->beginTest();
     }
 
-    public function testPatchTaskNotFound(): void
+    public function testPatchTransactionNotFound(): void
     {
         // Path with transactionId for non existent Transaction
         $this->transactionId = $this->transactionIdNotFound;
@@ -125,16 +125,14 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
         $this->errorResponse['errors'][0]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'A Task with taskId does not exist'
-            )
+            ->given('A Task with taskId does not exist')
             ->uponReceiving('Not Found PATCH request to /task/{taskId}/transaction/{transactionId}');
 
         $this->responseData = $this->errorResponse;
         $this->beginTest();
     }
 
-    public function testPatchTaskWithRouteBadRequest(): void
+    public function testPatchTransactionWithRouteBadRequest(): void
     {
         // Path with invalid taskId and transactionId
         $this->taskId = 'taskId_test_invalid';
@@ -147,9 +145,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
         $this->errorResponse['errors'][1]['code'] = strval($this->expectedStatusCode);
 
         $this->builder
-            ->given(
-                'The taskId and transactionId format is invalid'
-            )
+            ->given('The taskId and transactionId format is invalid')
             ->uponReceiving('Bad Request PATCH request to /task/{taskId}/transaction/{transactionId}');
 
         $this->responseData = $this->errorResponse;
@@ -159,7 +155,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
     /**
      * @throws GuzzleException
      */
-    public function testPatchTaskBadRequest(): void
+    public function testPatchTransactionBadRequest(): void
     {
         // transactionSeen is not defined
         $this->requestData['transactionSeen'] = "";
