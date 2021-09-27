@@ -17,9 +17,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
 {
-    /** @var string */
-    protected $externalId;
-
     /**
      * @throws Exception
      */
@@ -29,7 +26,7 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
 
         $this->method = 'GET';
 
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_GET');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_TOKEN');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -89,7 +86,7 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
 
     public function testGetSKUUsageForbidden(): void
     {
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';
