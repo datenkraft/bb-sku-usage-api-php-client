@@ -11,6 +11,7 @@ use PhpPact\Standalone\MockService\MockServerEnvConfig;
 use PHPUnit\Framework\TestCase;
 use PhpPact\Consumer\Model\ConsumerRequest;
 use PhpPact\Consumer\Model\ProviderResponse;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class SKUUsageConsumerTest
@@ -18,48 +19,39 @@ use PhpPact\Consumer\Model\ProviderResponse;
  */
 abstract class SKUUsageConsumerTest extends TestCase
 {
-    protected $builder;
-    protected $config;
+    protected InteractionBuilder $builder;
+    protected MockServerEnvConfig $config;
 
-    protected $guzzleClient;
+    protected GuzzleHttpClient $guzzleClient;
 
-    protected $expectedExceptionClass = GuzzleException::class;
+    protected string $expectedExceptionClass = GuzzleException::class;
 
-    protected $token;
+    protected string $token;
 
-    protected $method;
-    protected $path;
-    protected $query;
-    protected $queryParams;
+    protected string $method;
+    protected string $path;
+    protected string $query;
+    protected array $queryParams;
 
-    protected $requestHeaders;
-    protected $responseHeaders;
-    protected $expectedStatusCode;
+    protected array $requestHeaders;
+    protected array $responseHeaders;
+    protected string $expectedStatusCode;
 
-    protected $requestData;
-    protected $responseData;
-    protected $errorResponse;
+    protected array $requestData;
+    protected array $responseData;
+    protected array $errorResponse;
 
-    protected $matcher;
+    protected Matcher $matcher;
 
-    /** @var string */
-    protected $skuCode;
-    /** @var string */
-    protected $projectId;
-    /** @var string */
-    protected $projectIdDuplicate;
-    /** @var string */
-    protected $externalId;
-    /** @var string */
-    protected $externalIdDuplicate;
-    /** @var string */
-    protected $taskIdGet;
-    /** @var string */
-    protected $taskIdPatch;
-    /** @var string */
-    protected $taskIdPost;
-    /** @var string */
-    protected $taskIdNotFound;
+    protected string $skuCode;
+    protected string $projectId;
+    protected string $projectIdDuplicate;
+    protected string $externalId;
+    protected string $externalIdDuplicate;
+    protected string $taskIdGet;
+    protected string $taskIdPatch;
+    protected string $taskIdPost;
+    protected string $taskIdNotFound;
 
     /**
      * @throws Exception
@@ -200,5 +192,5 @@ abstract class SKUUsageConsumerTest extends TestCase
         return $response;
     }
 
-    abstract protected function doClientRequest();
+    abstract protected function doClientRequest(): ResponseInterface;
 }

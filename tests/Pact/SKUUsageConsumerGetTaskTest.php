@@ -32,7 +32,7 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
 
         $this->method = 'GET';
 
-        $this->token = getenv('VALID_TOKEN_BB_SKU_USAGE_TASK_GET');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_TOKEN');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -100,7 +100,7 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
 
     public function testGetTaskForbidden(): void
     {
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         $this->expectedStatusCode = '403';

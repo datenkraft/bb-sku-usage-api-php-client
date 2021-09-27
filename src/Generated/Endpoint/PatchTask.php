@@ -79,6 +79,6 @@ class PatchTask extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtim
     }
     public function getAuthenticationScopes() : array
     {
-        return array('oAuthAuthorization');
+        return array();
     }
 }
