@@ -35,7 +35,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
 
         $this->method = 'PATCH';
 
-        $this->token = getenv('VALID_TOKEN_BB_SKU_USAGE_TRANSACTION_PATCH');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_TOKEN');
 
         $this->requestHeaders = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -98,8 +98,7 @@ class SKUUsageConsumerPatchTransactionTest extends SKUUsageConsumerTest
 
     public function testPatchTransactionForbidden(): void
     {
-        // Token with invalid scope
-        $this->token = getenv('VALID_TOKEN_SKU_USAGE_POST');
+        $this->token = getenv('CONTRACT_TEST_CLIENT_WITHOUT_PERMISSIONS_TOKEN');
         $this->requestHeaders['Authorization'] = 'Bearer ' . $this->token;
 
         // Error code in response is 403

@@ -501,14 +501,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-sku-usage-api/sku-usage:get"
-                        ]
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
@@ -608,14 +601,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-sku-usage-api/sku-usage:post"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/task/{taskId}": {
@@ -698,14 +684,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-sku-usage-api/task:get"
-                        ]
-                    }
-                ]
+                }
             },
             "patch": {
                 "tags": [
@@ -816,14 +795,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-sku-usage-api/task:patch"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/task/{taskId}/transaction/{transactionId}": {
@@ -935,14 +907,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-sku-usage-api/transaction:get"
-                        ]
-                    }
-                ]
+                }
             },
             "patch": {
                 "tags": [
@@ -1052,14 +1017,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-sku-usage-api/transaction:patch"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/task/{taskId}/transaction/sku-usage": {
@@ -1152,14 +1110,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "oAuthAuthorization": [
-                            "bb-sku-usage-api/transaction:post"
-                        ]
-                    }
-                ]
+                }
             }
         }
     },
@@ -1507,17 +1458,9 @@
                 "description": "OAuth2 Authorization",
                 "flows": {
                     "clientCredentials": {
-                        "tokenUrl": "https://localhost:30250/oauth/token",
+                        "tokenUrl": "https://localhost:30370/oauth/token",
                         "refreshUrl": "UNDEFINED",
-                        "scopes": {
-                            "bb-sku-usage-api/sku-usage:get": "Get SKU Usages from the SKU Usage API",
-                            "bb-sku-usage-api/sku-usage:post": "Add SKU Usages to the SKU Usage API",
-                            "bb-sku-usage-api/task:get": "Get Tasks from the SKU Usage API",
-                            "bb-sku-usage-api/task:patch": "Update Tasks in the SKU Usage API",
-                            "bb-sku-usage-api/transaction:get": "Get Transactions from the SKU Usage API",
-                            "bb-sku-usage-api/transaction:post": "Add Transactions to the SKU Usage API",
-                            "bb-sku-usage-api/transaction:patch": "Update Transactions in the SKU Usage API"
-                        }
+                        "scopes": {}
                     }
                 }
             }
