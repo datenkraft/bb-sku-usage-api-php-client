@@ -74,16 +74,16 @@
         },
         {
             "name": "datenkraft/bb-base-api-php-client",
-            "version": "v1.0.8",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datenkraft/bb-base-api-php-client.git",
-                "reference": "ee62ec3d4304480b4c40fbac241eb57b486bfbe9"
+                "reference": "374356949f1cc57951fb98d6d969f75c65c941c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datenkraft/bb-base-api-php-client/zipball/ee62ec3d4304480b4c40fbac241eb57b486bfbe9",
-                "reference": "ee62ec3d4304480b4c40fbac241eb57b486bfbe9",
+                "url": "https://api.github.com/repos/datenkraft/bb-base-api-php-client/zipball/374356949f1cc57951fb98d6d969f75c65c941c2",
+                "reference": "374356949f1cc57951fb98d6d969f75c65c941c2",
                 "shasum": ""
             },
             "require": {
@@ -122,9 +122,9 @@
             ],
             "support": {
                 "issues": "https://github.com/datenkraft/bb-base-api-php-client/issues",
-                "source": "https://github.com/datenkraft/bb-base-api-php-client/tree/v1.0.8"
+                "source": "https://github.com/datenkraft/bb-base-api-php-client/tree/v1.1.0"
             },
-            "time": "2021-08-16T15:23:34+00:00"
+            "time": "2021-09-27T12:22:45+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
