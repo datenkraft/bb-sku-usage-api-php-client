@@ -17,6 +17,12 @@ class Task
      */
     protected $taskStatus;
     /**
+     * Identity ID
+     *
+     * @var string
+     */
+    protected $identityId;
+    /**
      * Entry Count
      *
      * @var int
@@ -68,6 +74,27 @@ class Task
     public function setTaskStatus(string $taskStatus) : self
     {
         $this->taskStatus = $taskStatus;
+        return $this;
+    }
+    /**
+     * Identity ID
+     *
+     * @return string
+     */
+    public function getIdentityId() : string
+    {
+        return $this->identityId;
+    }
+    /**
+     * Identity ID
+     *
+     * @param string $identityId
+     *
+     * @return self
+     */
+    public function setIdentityId(string $identityId) : self
+    {
+        $this->identityId = $identityId;
         return $this;
     }
     /**

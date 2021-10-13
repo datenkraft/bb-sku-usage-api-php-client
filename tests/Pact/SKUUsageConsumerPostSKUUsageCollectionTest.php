@@ -170,7 +170,7 @@ class SKUUsageConsumerPostSKUUsageCollectionTest extends SKUUsageConsumerTest
         $this->requestData[0]['skuCode'] = 'skuCode_test_invalid';
 
         // New Combination of projectId and externalId that does not exist yet
-        $this->requestData[0]['projectId'] = $this->matcher->uuid()['data']['generate'];
+        $this->requestData[0]['projectId'] = 'ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8';
         $this->requestData[0]['externalId'] = 'externalId_3';
 
         // Error code in response is 422

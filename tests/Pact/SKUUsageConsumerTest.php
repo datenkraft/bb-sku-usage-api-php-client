@@ -52,6 +52,7 @@ abstract class SKUUsageConsumerTest extends TestCase
     protected string $taskIdPatch;
     protected string $taskIdPost;
     protected string $taskIdNotFound;
+    protected string $identityId;
 
     /**
      * @throws Exception
@@ -92,14 +93,15 @@ abstract class SKUUsageConsumerTest extends TestCase
         ];
 
         $this->skuCode = 'skuCode_test';
-        $this->projectId = 'b1fedb36-c774-11eb-b8bc-0242ac130003';
-        $this->projectIdDuplicate = '7c2c564c-dd62-11eb-ba80-0242ac130004';
+        $this->projectId = 'f1bb70c8-a197-4dcb-93d9-9896433a59db';
+        $this->projectIdDuplicate = '1ca9abca-908d-4578-9073-54ee524a0bb8';
         $this->externalId = 'externalId_test';
         $this->externalIdDuplicate = 'externalId_test_duplicate';
         $this->taskIdGet = 'a84da9b8-dd8c-11eb-ba80-000000000000';
         $this->taskIdPatch = 'f5f25fba-dd8c-11eb-ba80-000000000000';
         $this->taskIdPost = 'ff007ace-dd8c-11eb-ba80-000000000000';
         $this->taskIdNotFound = '00000000-0000-0000-0000-000000000000';
+        $this->identityId = '52fa4193-7644-45d5-bb21-c5acef208ff2';
 
         $this->queryParams = [];
     }

@@ -37,7 +37,7 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
 
         $this->externalId = $this->externalIdDuplicate;
         $this->queryParams = [
-            'filter[projectId]' => 'b1fedb36-c774-11eb-b8bc-0242ac130003',
+            'filter[projectId]' => '1ca9abca-908d-4578-9073-54ee524a0bb8',
             'filter[externalId]' => $this->externalIdDuplicate,
         ];
 
@@ -49,7 +49,7 @@ class SKUUsageConsumerGetSKUUsageTest extends SKUUsageConsumerTest
                 'quantity' => $this->matcher->like(1),
                 'usageStart' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
                 'usageEnd' => $this->matcher->like((new DateTime())->format(DateTimeInterface::ATOM)),
-                'projectId' => 'b1fedb36-c774-11eb-b8bc-0242ac130003',
+                'projectId' => '1ca9abca-908d-4578-9073-54ee524a0bb8',
                 'externalId' => $this->externalIdDuplicate,
             ]
         ];
