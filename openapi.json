@@ -1343,6 +1343,7 @@
                 "required": [
                     "taskId",
                     "taskStatus",
+                    "identityId",
                     "entryCount",
                     "transactions"
                 ],
@@ -1353,6 +1354,10 @@
                     },
                     "taskStatus": {
                         "description": "Task Status",
+                        "type": "string"
+                    },
+                    "identityId": {
+                        "description": "Identity ID",
                         "type": "string"
                     },
                     "entryCount": {
@@ -1458,7 +1463,7 @@
                 "description": "OAuth2 Authorization",
                 "flows": {
                     "clientCredentials": {
-                        "tokenUrl": "https://localhost:30370/oauth/token",
+                        "tokenUrl": "https://authentication-api.conqore.niceshops.com/oauth/token",
                         "refreshUrl": "UNDEFINED",
                         "scopes": {}
                     }

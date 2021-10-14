@@ -64,6 +64,7 @@ class SKUUsageConsumerGetTaskTest extends SKUUsageConsumerTest
         $this->responseData = [
             'taskId' => $this->taskId,
             'taskStatus' => $taskStatus,
+            'identityId' => $this->identityId,
             'entryCount' => $entryCount,
             'transactions' => $transactions,
         ];
