@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-class PostAuthRoleIdentityCollectionNotFoundException extends NotFoundException
+class PostTransactionSkuUsageCollectionNotFoundException extends NotFoundException
 {
     private $errorResponse;
     public function __construct(\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse $errorResponse)
