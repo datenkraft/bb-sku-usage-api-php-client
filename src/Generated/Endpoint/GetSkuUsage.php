@@ -5,11 +5,12 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint;
 class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\Endpoint
 {
     /**
-     * Query SKU Usage data by projectId and externalId
+     * Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given
      *
      * @param array $queryParameters {
      *     @var string $filter[projectId] SKUUsage ProjectId filter
      *     @var string $filter[externalId] SKUUsage ExternalId filter
+     *     @var string $filter[skuUsageIds] SKUUsage SkuUsageIds filter
      * }
      */
     public function __construct(array $queryParameters = array())
@@ -36,11 +37,12 @@ class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runt
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('filter[projectId]', 'filter[externalId]'));
-        $optionsResolver->setRequired(array('filter[projectId]', 'filter[externalId]'));
+        $optionsResolver->setDefined(array('filter[projectId]', 'filter[externalId]', 'filter[skuUsageIds]'));
+        $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
         $optionsResolver->setAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->setAllowedTypes('filter[externalId]', array('string'));
+        $optionsResolver->setAllowedTypes('filter[skuUsageIds]', array('string'));
         return $optionsResolver;
     }
     /**
