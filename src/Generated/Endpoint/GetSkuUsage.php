@@ -11,6 +11,7 @@ class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runt
      *     @var string $filter[projectId] SKUUsage ProjectId filter
      *     @var string $filter[externalId] SKUUsage ExternalId filter
      *     @var string $filter[skuUsageIds] SKUUsage SkuUsageIds filter
+     *     @var string $filter[skuGroupIds] SKUUsage SkuGroupIds filter
      * }
      */
     public function __construct(array $queryParameters = array())
@@ -37,12 +38,13 @@ class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runt
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('filter[projectId]', 'filter[externalId]', 'filter[skuUsageIds]'));
+        $optionsResolver->setDefined(array('filter[projectId]', 'filter[externalId]', 'filter[skuUsageIds]', 'filter[skuGroupIds]'));
         $optionsResolver->setRequired(array());
         $optionsResolver->setDefaults(array());
         $optionsResolver->setAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->setAllowedTypes('filter[externalId]', array('string'));
         $optionsResolver->setAllowedTypes('filter[skuUsageIds]', array('string'));
+        $optionsResolver->setAllowedTypes('filter[skuGroupIds]', array('string'));
         return $optionsResolver;
     }
     /**
