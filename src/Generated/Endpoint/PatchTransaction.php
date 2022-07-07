@@ -78,6 +78,6 @@ class PatchTransaction extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated
     }
     public function getAuthenticationScopes() : array
     {
-        return array();
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }

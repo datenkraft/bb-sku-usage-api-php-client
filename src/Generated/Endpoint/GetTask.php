@@ -66,6 +66,6 @@ class GetTask extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\
     }
     public function getAuthenticationScopes() : array
     {
-        return array();
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }

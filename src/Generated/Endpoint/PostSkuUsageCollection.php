@@ -76,6 +76,6 @@ class PostSkuUsageCollection extends \Datenkraft\Backbone\Client\SkuUsageApi\Gen
     }
     public function getAuthenticationScopes() : array
     {
-        return array();
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }

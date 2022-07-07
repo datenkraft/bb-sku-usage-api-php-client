@@ -86,6 +86,6 @@ class GetTransaction extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\R
     }
     public function getAuthenticationScopes() : array
     {
-        return array();
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }

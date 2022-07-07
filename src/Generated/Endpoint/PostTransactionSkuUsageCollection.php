@@ -75,6 +75,6 @@ class PostTransactionSkuUsageCollection extends \Datenkraft\Backbone\Client\SkuU
     }
     public function getAuthenticationScopes() : array
     {
-        return array();
+        return array('oAuthAuthorization', 'bearerAuth');
     }
 }
