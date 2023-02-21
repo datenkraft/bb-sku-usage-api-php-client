@@ -15,7 +15,7 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetOpenApi(), $fetch);
     }
     /**
-     * Get the openapi documentation in the specified format (yaml or json, fallback is json)
+     * Get the openapi documentation in the specified format
      *
      * @param string $format Openapi file format
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -26,6 +26,21 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
     public function getOpenApiInFormat(string $format, string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetOpenApiInFormat($format), $fetch);
+    }
+    /**
+     * Get the changelog in the specified format
+     *
+     * @param string $format Changelog file format
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetChangelogInFormatNotFoundException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetChangelogInFormatBadRequestException
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
+     *
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getChangelogInFormat(string $format, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetChangelogInFormat($format), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -41,6 +56,9 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthRoleCollection(), $fetch);
     }
     /**
+     * Delete one or more role to identity assignments in this resource server
+     *
+     * @param \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleIdentityResource[] $requestBody 
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\DeleteAuthRoleIdentityCollectionBadRequestException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\DeleteAuthRoleIdentityCollectionUnauthorizedException
@@ -52,9 +70,9 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
      *
      * @return null|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
      */
-    public function deleteAuthRoleIdentityCollection(string $fetch = self::FETCH_OBJECT)
+    public function deleteAuthRoleIdentityCollection(array $requestBody, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\DeleteAuthRoleIdentityCollection(), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\DeleteAuthRoleIdentityCollection($requestBody), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
