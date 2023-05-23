@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class UpdateResponseTaskNormalizer implements DenormalizerInterface, NormalizerI
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\UpdateResponseTask';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\UpdateResponseTask';
     }
@@ -41,9 +43,16 @@ class UpdateResponseTaskNormalizer implements DenormalizerInterface, NormalizerI
         }
         if (\array_key_exists('taskId', $data)) {
             $object->setTaskId($data['taskId']);
+            unset($data['taskId']);
         }
         if (\array_key_exists('taskStatus', $data)) {
             $object->setTaskStatus($data['taskStatus']);
+            unset($data['taskStatus']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
@@ -55,6 +64,11 @@ class UpdateResponseTaskNormalizer implements DenormalizerInterface, NormalizerI
         $data = array();
         $data['taskId'] = $object->getTaskId();
         $data['taskStatus'] = $object->getTaskStatus();
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
         return $data;
     }
 }

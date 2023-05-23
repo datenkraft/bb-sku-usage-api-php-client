@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Transaction';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Transaction';
     }
@@ -41,24 +43,44 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         if (\array_key_exists('transactionId', $data)) {
             $object->setTransactionId($data['transactionId']);
+            unset($data['transactionId']);
         }
         if (\array_key_exists('transactionStatus', $data)) {
             $object->setTransactionStatus($data['transactionStatus']);
+            unset($data['transactionStatus']);
         }
         if (\array_key_exists('transactionSeen', $data)) {
             $object->setTransactionSeen($data['transactionSeen']);
+            unset($data['transactionSeen']);
         }
         if (\array_key_exists('transactionResourceType', $data)) {
             $object->setTransactionResourceType($data['transactionResourceType']);
+            unset($data['transactionResourceType']);
         }
         if (\array_key_exists('entryCount', $data)) {
             $object->setEntryCount($data['entryCount']);
+            unset($data['entryCount']);
         }
         if (\array_key_exists('requestData', $data)) {
-            $object->setRequestData($data['requestData']);
+            $values = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['requestData'] as $key => $value) {
+                $values[$key] = $value;
+            }
+            $object->setRequestData($values);
+            unset($data['requestData']);
         }
         if (\array_key_exists('responseData', $data)) {
-            $object->setResponseData($data['responseData']);
+            $values_1 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+            foreach ($data['responseData'] as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $object->setResponseData($values_1);
+            unset($data['responseData']);
+        }
+        foreach ($data as $key_2 => $value_2) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $object[$key_2] = $value_2;
+            }
         }
         return $object;
     }
@@ -68,26 +90,39 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getTransactionId()) {
+        if ($object->isInitialized('transactionId') && null !== $object->getTransactionId()) {
             $data['transactionId'] = $object->getTransactionId();
         }
-        if (null !== $object->getTransactionStatus()) {
+        if ($object->isInitialized('transactionStatus') && null !== $object->getTransactionStatus()) {
             $data['transactionStatus'] = $object->getTransactionStatus();
         }
-        if (null !== $object->getTransactionSeen()) {
+        if ($object->isInitialized('transactionSeen') && null !== $object->getTransactionSeen()) {
             $data['transactionSeen'] = $object->getTransactionSeen();
         }
-        if (null !== $object->getTransactionResourceType()) {
+        if ($object->isInitialized('transactionResourceType') && null !== $object->getTransactionResourceType()) {
             $data['transactionResourceType'] = $object->getTransactionResourceType();
         }
-        if (null !== $object->getEntryCount()) {
+        if ($object->isInitialized('entryCount') && null !== $object->getEntryCount()) {
             $data['entryCount'] = $object->getEntryCount();
         }
-        if (null !== $object->getRequestData()) {
-            $data['requestData'] = $object->getRequestData();
+        if ($object->isInitialized('requestData') && null !== $object->getRequestData()) {
+            $values = array();
+            foreach ($object->getRequestData() as $key => $value) {
+                $values[$key] = $value;
+            }
+            $data['requestData'] = $values;
         }
-        if (null !== $object->getResponseData()) {
-            $data['responseData'] = $object->getResponseData();
+        if ($object->isInitialized('responseData') && null !== $object->getResponseData()) {
+            $values_1 = array();
+            foreach ($object->getResponseData() as $key_1 => $value_1) {
+                $values_1[$key_1] = $value_1;
+            }
+            $data['responseData'] = $values_1;
+        }
+        foreach ($object as $key_2 => $value_2) {
+            if (preg_match('/.*/', (string) $key_2)) {
+                $data[$key_2] = $value_2;
+            }
         }
         return $data;
     }

@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class Information
+class Information extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Code
      *
@@ -40,6 +48,7 @@ class Information
      */
     public function setCode(string $code) : self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
         return $this;
     }
@@ -61,6 +70,7 @@ class Information
      */
     public function setMessage(string $message) : self
     {
+        $this->initialized['message'] = true;
         $this->message = $message;
         return $this;
     }
@@ -82,6 +92,7 @@ class Information
      */
     public function setExtra(ErrorExtra $extra) : self
     {
+        $this->initialized['extra'] = true;
         $this->extra = $extra;
         return $this;
     }
