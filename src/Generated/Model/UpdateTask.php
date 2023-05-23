@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class UpdateTask
+class UpdateTask extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Task Status
      *
@@ -28,6 +36,7 @@ class UpdateTask
      */
     public function setTaskStatus(string $taskStatus) : self
     {
+        $this->initialized['taskStatus'] = true;
         $this->taskStatus = $taskStatus;
         return $this;
     }

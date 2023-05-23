@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class PatchResponseTransactionNormalizer implements DenormalizerInterface, Norma
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\PatchResponseTransaction';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\PatchResponseTransaction';
     }
@@ -41,12 +43,20 @@ class PatchResponseTransactionNormalizer implements DenormalizerInterface, Norma
         }
         if (\array_key_exists('transactionId', $data)) {
             $object->setTransactionId($data['transactionId']);
+            unset($data['transactionId']);
         }
         if (\array_key_exists('transactionStatus', $data)) {
             $object->setTransactionStatus($data['transactionStatus']);
+            unset($data['transactionStatus']);
         }
         if (\array_key_exists('transactionSeen', $data)) {
             $object->setTransactionSeen($data['transactionSeen']);
+            unset($data['transactionSeen']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
@@ -59,6 +69,11 @@ class PatchResponseTransactionNormalizer implements DenormalizerInterface, Norma
         $data['transactionId'] = $object->getTransactionId();
         $data['transactionStatus'] = $object->getTransactionStatus();
         $data['transactionSeen'] = $object->getTransactionSeen();
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
         return $data;
     }
 }

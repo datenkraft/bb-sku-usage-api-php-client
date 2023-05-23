@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class PatchResponseTransaction
+class PatchResponseTransaction extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Transaction Id
      *
@@ -40,6 +48,7 @@ class PatchResponseTransaction
      */
     public function setTransactionId(string $transactionId) : self
     {
+        $this->initialized['transactionId'] = true;
         $this->transactionId = $transactionId;
         return $this;
     }
@@ -61,6 +70,7 @@ class PatchResponseTransaction
      */
     public function setTransactionStatus(string $transactionStatus) : self
     {
+        $this->initialized['transactionStatus'] = true;
         $this->transactionStatus = $transactionStatus;
         return $this;
     }
@@ -82,6 +92,7 @@ class PatchResponseTransaction
      */
     public function setTransactionSeen(bool $transactionSeen) : self
     {
+        $this->initialized['transactionSeen'] = true;
         $this->transactionSeen = $transactionSeen;
         return $this;
     }
