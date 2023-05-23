@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class ErrorExtra
+class ErrorExtra extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * External Id
      *
@@ -28,6 +36,7 @@ class ErrorExtra
      */
     public function setExternalId(string $externalId) : self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
         return $this;
     }

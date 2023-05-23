@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class NewSkuUsage
+class NewSkuUsage extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * SKU Code
      *
@@ -43,7 +51,7 @@ class NewSkuUsage
     /**
      * Meta
      *
-     * @var mixed
+     * @var mixed[]
      */
     protected $meta;
     /**
@@ -64,6 +72,7 @@ class NewSkuUsage
      */
     public function setSkuCode(string $skuCode) : self
     {
+        $this->initialized['skuCode'] = true;
         $this->skuCode = $skuCode;
         return $this;
     }
@@ -85,6 +94,7 @@ class NewSkuUsage
      */
     public function setQuantity(int $quantity) : self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
         return $this;
     }
@@ -106,6 +116,7 @@ class NewSkuUsage
      */
     public function setProjectId(string $projectId) : self
     {
+        $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
         return $this;
     }
@@ -127,6 +138,7 @@ class NewSkuUsage
      */
     public function setUsageStart(\DateTime $usageStart) : self
     {
+        $this->initialized['usageStart'] = true;
         $this->usageStart = $usageStart;
         return $this;
     }
@@ -148,6 +160,7 @@ class NewSkuUsage
      */
     public function setUsageEnd(\DateTime $usageEnd) : self
     {
+        $this->initialized['usageEnd'] = true;
         $this->usageEnd = $usageEnd;
         return $this;
     }
@@ -169,27 +182,29 @@ class NewSkuUsage
      */
     public function setExternalId(string $externalId) : self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
         return $this;
     }
     /**
      * Meta
      *
-     * @return mixed
+     * @return mixed[]
      */
-    public function getMeta()
+    public function getMeta() : iterable
     {
         return $this->meta;
     }
     /**
      * Meta
      *
-     * @param mixed $meta
+     * @param mixed[] $meta
      *
      * @return self
      */
-    public function setMeta($meta) : self
+    public function setMeta(iterable $meta) : self
     {
+        $this->initialized['meta'] = true;
         $this->meta = $meta;
         return $this;
     }

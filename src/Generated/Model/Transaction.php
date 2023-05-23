@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class Transaction
+class Transaction extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Transaction Id
      *
@@ -37,13 +45,13 @@ class Transaction
     /**
      * Request Data
      *
-     * @var mixed
+     * @var mixed[]
      */
     protected $requestData;
     /**
      * Response Data
      *
-     * @var mixed
+     * @var mixed[]
      */
     protected $responseData;
     /**
@@ -64,6 +72,7 @@ class Transaction
      */
     public function setTransactionId(string $transactionId) : self
     {
+        $this->initialized['transactionId'] = true;
         $this->transactionId = $transactionId;
         return $this;
     }
@@ -85,6 +94,7 @@ class Transaction
      */
     public function setTransactionStatus(string $transactionStatus) : self
     {
+        $this->initialized['transactionStatus'] = true;
         $this->transactionStatus = $transactionStatus;
         return $this;
     }
@@ -106,6 +116,7 @@ class Transaction
      */
     public function setTransactionSeen(bool $transactionSeen) : self
     {
+        $this->initialized['transactionSeen'] = true;
         $this->transactionSeen = $transactionSeen;
         return $this;
     }
@@ -127,6 +138,7 @@ class Transaction
      */
     public function setTransactionResourceType(string $transactionResourceType) : self
     {
+        $this->initialized['transactionResourceType'] = true;
         $this->transactionResourceType = $transactionResourceType;
         return $this;
     }
@@ -148,48 +160,51 @@ class Transaction
      */
     public function setEntryCount(int $entryCount) : self
     {
+        $this->initialized['entryCount'] = true;
         $this->entryCount = $entryCount;
         return $this;
     }
     /**
      * Request Data
      *
-     * @return mixed
+     * @return mixed[]
      */
-    public function getRequestData()
+    public function getRequestData() : iterable
     {
         return $this->requestData;
     }
     /**
      * Request Data
      *
-     * @param mixed $requestData
+     * @param mixed[] $requestData
      *
      * @return self
      */
-    public function setRequestData($requestData) : self
+    public function setRequestData(iterable $requestData) : self
     {
+        $this->initialized['requestData'] = true;
         $this->requestData = $requestData;
         return $this;
     }
     /**
      * Response Data
      *
-     * @return mixed
+     * @return mixed[]
      */
-    public function getResponseData()
+    public function getResponseData() : iterable
     {
         return $this->responseData;
     }
     /**
      * Response Data
      *
-     * @param mixed $responseData
+     * @param mixed[] $responseData
      *
      * @return self
      */
-    public function setResponseData($responseData) : self
+    public function setResponseData(iterable $responseData) : self
     {
+        $this->initialized['responseData'] = true;
         $this->responseData = $responseData;
         return $this;
     }

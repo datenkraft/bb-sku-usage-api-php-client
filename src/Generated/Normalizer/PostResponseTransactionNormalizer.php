@@ -4,6 +4,7 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -16,11 +17,12 @@ class PostResponseTransactionNormalizer implements DenormalizerInterface, Normal
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
     {
         return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\PostResponseTransaction';
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, $format = null, array $context = array()) : bool
     {
         return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\PostResponseTransaction';
     }
@@ -41,6 +43,12 @@ class PostResponseTransactionNormalizer implements DenormalizerInterface, Normal
         }
         if (\array_key_exists('transactionId', $data)) {
             $object->setTransactionId($data['transactionId']);
+            unset($data['transactionId']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
@@ -51,6 +59,11 @@ class PostResponseTransactionNormalizer implements DenormalizerInterface, Normal
     {
         $data = array();
         $data['transactionId'] = $object->getTransactionId();
+        foreach ($object as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $data[$key] = $value;
+            }
+        }
         return $data;
     }
 }

@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class Task
+class Task extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Task Id
      *
@@ -52,6 +60,7 @@ class Task
      */
     public function setTaskId(string $taskId) : self
     {
+        $this->initialized['taskId'] = true;
         $this->taskId = $taskId;
         return $this;
     }
@@ -73,6 +82,7 @@ class Task
      */
     public function setTaskStatus(string $taskStatus) : self
     {
+        $this->initialized['taskStatus'] = true;
         $this->taskStatus = $taskStatus;
         return $this;
     }
@@ -94,6 +104,7 @@ class Task
      */
     public function setIdentityId(string $identityId) : self
     {
+        $this->initialized['identityId'] = true;
         $this->identityId = $identityId;
         return $this;
     }
@@ -115,6 +126,7 @@ class Task
      */
     public function setEntryCount(int $entryCount) : self
     {
+        $this->initialized['entryCount'] = true;
         $this->entryCount = $entryCount;
         return $this;
     }
@@ -136,6 +148,7 @@ class Task
      */
     public function setTransactions(array $transactions) : self
     {
+        $this->initialized['transactions'] = true;
         $this->transactions = $transactions;
         return $this;
     }

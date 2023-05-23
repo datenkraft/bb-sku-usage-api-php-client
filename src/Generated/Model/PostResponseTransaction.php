@@ -2,8 +2,16 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class PostResponseTransaction
+class PostResponseTransaction extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = array();
+    public function isInitialized($property) : bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * Transaction Id
      *
@@ -28,6 +36,7 @@ class PostResponseTransaction
      */
     public function setTransactionId(string $transactionId) : self
     {
+        $this->initialized['transactionId'] = true;
         $this->transactionId = $transactionId;
         return $this;
     }
