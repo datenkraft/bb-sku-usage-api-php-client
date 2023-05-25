@@ -2,7 +2,7 @@
 
 return [
     'openapi-file' => __DIR__ . '/openapi.json',
-    'namespace' => 'Datenkraft\Backbone\Client\XxxApi\Generated',
+    'namespace' => 'Datenkraft\Backbone\Client\SkuUsageApi\Generated',
     'directory' => __DIR__ . '/src/Generated',
     'throw-unexpected-status-code' => true,
 ];
