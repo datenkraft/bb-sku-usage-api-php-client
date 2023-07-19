@@ -65,13 +65,16 @@ class NewSkuUsageNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setExternalId($data['externalId']);
             unset($data['externalId']);
         }
-        if (\array_key_exists('meta', $data)) {
+        if (\array_key_exists('meta', $data) && $data['meta'] !== null) {
             $values = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['meta'] as $key => $value) {
                 $values[$key] = $value;
             }
             $object->setMeta($values);
             unset($data['meta']);
+        }
+        elseif (\array_key_exists('meta', $data) && $data['meta'] === null) {
+            $object->setMeta(null);
         }
         foreach ($data as $key_1 => $value_1) {
             if (preg_match('/.*/', (string) $key_1)) {

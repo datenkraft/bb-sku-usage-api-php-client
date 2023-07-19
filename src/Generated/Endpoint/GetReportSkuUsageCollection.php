@@ -8,11 +8,11 @@ class GetReportSkuUsageCollection extends \Datenkraft\Backbone\Client\SkuUsageAp
      * Query a list of sku usage ids that match the selected filters
      *
      * @param array $queryParameters {
-     *     @var string $filter[projectId] 
-     *     @var string $filter[usageStart] 
-     *     @var string $filter[usageEnd] 
-     *     @var string $filter[metaKey] 
-     *     @var string $filter[metaValue] 
+     *     @var string $filter[projectId] Project Id
+     *     @var string $filter[usageStart] Start of the usage
+     *     @var string $filter[usageEnd] End of the usage
+     *     @var string $filter[metaKey] Key of the meta field
+     *     @var string $filter[metaValue] Value of the meta field
      * }
      */
     public function __construct(array $queryParameters = array())
