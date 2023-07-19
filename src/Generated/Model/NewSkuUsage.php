@@ -51,7 +51,7 @@ class NewSkuUsage extends \ArrayObject
     /**
      * Meta
      *
-     * @var mixed[]
+     * @var mixed[]|null
      */
     protected $meta;
     /**
@@ -189,20 +189,20 @@ class NewSkuUsage extends \ArrayObject
     /**
      * Meta
      *
-     * @return mixed[]
+     * @return mixed[]|null
      */
-    public function getMeta() : iterable
+    public function getMeta() : ?iterable
     {
         return $this->meta;
     }
     /**
      * Meta
      *
-     * @param mixed[] $meta
+     * @param mixed[]|null $meta
      *
      * @return self
      */
-    public function setMeta(iterable $meta) : self
+    public function setMeta(?iterable $meta) : self
     {
         $this->initialized['meta'] = true;
         $this->meta = $meta;
