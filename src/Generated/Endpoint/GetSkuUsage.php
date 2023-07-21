@@ -8,7 +8,7 @@ class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runt
      * Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given
      *
      * @param array $queryParameters {
-     *     @var string $filter[projectId] SKUUsage ProjectId filter
+     *     @var string $filter[projectId] SKUUsage ProjectId filter - Must not be present with filter[skuUsageIds]
      *     @var string $filter[externalId] SKUUsage ExternalId filter
      *     @var string $filter[skuUsageIds] SKUUsage SkuUsageIds filter
      *     @var string $filter[skuGroupIds] SKUUsage SkuGroupIds filter
