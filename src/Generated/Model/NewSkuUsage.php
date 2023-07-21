@@ -43,7 +43,7 @@ class NewSkuUsage
     /**
      * Meta
      *
-     * @var mixed
+     * @var mixed|null
      */
     protected $meta;
     /**

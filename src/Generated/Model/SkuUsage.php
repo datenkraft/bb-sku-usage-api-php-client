@@ -49,7 +49,7 @@ class SkuUsage
     /**
      * Meta
      *
-     * @var mixed
+     * @var mixed|null
      */
     protected $meta;
     /**

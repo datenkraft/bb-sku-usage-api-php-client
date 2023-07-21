@@ -60,8 +60,11 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (\array_key_exists('externalId', $data)) {
             $object->setExternalId($data['externalId']);
         }
-        if (\array_key_exists('meta', $data)) {
+        if (\array_key_exists('meta', $data) && $data['meta'] !== null) {
             $object->setMeta($data['meta']);
+        }
+        elseif (\array_key_exists('meta', $data) && $data['meta'] === null) {
+            $object->setMeta(null);
         }
         return $object;
     }
