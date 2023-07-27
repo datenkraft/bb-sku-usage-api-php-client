@@ -2556,7 +2556,7 @@
                         "format": "date-time"
                     },
                     "externalId": {
-                        "description": "External Id",
+                        "description": "External Id\\\nNote: This is not required if the skuCode is 'su-manual-correction'.",
                         "type": "string"
                     },
                     "meta": {

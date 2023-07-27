@@ -35,10 +35,11 @@ class NewSkuUsage
      */
     protected $usageEnd;
     /**
-     * External Id
-     *
-     * @var string
-     */
+    * External Id\
+    Note: This is not required if the skuCode is 'su-manual-correction'.
+    *
+    * @var string
+    */
     protected $externalId;
     /**
      * Meta
@@ -152,21 +153,23 @@ class NewSkuUsage
         return $this;
     }
     /**
-     * External Id
-     *
-     * @return string
-     */
+    * External Id\
+    Note: This is not required if the skuCode is 'su-manual-correction'.
+    *
+    * @return string
+    */
     public function getExternalId() : string
     {
         return $this->externalId;
     }
     /**
-     * External Id
-     *
-     * @param string $externalId
-     *
-     * @return self
-     */
+    * External Id\
+    Note: This is not required if the skuCode is 'su-manual-correction'.
+    *
+    * @param string $externalId
+    *
+    * @return self
+    */
     public function setExternalId(string $externalId) : self
     {
         $this->externalId = $externalId;
