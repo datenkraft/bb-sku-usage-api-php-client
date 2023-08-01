@@ -49,13 +49,21 @@ class InformationNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setMessage($data['message']);
             unset($data['message']);
         }
+        if (\array_key_exists('references', $data)) {
+            $values = array();
+            foreach ($data['references'] as $value) {
+                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorReferencesItem', 'json', $context);
+            }
+            $object->setReferences($values);
+            unset($data['references']);
+        }
         if (\array_key_exists('extra', $data)) {
             $object->setExtra($this->denormalizer->denormalize($data['extra'], 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorExtra', 'json', $context));
             unset($data['extra']);
         }
-        foreach ($data as $key => $value) {
+        foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
-                $object[$key] = $value;
+                $object[$key] = $value_1;
             }
         }
         return $object;
@@ -68,12 +76,19 @@ class InformationNormalizer implements DenormalizerInterface, NormalizerInterfac
         $data = array();
         $data['code'] = $object->getCode();
         $data['message'] = $object->getMessage();
+        if ($object->isInitialized('references') && null !== $object->getReferences()) {
+            $values = array();
+            foreach ($object->getReferences() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['references'] = $values;
+        }
         if ($object->isInitialized('extra') && null !== $object->getExtra()) {
             $data['extra'] = $this->normalizer->normalize($object->getExtra(), 'json', $context);
         }
-        foreach ($object as $key => $value) {
+        foreach ($object as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value;
+                $data[$key] = $value_1;
             }
         }
         return $data;
