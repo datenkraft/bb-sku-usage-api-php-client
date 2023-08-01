@@ -17,6 +17,12 @@ class Error
      */
     protected $message;
     /**
+     * References
+     *
+     * @var ErrorReferencesItem[]
+     */
+    protected $references;
+    /**
      * 
      *
      * @var ErrorExtra
@@ -62,6 +68,27 @@ class Error
     public function setMessage(string $message) : self
     {
         $this->message = $message;
+        return $this;
+    }
+    /**
+     * References
+     *
+     * @return ErrorReferencesItem[]
+     */
+    public function getReferences() : array
+    {
+        return $this->references;
+    }
+    /**
+     * References
+     *
+     * @param ErrorReferencesItem[] $references
+     *
+     * @return self
+     */
+    public function setReferences(array $references) : self
+    {
+        $this->references = $references;
         return $this;
     }
     /**
