@@ -49,17 +49,26 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\DeleteAuthPermissionRoleCollection($requestBody), $fetch);
     }
     /**
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionRoleCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionRoleCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionRoleCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthPermissionRoleResource[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
-    public function getAuthPermissionRoleCollection(string $fetch = self::FETCH_OBJECT)
+    * Get all role to permission assignments from this resource server
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionRoleCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionRoleCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionRoleCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthPermissionRolePaginatedCollection|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
+    public function getAuthPermissionRoleCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthPermissionRoleCollection(), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthPermissionRoleCollection($queryParameters), $fetch);
     }
     /**
      * Create one or more role to permission assignments in this resource server
@@ -80,17 +89,26 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\PostAuthPermissionRoleCollection($requestBody), $fetch);
     }
     /**
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthPermissionResource[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
-    public function getAuthPermissionCollection(string $fetch = self::FETCH_OBJECT)
+    * Get all permissions from this resource server
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\GetAuthPermissionCollectionResponse|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
+    public function getAuthPermissionCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthPermissionCollection(), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthPermissionCollection($queryParameters), $fetch);
     }
     /**
      * Delete one or more role to identity assignments in this resource server
@@ -112,18 +130,26 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\DeleteAuthRoleIdentityCollection($requestBody), $fetch);
     }
     /**
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionNotFoundException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleIdentityResource[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
-    public function getAuthRoleIdentityCollection(string $fetch = self::FETCH_OBJECT)
+    * Get all role to identity assignments from this resource server
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleIdentityPaginatedCollection|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
+    public function getAuthRoleIdentityCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthRoleIdentityCollection(), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthRoleIdentityCollection($queryParameters), $fetch);
     }
     /**
      * Create one or more role to identity assignments in this resource server
@@ -145,17 +171,26 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\PostAuthRoleIdentityCollection($requestBody), $fetch);
     }
     /**
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleResource[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
-    public function getAuthRoleCollection(string $fetch = self::FETCH_OBJECT)
+    * Get all available roles from this resource server
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionForbiddenException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleCollection|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
+    public function getAuthRoleCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthRoleCollection(), $fetch);
+        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetAuthRoleCollection($queryParameters), $fetch);
     }
     /**
      * Delete a role for this resource server
