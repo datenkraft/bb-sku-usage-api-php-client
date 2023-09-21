@@ -5,15 +5,20 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint;
 class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\Endpoint
 {
     /**
-     * Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given
-     *
-     * @param array $queryParameters {
-     *     @var string $filter[projectId] SKUUsage ProjectId filter - Must not be present with filter[skuUsageIds]
-     *     @var string $filter[externalId] SKUUsage ExternalId filter
-     *     @var string $filter[skuUsageIds] SKUUsage SkuUsageIds filter
-     *     @var string $filter[skuGroupIds] SKUUsage SkuGroupIds filter
-     * }
-     */
+    * Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    *     @var string $filter[projectId] SKUUsage ProjectId filter - Must not be present with filter[skuUsageIds]
+    *     @var string $filter[externalId] SKUUsage ExternalId filter
+    *     @var string $filter[skuUsageIds] SKUUsage SkuUsageIds filter
+    *     @var string $filter[skuGroupIds] SKUUsage SkuGroupIds filter
+    * }
+    */
     public function __construct(array $queryParameters = array())
     {
         $this->queryParameters = $queryParameters;
@@ -38,9 +43,12 @@ class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runt
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('filter[projectId]', 'filter[externalId]', 'filter[skuUsageIds]', 'filter[skuGroupIds]'));
+        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[externalId]', 'filter[skuUsageIds]', 'filter[skuGroupIds]'));
         $optionsResolver->setRequired(array());
-        $optionsResolver->setDefaults(array());
+        $optionsResolver->setDefaults(array('paginationMode' => 'default'));
+        $optionsResolver->addAllowedTypes('page', array('int'));
+        $optionsResolver->addAllowedTypes('pageSize', array('int'));
+        $optionsResolver->addAllowedTypes('paginationMode', array('string'));
         $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->addAllowedTypes('filter[externalId]', array('string'));
         $optionsResolver->addAllowedTypes('filter[skuUsageIds]', array('string'));
@@ -56,14 +64,14 @@ class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runt
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
      *
-     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse
+     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\GetSkuUsageResponse|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse
      */
     protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsage[]', 'json');
+            return $serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\GetSkuUsageResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageBadRequestException($serializer->deserialize($body, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\ErrorResponse', 'json'), $response);
