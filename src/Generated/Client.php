@@ -304,46 +304,28 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetOpenApiInFormat($format), $fetch);
     }
     /**
-     * Query a list of sku usage ids that match the selected filters
-     *
-     * @param array $queryParameters {
-     *     @var string $filter[projectId] Project Id
-     *     @var string $filter[usageStart] Start of the usage
-     *     @var string $filter[usageEnd] End of the usage
-     *     @var string $filter[metaKey] Key of the meta field
-     *     @var string $filter[metaValue] Value of the meta field
-     * }
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetReportSkuUsageCollectionBadRequestException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetReportSkuUsageCollectionUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetReportSkuUsageCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetReportSkuUsageCollectionInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return null|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
-    public function getReportSkuUsageCollection(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
-    {
-        return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetReportSkuUsageCollection($queryParameters), $fetch);
-    }
-    /**
-     * Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given
-     *
-     * @param array $queryParameters {
-     *     @var string $filter[projectId] SKUUsage ProjectId filter - Must not be present with filter[skuUsageIds]
-     *     @var string $filter[externalId] SKUUsage ExternalId filter
-     *     @var string $filter[skuUsageIds] SKUUsage SkuUsageIds filter
-     *     @var string $filter[skuGroupIds] SKUUsage SkuGroupIds filter
-     * }
-     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageBadRequestException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageUnauthorizedException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageForbiddenException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageInternalServerErrorException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
-     *
-     * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage[]|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
-     */
+    * Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given
+    *
+    * @param array $queryParameters {
+    *     @var int $page The page to read. Default is the first page.
+    *     @var int $pageSize The maximum size per page is 100. Default is 100.
+    *     @var string $paginationMode The paginationMode to use:
+    - default: The total number of items in the collection will not be calculated.
+    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    *     @var string $filter[projectId] SKUUsage ProjectId filter - Must not be present with filter[skuUsageIds]
+    *     @var string $filter[externalId] SKUUsage ExternalId filter
+    *     @var string $filter[skuUsageIds] SKUUsage SkuUsageIds filter
+    *     @var string $filter[skuGroupIds] SKUUsage SkuGroupIds filter
+    * }
+    * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageBadRequestException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageUnauthorizedException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageForbiddenException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageInternalServerErrorException
+    * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
+    *
+    * @return \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\GetSkuUsageResponse|\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse|\Psr\Http\Message\ResponseInterface
+    */
     public function getSkuUsage(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetSkuUsage($queryParameters), $fetch);
@@ -469,7 +451,7 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = array();
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://sku-usage-api.conqore.niceshops.com/v1');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://sku-usage-api.conqore.niceshops.com/v2');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
             if (count($additionalPlugins) > 0) {
