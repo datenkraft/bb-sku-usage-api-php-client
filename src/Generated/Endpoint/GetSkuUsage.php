@@ -5,18 +5,20 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint;
 class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\Endpoint
 {
     /**
-    * Query SKU Usage data by projectId and externalId OR by skuUsageIds OR additionally by skuGroupIds. At least one of those three options must be given
+    * Query SKU Usage data by projectId and externalId OR skuUsageIds OR skuGroupIds.\
+    At least one of those three options must be given.\
+    Combining projectId and externalId with skuUsageIds is not possible.
     *
     * @param array $queryParameters {
-    *     @var int $page The page to read. Default is the first page.
-    *     @var int $pageSize The maximum size per page is 100. Default is 100.
-    *     @var string $paginationMode The paginationMode to use:
-    - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-    *     @var string $filter[projectId] SKUUsage ProjectId filter - Must not be present with filter[skuUsageIds]
-    *     @var string $filter[externalId] SKUUsage ExternalId filter
-    *     @var string $filter[skuUsageIds] SKUUsage SkuUsageIds filter
-    *     @var string $filter[skuGroupIds] SKUUsage SkuGroupIds filter
+    *     @var string $filter[projectId] ProjectId filter
+    - Required with filter[externalId]
+    - Must not be present with filter[skuUsageIds]
+    *     @var string $filter[externalId] ExternalId filter
+    - Required with filter[projectId]
+    - Must not be present with filter[skuUsageIds]
+    *     @var string $filter[skuUsageIds] SkuUsageIds filter
+    - Must not be present with filter[projectId] and filter[externalId]
+    *     @var string $filter[skuGroupIds] SkuGroupIds filter
     * }
     */
     public function __construct(array $queryParameters = array())
@@ -43,12 +45,9 @@ class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runt
     protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('page', 'pageSize', 'paginationMode', 'filter[projectId]', 'filter[externalId]', 'filter[skuUsageIds]', 'filter[skuGroupIds]'));
+        $optionsResolver->setDefined(array('filter[projectId]', 'filter[externalId]', 'filter[skuUsageIds]', 'filter[skuGroupIds]'));
         $optionsResolver->setRequired(array());
-        $optionsResolver->setDefaults(array('paginationMode' => 'default'));
-        $optionsResolver->addAllowedTypes('page', array('int'));
-        $optionsResolver->addAllowedTypes('pageSize', array('int'));
-        $optionsResolver->addAllowedTypes('paginationMode', array('string'));
+        $optionsResolver->setDefaults(array());
         $optionsResolver->addAllowedTypes('filter[projectId]', array('string'));
         $optionsResolver->addAllowedTypes('filter[externalId]', array('string'));
         $optionsResolver->addAllowedTypes('filter[skuUsageIds]', array('string'));
