@@ -5,7 +5,7 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint;
 class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\Endpoint
 {
     /**
-     * Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given
+     * Query SKU Usage data by projectId and externalId OR by skuUsageIds OR additionally by skuGroupIds. At least one of those three options must be given
      *
      * @param array $queryParameters {
      *     @var string $filter[projectId] SKUUsage ProjectId filter - Must not be present with filter[skuUsageIds]
