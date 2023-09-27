@@ -327,7 +327,7 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
         return $this->executeEndpoint(new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint\GetReportSkuUsageCollection($queryParameters), $fetch);
     }
     /**
-     * Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given
+     * Query SKU Usage data by projectId and externalId OR by skuUsageIds OR additionally by skuGroupIds. At least one of those three options must be given
      *
      * @param array $queryParameters {
      *     @var string $filter[projectId] SKUUsage ProjectId filter - Must not be present with filter[skuUsageIds]
@@ -372,6 +372,7 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
      *
      * @param string $taskId Task id
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTaskBadRequestException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTaskUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTaskForbiddenException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetTaskNotFoundException
@@ -412,7 +413,6 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostTransactionSkuUsageCollectionBadRequestException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostTransactionSkuUsageCollectionUnauthorizedException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostTransactionSkuUsageCollectionForbiddenException
-     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostTransactionSkuUsageCollectionNotFoundException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\PostTransactionSkuUsageCollectionInternalServerErrorException
      * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException
      *

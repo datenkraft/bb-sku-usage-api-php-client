@@ -1617,8 +1617,8 @@
                 "tags": [
                     "skuUsage"
                 ],
-                "summary": "Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given",
-                "description": "Query SKU Usage data by projectId and externalId OR by skuUsageIds. At least one of those two options must be given",
+                "summary": "Query SKU Usage data by projectId and externalId OR by skuUsageIds OR additionally by skuGroupIds. At least one of those three options must be given",
+                "description": "Query SKU Usage data by projectId and externalId OR by skuUsageIds OR additionally by skuGroupIds. At least one of those three options must be given",
                 "operationId": "getSkuUsage",
                 "parameters": [
                     {
@@ -1868,6 +1868,16 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "content": {
@@ -2100,16 +2110,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
                         "content": {
                             "application/json": {
                                 "schema": {
