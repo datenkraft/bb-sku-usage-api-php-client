@@ -1485,48 +1485,14 @@
                 "tags": [
                     "skuUsage"
                 ],
-                "summary": "Query SKU Usage data by projectId and externalId OR by skuUsageIds OR additionally by skuGroupIds. At least one of those three options must be given",
-                "description": "Query SKU Usage data by projectId and externalId OR by skuUsageIds OR additionally by skuGroupIds. At least one of those three options must be given",
+                "summary": "Query SKU Usage data by projectId and externalId OR by skuUsageIds OR by skuGroupIds.\\\nAt least one of those three options must be given.\\\nCombining projectId and externalId with skuUsageIds is not possible.",
+                "description": "Query SKU Usage data by projectId and externalId OR skuUsageIds OR skuGroupIds.\\\nAt least one of those three options must be given.\\\nCombining projectId and externalId with skuUsageIds is not possible.",
                 "operationId": "getSkuUsage",
                 "parameters": [
                     {
-                        "name": "page",
-                        "in": "query",
-                        "description": "The page to read. Default is the first page.",
-                        "required": false,
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 1
-                    },
-                    {
-                        "name": "pageSize",
-                        "in": "query",
-                        "description": "The maximum size per page is 100. Default is 100.",
-                        "required": false,
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 20
-                    },
-                    {
-                        "name": "paginationMode",
-                        "in": "query",
-                        "description": "The paginationMode to use:\n- default: The total number of items in the collection will not be calculated.\n- totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "default": "default",
-                            "enum": [
-                                "default",
-                                "totalCount"
-                            ]
-                        }
-                    },
-                    {
                         "name": "filter[projectId]",
                         "in": "query",
-                        "description": "SKUUsage ProjectId filter - Must not be present with filter[skuUsageIds]",
+                        "description": "ProjectId filter\n- Required with filter[externalId]\n- Must not be present with filter[skuUsageIds]",
                         "required": false,
                         "schema": {
                             "type": "string"
@@ -1535,7 +1501,7 @@
                     {
                         "name": "filter[externalId]",
                         "in": "query",
-                        "description": "SKUUsage ExternalId filter",
+                        "description": "ExternalId filter\n- Required with filter[projectId]\n- Must not be present with filter[skuUsageIds]",
                         "required": false,
                         "schema": {
                             "type": "string"
@@ -1544,7 +1510,7 @@
                     {
                         "name": "filter[skuUsageIds]",
                         "in": "query",
-                        "description": "SKUUsage SkuUsageIds filter",
+                        "description": "SkuUsageIds filter\n- Must not be present with filter[projectId] and filter[externalId]",
                         "required": false,
                         "schema": {
                             "type": "string"
@@ -1553,7 +1519,7 @@
                     {
                         "name": "filter[skuGroupIds]",
                         "in": "query",
-                        "description": "SKUUsage SkuGroupIds filter",
+                        "description": "SkuGroupIds filter",
                         "required": false,
                         "schema": {
                             "type": "string"
