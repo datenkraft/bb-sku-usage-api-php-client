@@ -2,7 +2,7 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception;
 
-class PostTransactionSkuUsageCollectionNotFoundException extends NotFoundException
+class GetTaskBadRequestException extends BadRequestException
 {
     /**
      * @var \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse
@@ -14,7 +14,7 @@ class PostTransactionSkuUsageCollectionNotFoundException extends NotFoundExcepti
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Not Found');
+        parent::__construct('Bad Request');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }
