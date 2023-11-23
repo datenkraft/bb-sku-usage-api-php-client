@@ -12,7 +12,8 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     *     @var string $filter[endpoint] A filter for restricting the audit log to a endpoint.
     *     @var string $filter[version] A filter for restricting the audit log to a endpoint version.
     *     @var mixed $filter[identifier] A filter for querying actions for a identifier.
@@ -56,7 +57,8 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionRoleCollectionUnauthorizedException
@@ -97,7 +99,8 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthPermissionCollectionUnauthorizedException
@@ -137,7 +140,8 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleIdentityCollectionUnauthorizedException
@@ -178,7 +182,8 @@ class Client extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\C
     *     @var int $pageSize The maximum size per page is 100. Default is 100.
     *     @var string $paginationMode The paginationMode to use:
     - default: The total number of items in the collection will not be calculated.
-    - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+    - totalCount: The total number of items in the collection will be calculated.
+    This can mean loss of performance.
     * }
     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
     * @throws \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetAuthRoleCollectionUnauthorizedException
