@@ -5,19 +5,16 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint;
 class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\Endpoint
 {
     /**
-    * Query SKU Usage data by projectId and externalId OR skuUsageIds OR skuGroupIds.\
-    At least one of those three options must be given.\
-    Combining projectId and externalId with skuUsageIds is not possible.
+    * Query SKU Usage data by projectId and externalId OR skuUsageIds OR skuGroupIds. At least one of
+    those three options must be given. Combining projectId and externalId with skuUsageIds is not possible.',
+    summary: 'Query SKU Usage data by projectId and externalId OR by skuUsageIds OR by skuGroupIds.
+    At least one of those three options must be given. Combining projectId and externalId
+    with skuUsageIds is not possible.
     *
     * @param array $queryParameters {
-    *     @var string $filter[projectId] ProjectId filter
-    - Required with filter[externalId]
-    - Must not be present with filter[skuUsageIds]
-    *     @var string $filter[externalId] ExternalId filter
-    - Required with filter[projectId]
-    - Must not be present with filter[skuUsageIds]
-    *     @var string $filter[skuUsageIds] SkuUsageIds filter
-    - Must not be present with filter[projectId] and filter[externalId]
+    *     @var string $filter[projectId] ProjectId filter - Required with filter[externalId] - Must not be present with filter[skuUsageIds]
+    *     @var string $filter[externalId] ExternalId filter - Required with filter[projectId] - Must not be present with filter[skuUsageIds]
+    *     @var string $filter[skuUsageIds] SkuUsageIds filter - Must not be present with filter[projectId] and filter[externalId]
     *     @var string $filter[skuGroupIds] SkuGroupIds filter
     * }
     */

@@ -14,7 +14,10 @@ class PatchTaskUnprocessableEntityException extends UnprocessableEntityException
     private $response;
     public function __construct(\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse $errorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
-        parent::__construct('Unprocessable Entity');
+        parent::__construct('Unprocessable Entity
+
+Error codes:
+- DATA_NOT_PROCESSABLE: The given data is not processable.');
         $this->errorResponse = $errorResponse;
         $this->response = $response;
     }

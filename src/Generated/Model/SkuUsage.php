@@ -49,7 +49,7 @@ class SkuUsage extends \ArrayObject
      */
     protected $usageEnd;
     /**
-    * External Id\
+    * External Id,
     Note: This is not required if the skuCode is 'su-manual-correction'.
     *
     * @var string
@@ -194,7 +194,7 @@ class SkuUsage extends \ArrayObject
         return $this;
     }
     /**
-    * External Id\
+    * External Id,
     Note: This is not required if the skuCode is 'su-manual-correction'.
     *
     * @return string
@@ -204,7 +204,7 @@ class SkuUsage extends \ArrayObject
         return $this->externalId;
     }
     /**
-    * External Id\
+    * External Id,
     Note: This is not required if the skuCode is 'su-manual-correction'.
     *
     * @param string $externalId
