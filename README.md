@@ -1,3 +1,6 @@
+**This package version branch is abandoned and does not receive any updates!**
+---
+
 # Backbone - SKU Usage API PHP Client
 
 ## Introduction
