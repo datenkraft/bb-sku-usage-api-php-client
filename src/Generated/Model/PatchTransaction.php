@@ -7,8 +7,8 @@ class PatchTransaction extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -23,7 +23,7 @@ class PatchTransaction extends \ArrayObject
      *
      * @return bool
      */
-    public function getTransactionSeen() : bool
+    public function getTransactionSeen(): bool
     {
         return $this->transactionSeen;
     }
@@ -34,7 +34,7 @@ class PatchTransaction extends \ArrayObject
      *
      * @return self
      */
-    public function setTransactionSeen(bool $transactionSeen) : self
+    public function setTransactionSeen(bool $transactionSeen): self
     {
         $this->initialized['transactionSeen'] = true;
         $this->transactionSeen = $transactionSeen;

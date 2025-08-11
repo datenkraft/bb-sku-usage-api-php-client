@@ -7,8 +7,8 @@ class UpdateTask extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -23,7 +23,7 @@ class UpdateTask extends \ArrayObject
      *
      * @return string
      */
-    public function getTaskStatus() : string
+    public function getTaskStatus(): string
     {
         return $this->taskStatus;
     }
@@ -34,7 +34,7 @@ class UpdateTask extends \ArrayObject
      *
      * @return self
      */
-    public function setTaskStatus(string $taskStatus) : self
+    public function setTaskStatus(string $taskStatus): self
     {
         $this->initialized['taskStatus'] = true;
         $this->taskStatus = $taskStatus;

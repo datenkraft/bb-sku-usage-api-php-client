@@ -5,7 +5,6 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\ValidatorTrait;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -18,18 +17,15 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsage';
+        return $type === \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage::class;
     }
-    public function supportsNormalization($data, $format = null, array $context = array()) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\SkuUsage';
+        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -58,11 +54,11 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
             unset($data['projectId']);
         }
         if (\array_key_exists('usageStart', $data)) {
-            $object->setUsageStart(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['usageStart']));
+            $object->setUsageStart(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['usageStart']));
             unset($data['usageStart']);
         }
         if (\array_key_exists('usageEnd', $data)) {
-            $object->setUsageEnd(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['usageEnd']));
+            $object->setUsageEnd(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['usageEnd']));
             unset($data['usageEnd']);
         }
         if (\array_key_exists('externalId', $data)) {
@@ -70,7 +66,7 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
             unset($data['externalId']);
         }
         if (\array_key_exists('meta', $data) && $data['meta'] !== null) {
-            $values = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['meta'] as $key => $value) {
                 $values[$key] = $value;
             }
@@ -87,33 +83,34 @@ class SkuUsageNormalizer implements DenormalizerInterface, NormalizerInterface, 
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if ($object->isInitialized('skuUsageId') && null !== $object->getSkuUsageId()) {
-            $data['skuUsageId'] = $object->getSkuUsageId();
+        $dataArray = [];
+        if ($data->isInitialized('skuUsageId') && null !== $data->getSkuUsageId()) {
+            $dataArray['skuUsageId'] = $data->getSkuUsageId();
         }
-        $data['skuCode'] = $object->getSkuCode();
-        $data['quantity'] = $object->getQuantity();
-        $data['projectId'] = $object->getProjectId();
-        $data['usageStart'] = $object->getUsageStart()->format('Y-m-d\\TH:i:sP');
-        $data['usageEnd'] = $object->getUsageEnd()->format('Y-m-d\\TH:i:sP');
-        $data['externalId'] = $object->getExternalId();
-        if ($object->isInitialized('meta') && null !== $object->getMeta()) {
-            $values = array();
-            foreach ($object->getMeta() as $key => $value) {
+        $dataArray['skuCode'] = $data->getSkuCode();
+        $dataArray['quantity'] = $data->getQuantity();
+        $dataArray['projectId'] = $data->getProjectId();
+        $dataArray['usageStart'] = $data->getUsageStart()?->format('Y-m-d\TH:i:sP');
+        $dataArray['usageEnd'] = $data->getUsageEnd()?->format('Y-m-d\TH:i:sP');
+        $dataArray['externalId'] = $data->getExternalId();
+        if ($data->isInitialized('meta') && null !== $data->getMeta()) {
+            $values = [];
+            foreach ($data->getMeta() as $key => $value) {
                 $values[$key] = $value;
             }
-            $data['meta'] = $values;
+            $dataArray['meta'] = $values;
         }
-        foreach ($object as $key_1 => $value_1) {
+        foreach ($data as $key_1 => $value_1) {
             if (preg_match('/.*/', (string) $key_1)) {
-                $data[$key_1] = $value_1;
+                $dataArray[$key_1] = $value_1;
             }
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage::class => false];
     }
 }

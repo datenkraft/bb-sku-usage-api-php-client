@@ -7,8 +7,8 @@ class Transaction extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -45,13 +45,13 @@ class Transaction extends \ArrayObject
     /**
      * Request Data
      *
-     * @var mixed[]
+     * @var array<string, mixed>
      */
     protected $requestData;
     /**
      * Response Data
      *
-     * @var mixed[]
+     * @var array<string, mixed>
      */
     protected $responseData;
     /**
@@ -59,7 +59,7 @@ class Transaction extends \ArrayObject
      *
      * @return string
      */
-    public function getTransactionId() : string
+    public function getTransactionId(): string
     {
         return $this->transactionId;
     }
@@ -70,7 +70,7 @@ class Transaction extends \ArrayObject
      *
      * @return self
      */
-    public function setTransactionId(string $transactionId) : self
+    public function setTransactionId(string $transactionId): self
     {
         $this->initialized['transactionId'] = true;
         $this->transactionId = $transactionId;
@@ -81,7 +81,7 @@ class Transaction extends \ArrayObject
      *
      * @return string
      */
-    public function getTransactionStatus() : string
+    public function getTransactionStatus(): string
     {
         return $this->transactionStatus;
     }
@@ -92,7 +92,7 @@ class Transaction extends \ArrayObject
      *
      * @return self
      */
-    public function setTransactionStatus(string $transactionStatus) : self
+    public function setTransactionStatus(string $transactionStatus): self
     {
         $this->initialized['transactionStatus'] = true;
         $this->transactionStatus = $transactionStatus;
@@ -103,7 +103,7 @@ class Transaction extends \ArrayObject
      *
      * @return bool
      */
-    public function getTransactionSeen() : bool
+    public function getTransactionSeen(): bool
     {
         return $this->transactionSeen;
     }
@@ -114,7 +114,7 @@ class Transaction extends \ArrayObject
      *
      * @return self
      */
-    public function setTransactionSeen(bool $transactionSeen) : self
+    public function setTransactionSeen(bool $transactionSeen): self
     {
         $this->initialized['transactionSeen'] = true;
         $this->transactionSeen = $transactionSeen;
@@ -125,7 +125,7 @@ class Transaction extends \ArrayObject
      *
      * @return string
      */
-    public function getTransactionResourceType() : string
+    public function getTransactionResourceType(): string
     {
         return $this->transactionResourceType;
     }
@@ -136,7 +136,7 @@ class Transaction extends \ArrayObject
      *
      * @return self
      */
-    public function setTransactionResourceType(string $transactionResourceType) : self
+    public function setTransactionResourceType(string $transactionResourceType): self
     {
         $this->initialized['transactionResourceType'] = true;
         $this->transactionResourceType = $transactionResourceType;
@@ -147,7 +147,7 @@ class Transaction extends \ArrayObject
      *
      * @return int
      */
-    public function getEntryCount() : int
+    public function getEntryCount(): int
     {
         return $this->entryCount;
     }
@@ -158,7 +158,7 @@ class Transaction extends \ArrayObject
      *
      * @return self
      */
-    public function setEntryCount(int $entryCount) : self
+    public function setEntryCount(int $entryCount): self
     {
         $this->initialized['entryCount'] = true;
         $this->entryCount = $entryCount;
@@ -167,20 +167,20 @@ class Transaction extends \ArrayObject
     /**
      * Request Data
      *
-     * @return mixed[]
+     * @return array<string, mixed>
      */
-    public function getRequestData() : iterable
+    public function getRequestData(): iterable
     {
         return $this->requestData;
     }
     /**
      * Request Data
      *
-     * @param mixed[] $requestData
+     * @param array<string, mixed> $requestData
      *
      * @return self
      */
-    public function setRequestData(iterable $requestData) : self
+    public function setRequestData(iterable $requestData): self
     {
         $this->initialized['requestData'] = true;
         $this->requestData = $requestData;
@@ -189,20 +189,20 @@ class Transaction extends \ArrayObject
     /**
      * Response Data
      *
-     * @return mixed[]
+     * @return array<string, mixed>
      */
-    public function getResponseData() : iterable
+    public function getResponseData(): iterable
     {
         return $this->responseData;
     }
     /**
      * Response Data
      *
-     * @param mixed[] $responseData
+     * @param array<string, mixed> $responseData
      *
      * @return self
      */
-    public function setResponseData(iterable $responseData) : self
+    public function setResponseData(iterable $responseData): self
     {
         $this->initialized['responseData'] = true;
         $this->responseData = $responseData;

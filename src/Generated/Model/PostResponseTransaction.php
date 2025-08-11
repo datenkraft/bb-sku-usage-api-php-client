@@ -7,8 +7,8 @@ class PostResponseTransaction extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -23,7 +23,7 @@ class PostResponseTransaction extends \ArrayObject
      *
      * @return string
      */
-    public function getTransactionId() : string
+    public function getTransactionId(): string
     {
         return $this->transactionId;
     }
@@ -34,7 +34,7 @@ class PostResponseTransaction extends \ArrayObject
      *
      * @return self
      */
-    public function setTransactionId(string $transactionId) : self
+    public function setTransactionId(string $transactionId): self
     {
         $this->initialized['transactionId'] = true;
         $this->transactionId = $transactionId;

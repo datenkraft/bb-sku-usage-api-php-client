@@ -7,8 +7,8 @@ class ErrorExtra extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -23,7 +23,7 @@ class ErrorExtra extends \ArrayObject
      *
      * @return string
      */
-    public function getExternalId() : string
+    public function getExternalId(): string
     {
         return $this->externalId;
     }
@@ -34,7 +34,7 @@ class ErrorExtra extends \ArrayObject
      *
      * @return self
      */
-    public function setExternalId(string $externalId) : self
+    public function setExternalId(string $externalId): self
     {
         $this->initialized['externalId'] = true;
         $this->externalId = $externalId;

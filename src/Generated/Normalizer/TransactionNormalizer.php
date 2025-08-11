@@ -5,7 +5,6 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\ValidatorTrait;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -18,18 +17,15 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Transaction';
+        return $type === \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Transaction::class;
     }
-    public function supportsNormalization($data, $format = null, array $context = array()) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Transaction';
+        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Transaction::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -38,6 +34,9 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Transaction();
+        if (\array_key_exists('transactionSeen', $data) && \is_int($data['transactionSeen'])) {
+            $data['transactionSeen'] = (bool) $data['transactionSeen'];
+        }
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
@@ -62,7 +61,7 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
             unset($data['entryCount']);
         }
         if (\array_key_exists('requestData', $data)) {
-            $values = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['requestData'] as $key => $value) {
                 $values[$key] = $value;
             }
@@ -70,7 +69,7 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
             unset($data['requestData']);
         }
         if (\array_key_exists('responseData', $data)) {
-            $values_1 = new \ArrayObject(array(), \ArrayObject::ARRAY_AS_PROPS);
+            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
             foreach ($data['responseData'] as $key_1 => $value_1) {
                 $values_1[$key_1] = $value_1;
             }
@@ -84,46 +83,47 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if ($object->isInitialized('transactionId') && null !== $object->getTransactionId()) {
-            $data['transactionId'] = $object->getTransactionId();
+        $dataArray = [];
+        if ($data->isInitialized('transactionId') && null !== $data->getTransactionId()) {
+            $dataArray['transactionId'] = $data->getTransactionId();
         }
-        if ($object->isInitialized('transactionStatus') && null !== $object->getTransactionStatus()) {
-            $data['transactionStatus'] = $object->getTransactionStatus();
+        if ($data->isInitialized('transactionStatus') && null !== $data->getTransactionStatus()) {
+            $dataArray['transactionStatus'] = $data->getTransactionStatus();
         }
-        if ($object->isInitialized('transactionSeen') && null !== $object->getTransactionSeen()) {
-            $data['transactionSeen'] = $object->getTransactionSeen();
+        if ($data->isInitialized('transactionSeen') && null !== $data->getTransactionSeen()) {
+            $dataArray['transactionSeen'] = $data->getTransactionSeen();
         }
-        if ($object->isInitialized('transactionResourceType') && null !== $object->getTransactionResourceType()) {
-            $data['transactionResourceType'] = $object->getTransactionResourceType();
+        if ($data->isInitialized('transactionResourceType') && null !== $data->getTransactionResourceType()) {
+            $dataArray['transactionResourceType'] = $data->getTransactionResourceType();
         }
-        if ($object->isInitialized('entryCount') && null !== $object->getEntryCount()) {
-            $data['entryCount'] = $object->getEntryCount();
+        if ($data->isInitialized('entryCount') && null !== $data->getEntryCount()) {
+            $dataArray['entryCount'] = $data->getEntryCount();
         }
-        if ($object->isInitialized('requestData') && null !== $object->getRequestData()) {
-            $values = array();
-            foreach ($object->getRequestData() as $key => $value) {
+        if ($data->isInitialized('requestData') && null !== $data->getRequestData()) {
+            $values = [];
+            foreach ($data->getRequestData() as $key => $value) {
                 $values[$key] = $value;
             }
-            $data['requestData'] = $values;
+            $dataArray['requestData'] = $values;
         }
-        if ($object->isInitialized('responseData') && null !== $object->getResponseData()) {
-            $values_1 = array();
-            foreach ($object->getResponseData() as $key_1 => $value_1) {
+        if ($data->isInitialized('responseData') && null !== $data->getResponseData()) {
+            $values_1 = [];
+            foreach ($data->getResponseData() as $key_1 => $value_1) {
                 $values_1[$key_1] = $value_1;
             }
-            $data['responseData'] = $values_1;
+            $dataArray['responseData'] = $values_1;
         }
-        foreach ($object as $key_2 => $value_2) {
+        foreach ($data as $key_2 => $value_2) {
             if (preg_match('/.*/', (string) $key_2)) {
-                $data[$key_2] = $value_2;
+                $dataArray[$key_2] = $value_2;
             }
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Transaction::class => false];
     }
 }

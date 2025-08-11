@@ -7,8 +7,8 @@ class Task extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -39,7 +39,7 @@ class Task extends \ArrayObject
     /**
      * Transactions
      *
-     * @var PatchResponseTransaction[]
+     * @var list<PatchResponseTransaction>
      */
     protected $transactions;
     /**
@@ -47,7 +47,7 @@ class Task extends \ArrayObject
      *
      * @return string
      */
-    public function getTaskId() : string
+    public function getTaskId(): string
     {
         return $this->taskId;
     }
@@ -58,7 +58,7 @@ class Task extends \ArrayObject
      *
      * @return self
      */
-    public function setTaskId(string $taskId) : self
+    public function setTaskId(string $taskId): self
     {
         $this->initialized['taskId'] = true;
         $this->taskId = $taskId;
@@ -69,7 +69,7 @@ class Task extends \ArrayObject
      *
      * @return string
      */
-    public function getTaskStatus() : string
+    public function getTaskStatus(): string
     {
         return $this->taskStatus;
     }
@@ -80,7 +80,7 @@ class Task extends \ArrayObject
      *
      * @return self
      */
-    public function setTaskStatus(string $taskStatus) : self
+    public function setTaskStatus(string $taskStatus): self
     {
         $this->initialized['taskStatus'] = true;
         $this->taskStatus = $taskStatus;
@@ -91,7 +91,7 @@ class Task extends \ArrayObject
      *
      * @return string
      */
-    public function getIdentityId() : string
+    public function getIdentityId(): string
     {
         return $this->identityId;
     }
@@ -102,7 +102,7 @@ class Task extends \ArrayObject
      *
      * @return self
      */
-    public function setIdentityId(string $identityId) : self
+    public function setIdentityId(string $identityId): self
     {
         $this->initialized['identityId'] = true;
         $this->identityId = $identityId;
@@ -113,7 +113,7 @@ class Task extends \ArrayObject
      *
      * @return int
      */
-    public function getEntryCount() : int
+    public function getEntryCount(): int
     {
         return $this->entryCount;
     }
@@ -124,7 +124,7 @@ class Task extends \ArrayObject
      *
      * @return self
      */
-    public function setEntryCount(int $entryCount) : self
+    public function setEntryCount(int $entryCount): self
     {
         $this->initialized['entryCount'] = true;
         $this->entryCount = $entryCount;
@@ -133,20 +133,20 @@ class Task extends \ArrayObject
     /**
      * Transactions
      *
-     * @return PatchResponseTransaction[]
+     * @return list<PatchResponseTransaction>
      */
-    public function getTransactions() : array
+    public function getTransactions(): array
     {
         return $this->transactions;
     }
     /**
      * Transactions
      *
-     * @param PatchResponseTransaction[] $transactions
+     * @param list<PatchResponseTransaction> $transactions
      *
      * @return self
      */
-    public function setTransactions(array $transactions) : self
+    public function setTransactions(array $transactions): self
     {
         $this->initialized['transactions'] = true;
         $this->transactions = $transactions;

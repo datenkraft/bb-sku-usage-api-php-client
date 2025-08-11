@@ -7,8 +7,8 @@ class SkuUsage extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -58,7 +58,7 @@ class SkuUsage extends \ArrayObject
     /**
      * Meta
      *
-     * @var mixed[]|null
+     * @var array<string, mixed>|null
      */
     protected $meta;
     /**
@@ -66,7 +66,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return string
      */
-    public function getSkuUsageId() : string
+    public function getSkuUsageId(): string
     {
         return $this->skuUsageId;
     }
@@ -77,7 +77,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return self
      */
-    public function setSkuUsageId(string $skuUsageId) : self
+    public function setSkuUsageId(string $skuUsageId): self
     {
         $this->initialized['skuUsageId'] = true;
         $this->skuUsageId = $skuUsageId;
@@ -88,7 +88,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return string
      */
-    public function getSkuCode() : string
+    public function getSkuCode(): string
     {
         return $this->skuCode;
     }
@@ -99,7 +99,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return self
      */
-    public function setSkuCode(string $skuCode) : self
+    public function setSkuCode(string $skuCode): self
     {
         $this->initialized['skuCode'] = true;
         $this->skuCode = $skuCode;
@@ -110,7 +110,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return int
      */
-    public function getQuantity() : int
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
@@ -121,7 +121,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return self
      */
-    public function setQuantity(int $quantity) : self
+    public function setQuantity(int $quantity): self
     {
         $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
@@ -132,7 +132,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -143,7 +143,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return self
      */
-    public function setProjectId(string $projectId) : self
+    public function setProjectId(string $projectId): self
     {
         $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
@@ -154,7 +154,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getUsageStart() : \DateTime
+    public function getUsageStart(): \DateTime
     {
         return $this->usageStart;
     }
@@ -165,7 +165,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return self
      */
-    public function setUsageStart(\DateTime $usageStart) : self
+    public function setUsageStart(\DateTime $usageStart): self
     {
         $this->initialized['usageStart'] = true;
         $this->usageStart = $usageStart;
@@ -176,7 +176,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return \DateTime
      */
-    public function getUsageEnd() : \DateTime
+    public function getUsageEnd(): \DateTime
     {
         return $this->usageEnd;
     }
@@ -187,7 +187,7 @@ class SkuUsage extends \ArrayObject
      *
      * @return self
      */
-    public function setUsageEnd(\DateTime $usageEnd) : self
+    public function setUsageEnd(\DateTime $usageEnd): self
     {
         $this->initialized['usageEnd'] = true;
         $this->usageEnd = $usageEnd;
@@ -199,7 +199,7 @@ class SkuUsage extends \ArrayObject
     *
     * @return string
     */
-    public function getExternalId() : string
+    public function getExternalId(): string
     {
         return $this->externalId;
     }
@@ -211,7 +211,7 @@ class SkuUsage extends \ArrayObject
     *
     * @return self
     */
-    public function setExternalId(string $externalId) : self
+    public function setExternalId(string $externalId): self
     {
         $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
@@ -220,20 +220,20 @@ class SkuUsage extends \ArrayObject
     /**
      * Meta
      *
-     * @return mixed[]|null
+     * @return array<string, mixed>|null
      */
-    public function getMeta() : ?iterable
+    public function getMeta(): ?iterable
     {
         return $this->meta;
     }
     /**
      * Meta
      *
-     * @param mixed[]|null $meta
+     * @param array<string, mixed>|null $meta
      *
      * @return self
      */
-    public function setMeta(?iterable $meta) : self
+    public function setMeta(?iterable $meta): self
     {
         $this->initialized['meta'] = true;
         $this->meta = $meta;

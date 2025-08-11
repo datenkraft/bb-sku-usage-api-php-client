@@ -7,8 +7,8 @@ class PatchResponseTransaction extends \ArrayObject
     /**
      * @var array
      */
-    protected $initialized = array();
-    public function isInitialized($property) : bool
+    protected $initialized = [];
+    public function isInitialized($property): bool
     {
         return array_key_exists($property, $this->initialized);
     }
@@ -35,7 +35,7 @@ class PatchResponseTransaction extends \ArrayObject
      *
      * @return string
      */
-    public function getTransactionId() : string
+    public function getTransactionId(): string
     {
         return $this->transactionId;
     }
@@ -46,7 +46,7 @@ class PatchResponseTransaction extends \ArrayObject
      *
      * @return self
      */
-    public function setTransactionId(string $transactionId) : self
+    public function setTransactionId(string $transactionId): self
     {
         $this->initialized['transactionId'] = true;
         $this->transactionId = $transactionId;
@@ -57,7 +57,7 @@ class PatchResponseTransaction extends \ArrayObject
      *
      * @return string
      */
-    public function getTransactionStatus() : string
+    public function getTransactionStatus(): string
     {
         return $this->transactionStatus;
     }
@@ -68,7 +68,7 @@ class PatchResponseTransaction extends \ArrayObject
      *
      * @return self
      */
-    public function setTransactionStatus(string $transactionStatus) : self
+    public function setTransactionStatus(string $transactionStatus): self
     {
         $this->initialized['transactionStatus'] = true;
         $this->transactionStatus = $transactionStatus;
@@ -79,7 +79,7 @@ class PatchResponseTransaction extends \ArrayObject
      *
      * @return bool
      */
-    public function getTransactionSeen() : bool
+    public function getTransactionSeen(): bool
     {
         return $this->transactionSeen;
     }
@@ -90,7 +90,7 @@ class PatchResponseTransaction extends \ArrayObject
      *
      * @return self
      */
-    public function setTransactionSeen(bool $transactionSeen) : self
+    public function setTransactionSeen(bool $transactionSeen): self
     {
         $this->initialized['transactionSeen'] = true;
         $this->transactionSeen = $transactionSeen;

@@ -5,7 +5,6 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer;
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\CheckArray;
 use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\ValidatorTrait;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -18,18 +17,15 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-    public function supportsDenormalization($data, $type, $format = null, array $context = array()) : bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Task';
+        return $type === \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Task::class;
     }
-    public function supportsNormalization($data, $format = null, array $context = array()) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\Task';
+        return is_object($data) && get_class($data) === \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Task::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if (isset($data['$ref'])) {
             return new Reference($data['$ref'], $context['document-origin']);
@@ -58,9 +54,9 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             unset($data['entryCount']);
         }
         if (\array_key_exists('transactions', $data)) {
-            $values = array();
+            $values = [];
             foreach ($data['transactions'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Datenkraft\\Backbone\\Client\\SkuUsageApi\\Generated\\Model\\PatchResponseTransaction', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\PatchResponseTransaction::class, 'json', $context);
             }
             $object->setTransactions($values);
             unset($data['transactions']);
@@ -72,26 +68,27 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        $data['taskId'] = $object->getTaskId();
-        $data['taskStatus'] = $object->getTaskStatus();
-        $data['identityId'] = $object->getIdentityId();
-        $data['entryCount'] = $object->getEntryCount();
-        $values = array();
-        foreach ($object->getTransactions() as $value) {
+        $dataArray = [];
+        $dataArray['taskId'] = $data->getTaskId();
+        $dataArray['taskStatus'] = $data->getTaskStatus();
+        $dataArray['identityId'] = $data->getIdentityId();
+        $dataArray['entryCount'] = $data->getEntryCount();
+        $values = [];
+        foreach ($data->getTransactions() as $value) {
             $values[] = $this->normalizer->normalize($value, 'json', $context);
         }
-        $data['transactions'] = $values;
-        foreach ($object as $key => $value_1) {
+        $dataArray['transactions'] = $values;
+        foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
-                $data[$key] = $value_1;
+                $dataArray[$key] = $value_1;
             }
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Task::class => false];
     }
 }
