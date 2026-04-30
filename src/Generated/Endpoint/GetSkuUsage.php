@@ -5,19 +5,18 @@ namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Endpoint;
 class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\BaseEndpoint implements \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Client\Endpoint
 {
     /**
-    * Query SKU Usage data by projectId and externalId OR skuUsageIds OR skuGroupIds. At least one of
-    those three options must be given. Combining projectId and externalId with skuUsageIds is not possible.',
-    summary: 'Query SKU Usage data by projectId and externalId OR by skuUsageIds OR by skuGroupIds.
-    At least one of those three options must be given. Combining projectId and externalId
-    with skuUsageIds is not possible.
-    *
-    * @param array $queryParameters {
-    *     @var string $filter[projectId] ProjectId filter - Required with filter[externalId] - Must not be present with filter[skuUsageIds]
-    *     @var string $filter[externalId] ExternalId filter - Required with filter[projectId] - Must not be present with filter[skuUsageIds]
-    *     @var string $filter[skuUsageIds] SkuUsageIds filter - Must not be present with filter[projectId] and filter[externalId]
-    *     @var string $filter[skuGroupIds] SkuGroupIds filter
-    * }
-    */
+     * Query SKU Usage data by projectId and externalId OR skuUsageIds OR skuGroupIds. At least one of
+     * those three options must be given. Combining projectId and externalId with skuUsageIds is not possible.',
+     * summary: 'Query SKU Usage data by projectId and externalId OR by skuUsageIds OR by skuGroupIds.
+     * At least one of those three options must be given. Combining projectId and externalId
+     * with skuUsageIds is not possible.
+     * @param array{
+     *    "filter[projectId]"?: string, //ProjectId filter - Required with filter[externalId] - Must not be present with filter[skuUsageIds]
+     *    "filter[externalId]"?: string, //ExternalId filter - Required with filter[projectId] - Must not be present with filter[skuUsageIds]
+     *    "filter[skuUsageIds]"?: string, //SkuUsageIds filter - Must not be present with filter[projectId] and filter[externalId]
+     *    "filter[skuGroupIds]"?: string, //SkuGroupIds filter
+     * } $queryParameters
+     */
     public function __construct(array $queryParameters = [])
     {
         $this->queryParameters = $queryParameters;
@@ -66,22 +65,22 @@ class GetSkuUsage extends \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runt
     {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (200 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\GetSkuUsageResponse', 'json');
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageBadRequestException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (401 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageUnauthorizedException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (403 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageForbiddenException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (500 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetSkuUsageInternalServerErrorException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
-        if (mb_strpos($contentType, 'application/json') !== false) {
+        if (mb_strpos(strtolower($contentType), 'application/json') !== false) {
             return $serializer->deserialize($body, 'Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse', 'json');
         }
         throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException($status, $body);

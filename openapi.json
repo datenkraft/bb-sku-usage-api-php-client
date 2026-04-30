@@ -2880,5 +2880,43 @@
                 "scheme": "bearer"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "audit-log",
+            "description": "audit-log"
+        },
+        {
+            "name": "auth-permission",
+            "description": "auth-permission"
+        },
+        {
+            "name": "auth-permission-role",
+            "description": "auth-permission-role"
+        },
+        {
+            "name": "auth-role",
+            "description": "auth-role"
+        },
+        {
+            "name": "auth-role-identity",
+            "description": "auth-role-identity"
+        },
+        {
+            "name": "docs",
+            "description": "docs"
+        },
+        {
+            "name": "skuUsage",
+            "description": "skuUsage"
+        },
+        {
+            "name": "task",
+            "description": "task"
+        },
+        {
+            "name": "transaction",
+            "description": "transaction"
+        }
+    ]
 }
