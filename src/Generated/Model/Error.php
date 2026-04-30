@@ -31,8 +31,6 @@ class Error extends \ArrayObject
      */
     protected $references;
     /**
-     * 
-     *
      * @var ErrorExtra
      */
     protected $extra;
@@ -103,8 +101,6 @@ class Error extends \ArrayObject
         return $this;
     }
     /**
-     * 
-     *
      * @return ErrorExtra
      */
     public function getExtra(): ErrorExtra
@@ -112,8 +108,6 @@ class Error extends \ArrayObject
         return $this->extra;
     }
     /**
-     * 
-     *
      * @param ErrorExtra $extra
      *
      * @return self

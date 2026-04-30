@@ -43,11 +43,11 @@ class NewSkuUsage extends \ArrayObject
      */
     protected $usageEnd;
     /**
-    * External Id,
-    Note: This is not required if the skuCode is 'su-manual-correction'.
-    *
-    * @var string
-    */
+     * External Id,
+     * Note: This is not required if the skuCode is 'su-manual-correction'.
+     *
+     * @var string
+     */
     protected $externalId;
     /**
      * Meta
@@ -166,11 +166,11 @@ class NewSkuUsage extends \ArrayObject
         return $this;
     }
     /**
-    * External Id,
-    Note: This is not required if the skuCode is 'su-manual-correction'.
-    *
-    * @return string
-    */
+     * External Id,
+     * Note: This is not required if the skuCode is 'su-manual-correction'.
+     *
+     * @return string
+     */
     public function getExternalId(): string
     {
         return $this->externalId;

@@ -7,7 +7,6 @@ class GetOpenApiInFormat extends \Datenkraft\Backbone\Client\SkuUsageApi\Generat
     protected $format;
     /**
      * Get the openapi documentation in the specified format
-     *
      * @param string $format Openapi file format
      */
     public function __construct(string $format)
@@ -46,7 +45,7 @@ class GetOpenApiInFormat extends \Datenkraft\Backbone\Client\SkuUsageApi\Generat
         if (200 === $status) {
             return null;
         }
-        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+        if (is_null($contentType) === false && (400 === $status && mb_strpos(strtolower($contentType), 'application/json') !== false)) {
             throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\GetOpenApiInFormatBadRequestException($serializer->deserialize($body, 'Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse', 'json'), $response);
         }
         throw new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Exception\UnexpectedStatusCodeException($status, $body);

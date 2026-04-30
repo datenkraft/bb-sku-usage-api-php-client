@@ -27,15 +27,15 @@ class NewSkuUsageNormalizer implements DenormalizerInterface, NormalizerInterfac
     }
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('skuCode', $data)) {
             $object->setSkuCode($data['skuCode']);
@@ -85,10 +85,10 @@ class NewSkuUsageNormalizer implements DenormalizerInterface, NormalizerInterfac
         $dataArray['skuCode'] = $data->getSkuCode();
         $dataArray['quantity'] = $data->getQuantity();
         $dataArray['projectId'] = $data->getProjectId();
-        $dataArray['usageStart'] = $data->getUsageStart()?->format('Y-m-d\TH:i:sP');
-        $dataArray['usageEnd'] = $data->getUsageEnd()?->format('Y-m-d\TH:i:sP');
+        $dataArray['usageStart'] = $data->getUsageStart()->format('Y-m-d\TH:i:sP');
+        $dataArray['usageEnd'] = $data->getUsageEnd()->format('Y-m-d\TH:i:sP');
         $dataArray['externalId'] = $data->getExternalId();
-        if ($data->isInitialized('meta') && null !== $data->getMeta()) {
+        if ($data->isInitialized('meta')) {
             $values = [];
             foreach ($data->getMeta() as $key => $value) {
                 $values[$key] = $value;
