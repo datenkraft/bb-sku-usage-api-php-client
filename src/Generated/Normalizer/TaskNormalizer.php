@@ -38,19 +38,19 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('taskId', $data)) {
-            $object->setTaskId($data['taskId']);
+            $object->taskId = $data['taskId'];
             unset($data['taskId']);
         }
         if (\array_key_exists('taskStatus', $data)) {
-            $object->setTaskStatus($data['taskStatus']);
+            $object->taskStatus = $data['taskStatus'];
             unset($data['taskStatus']);
         }
         if (\array_key_exists('identityId', $data)) {
-            $object->setIdentityId($data['identityId']);
+            $object->identityId = $data['identityId'];
             unset($data['identityId']);
         }
         if (\array_key_exists('entryCount', $data)) {
-            $object->setEntryCount($data['entryCount']);
+            $object->entryCount = $data['entryCount'];
             unset($data['entryCount']);
         }
         if (\array_key_exists('transactions', $data)) {
@@ -58,7 +58,7 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             foreach ($data['transactions'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\PatchResponseTransaction::class, 'json', $context);
             }
-            $object->setTransactions($values);
+            $object->transactions = $values;
             unset($data['transactions']);
         }
         foreach ($data as $key => $value_1) {
@@ -71,16 +71,17 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['taskId'] = $data->getTaskId();
-        $dataArray['taskStatus'] = $data->getTaskStatus();
-        $dataArray['identityId'] = $data->getIdentityId();
-        $dataArray['entryCount'] = $data->getEntryCount();
+        $dataArray['taskId'] = $data->taskId;
+        $dataArray['taskStatus'] = $data->taskStatus;
+        $dataArray['identityId'] = $data->identityId;
+        $dataArray['entryCount'] = $data->entryCount;
         $values = [];
-        foreach ($data->getTransactions() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
+        foreach ($data->transactions as $value) {
+            $normalized = $value === null ? null : $this->normalizer->normalize($value, 'json', $context);
+            $values[] = \is_iterable($normalized) ? new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject($normalized) : $normalized;
         }
         $dataArray['transactions'] = $values;
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

@@ -38,7 +38,7 @@ class UpdateTaskNormalizer implements DenormalizerInterface, NormalizerInterface
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('taskStatus', $data)) {
-            $object->setTaskStatus($data['taskStatus']);
+            $object->taskStatus = $data['taskStatus'];
             unset($data['taskStatus']);
         }
         foreach ($data as $key => $value) {
@@ -51,8 +51,8 @@ class UpdateTaskNormalizer implements DenormalizerInterface, NormalizerInterface
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['taskStatus'] = $data->getTaskStatus();
-        foreach ($data as $key => $value) {
+        $dataArray['taskStatus'] = $data->taskStatus;
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

@@ -38,7 +38,7 @@ class ErrorExtraNormalizer implements DenormalizerInterface, NormalizerInterface
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('externalId', $data)) {
-            $object->setExternalId($data['externalId']);
+            $object->externalId = $data['externalId'];
             unset($data['externalId']);
         }
         foreach ($data as $key => $value) {
@@ -51,10 +51,10 @@ class ErrorExtraNormalizer implements DenormalizerInterface, NormalizerInterface
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('externalId') && null !== $data->getExternalId()) {
-            $dataArray['externalId'] = $data->getExternalId();
+        if (array_key_exists('externalId', get_object_vars($data)) && null !== ($data->externalId ?? null)) {
+            $dataArray['externalId'] = $data->externalId;
         }
-        foreach ($data as $key => $value) {
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

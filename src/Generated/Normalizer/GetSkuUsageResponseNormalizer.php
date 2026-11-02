@@ -38,19 +38,19 @@ class GetSkuUsageResponseNormalizer implements DenormalizerInterface, Normalizer
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('pagination', $data)) {
-            $object->setPagination($this->denormalizer->denormalize($data['pagination'], \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\CollectionPagination::class, 'json', $context));
+            $object->pagination = $this->denormalizer->denormalize($data['pagination'], \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\CollectionPagination::class, 'json', $context);
             unset($data['pagination']);
         }
         if (\array_key_exists('data', $data)) {
             $values = [];
             foreach ($data['data'] as $value) {
-                $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+                $values_1 = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject();
                 foreach ($value as $key => $value_1) {
                     $values_1[$key] = $value_1;
                 }
                 $values[] = $values_1;
             }
-            $object->setData($values);
+            $object->data = $values;
             unset($data['data']);
         }
         foreach ($data as $key_1 => $value_2) {
@@ -63,13 +63,14 @@ class GetSkuUsageResponseNormalizer implements DenormalizerInterface, Normalizer
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('pagination') && null !== $data->getPagination()) {
-            $dataArray['pagination'] = $this->normalizer->normalize($data->getPagination(), 'json', $context);
+        if (array_key_exists('pagination', get_object_vars($data)) && null !== ($data->pagination ?? null)) {
+            $normalized = $this->normalizer->normalize($data->pagination, 'json', $context);
+            $dataArray['pagination'] = \is_iterable($normalized) ? new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject($normalized) : $normalized;
         }
-        if ($data->isInitialized('data') && null !== $data->getData()) {
+        if (array_key_exists('data', get_object_vars($data)) && null !== ($data->data ?? null)) {
             $values = [];
-            foreach ($data->getData() as $value) {
-                $values_1 = [];
+            foreach ($data->data as $value) {
+                $values_1 = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject();
                 foreach ($value as $key => $value_1) {
                     $values_1[$key] = $value_1;
                 }
@@ -77,7 +78,7 @@ class GetSkuUsageResponseNormalizer implements DenormalizerInterface, Normalizer
             }
             $dataArray['data'] = $values;
         }
-        foreach ($data as $key_1 => $value_2) {
+        foreach ($data->additionalPropertyEntries() as $key_1 => $value_2) {
             if (preg_match('/.*/', (string) $key_1)) {
                 $dataArray[$key_1] = $value_2;
             }

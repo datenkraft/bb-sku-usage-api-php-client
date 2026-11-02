@@ -2,98 +2,31 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class PatchResponseTransaction extends \ArrayObject
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalPropertiesInterface;
+class PatchResponseTransaction implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Transaction Id
      *
      * @var string
      */
-    protected $transactionId;
+    public string $transactionId;
     /**
      * Transaction Status
      *
      * @var string
      */
-    protected $transactionStatus;
+    public string $transactionStatus;
     /**
      * Transaction has been seen
      *
      * @var bool
      */
-    protected $transactionSeen;
-    /**
-     * Transaction Id
-     *
-     * @return string
-     */
-    public function getTransactionId(): string
+    public bool $transactionSeen;
+    public function definedProperties(): array
     {
-        return $this->transactionId;
-    }
-    /**
-     * Transaction Id
-     *
-     * @param string $transactionId
-     *
-     * @return self
-     */
-    public function setTransactionId(string $transactionId): self
-    {
-        $this->initialized['transactionId'] = true;
-        $this->transactionId = $transactionId;
-        return $this;
-    }
-    /**
-     * Transaction Status
-     *
-     * @return string
-     */
-    public function getTransactionStatus(): string
-    {
-        return $this->transactionStatus;
-    }
-    /**
-     * Transaction Status
-     *
-     * @param string $transactionStatus
-     *
-     * @return self
-     */
-    public function setTransactionStatus(string $transactionStatus): self
-    {
-        $this->initialized['transactionStatus'] = true;
-        $this->transactionStatus = $transactionStatus;
-        return $this;
-    }
-    /**
-     * Transaction has been seen
-     *
-     * @return bool
-     */
-    public function getTransactionSeen(): bool
-    {
-        return $this->transactionSeen;
-    }
-    /**
-     * Transaction has been seen
-     *
-     * @param bool $transactionSeen
-     *
-     * @return self
-     */
-    public function setTransactionSeen(bool $transactionSeen): self
-    {
-        $this->initialized['transactionSeen'] = true;
-        $this->transactionSeen = $transactionSeen;
-        return $this;
+        return ['transactionId' => 'transactionId', 'transactionStatus' => 'transactionStatus', 'transactionSeen' => 'transactionSeen'];
     }
 }

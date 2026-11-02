@@ -41,39 +41,39 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
             $data['transactionSeen'] = (bool) $data['transactionSeen'];
         }
         if (\array_key_exists('transactionId', $data)) {
-            $object->setTransactionId($data['transactionId']);
+            $object->transactionId = $data['transactionId'];
             unset($data['transactionId']);
         }
         if (\array_key_exists('transactionStatus', $data)) {
-            $object->setTransactionStatus($data['transactionStatus']);
+            $object->transactionStatus = $data['transactionStatus'];
             unset($data['transactionStatus']);
         }
         if (\array_key_exists('transactionSeen', $data)) {
-            $object->setTransactionSeen($data['transactionSeen']);
+            $object->transactionSeen = $data['transactionSeen'];
             unset($data['transactionSeen']);
         }
         if (\array_key_exists('transactionResourceType', $data)) {
-            $object->setTransactionResourceType($data['transactionResourceType']);
+            $object->transactionResourceType = $data['transactionResourceType'];
             unset($data['transactionResourceType']);
         }
         if (\array_key_exists('entryCount', $data)) {
-            $object->setEntryCount($data['entryCount']);
+            $object->entryCount = $data['entryCount'];
             unset($data['entryCount']);
         }
         if (\array_key_exists('requestData', $data)) {
-            $values = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject();
             foreach ($data['requestData'] as $key => $value) {
                 $values[$key] = $value;
             }
-            $object->setRequestData($values);
+            $object->requestData = $values;
             unset($data['requestData']);
         }
         if (\array_key_exists('responseData', $data)) {
-            $values_1 = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+            $values_1 = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject();
             foreach ($data['responseData'] as $key_1 => $value_1) {
                 $values_1[$key_1] = $value_1;
             }
-            $object->setResponseData($values_1);
+            $object->responseData = $values_1;
             unset($data['responseData']);
         }
         foreach ($data as $key_2 => $value_2) {
@@ -86,36 +86,36 @@ class TransactionNormalizer implements DenormalizerInterface, NormalizerInterfac
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('transactionId') && null !== $data->getTransactionId()) {
-            $dataArray['transactionId'] = $data->getTransactionId();
+        if (array_key_exists('transactionId', get_object_vars($data)) && null !== ($data->transactionId ?? null)) {
+            $dataArray['transactionId'] = $data->transactionId;
         }
-        if ($data->isInitialized('transactionStatus') && null !== $data->getTransactionStatus()) {
-            $dataArray['transactionStatus'] = $data->getTransactionStatus();
+        if (array_key_exists('transactionStatus', get_object_vars($data)) && null !== ($data->transactionStatus ?? null)) {
+            $dataArray['transactionStatus'] = $data->transactionStatus;
         }
-        if ($data->isInitialized('transactionSeen') && null !== $data->getTransactionSeen()) {
-            $dataArray['transactionSeen'] = $data->getTransactionSeen();
+        if (array_key_exists('transactionSeen', get_object_vars($data)) && null !== ($data->transactionSeen ?? null)) {
+            $dataArray['transactionSeen'] = $data->transactionSeen;
         }
-        if ($data->isInitialized('transactionResourceType') && null !== $data->getTransactionResourceType()) {
-            $dataArray['transactionResourceType'] = $data->getTransactionResourceType();
+        if (array_key_exists('transactionResourceType', get_object_vars($data)) && null !== ($data->transactionResourceType ?? null)) {
+            $dataArray['transactionResourceType'] = $data->transactionResourceType;
         }
-        if ($data->isInitialized('entryCount') && null !== $data->getEntryCount()) {
-            $dataArray['entryCount'] = $data->getEntryCount();
+        if (array_key_exists('entryCount', get_object_vars($data)) && null !== ($data->entryCount ?? null)) {
+            $dataArray['entryCount'] = $data->entryCount;
         }
-        if ($data->isInitialized('requestData') && null !== $data->getRequestData()) {
-            $values = [];
-            foreach ($data->getRequestData() as $key => $value) {
+        if (array_key_exists('requestData', get_object_vars($data)) && null !== ($data->requestData ?? null)) {
+            $values = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject();
+            foreach ($data->requestData as $key => $value) {
                 $values[$key] = $value;
             }
             $dataArray['requestData'] = $values;
         }
-        if ($data->isInitialized('responseData') && null !== $data->getResponseData()) {
-            $values_1 = [];
-            foreach ($data->getResponseData() as $key_1 => $value_1) {
+        if (array_key_exists('responseData', get_object_vars($data)) && null !== ($data->responseData ?? null)) {
+            $values_1 = new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject();
+            foreach ($data->responseData as $key_1 => $value_1) {
                 $values_1[$key_1] = $value_1;
             }
             $dataArray['responseData'] = $values_1;
         }
-        foreach ($data as $key_2 => $value_2) {
+        foreach ($data->additionalPropertyEntries() as $key_2 => $value_2) {
             if (preg_match('/.*/', (string) $key_2)) {
                 $dataArray[$key_2] = $value_2;
             }

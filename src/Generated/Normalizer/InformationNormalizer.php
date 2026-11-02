@@ -38,11 +38,11 @@ class InformationNormalizer implements DenormalizerInterface, NormalizerInterfac
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('code', $data)) {
-            $object->setCode($data['code']);
+            $object->code = $data['code'];
             unset($data['code']);
         }
         if (\array_key_exists('message', $data)) {
-            $object->setMessage($data['message']);
+            $object->message = $data['message'];
             unset($data['message']);
         }
         if (\array_key_exists('references', $data)) {
@@ -50,11 +50,11 @@ class InformationNormalizer implements DenormalizerInterface, NormalizerInterfac
             foreach ($data['references'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorReferencesItem::class, 'json', $context);
             }
-            $object->setReferences($values);
+            $object->references = $values;
             unset($data['references']);
         }
         if (\array_key_exists('extra', $data)) {
-            $object->setExtra($this->denormalizer->denormalize($data['extra'], \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorExtra::class, 'json', $context));
+            $object->extra = $this->denormalizer->denormalize($data['extra'], \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorExtra::class, 'json', $context);
             unset($data['extra']);
         }
         foreach ($data as $key => $value_1) {
@@ -67,19 +67,21 @@ class InformationNormalizer implements DenormalizerInterface, NormalizerInterfac
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['code'] = $data->getCode();
-        $dataArray['message'] = $data->getMessage();
-        if ($data->isInitialized('references') && null !== $data->getReferences()) {
+        $dataArray['code'] = $data->code;
+        $dataArray['message'] = $data->message;
+        if (array_key_exists('references', get_object_vars($data)) && null !== ($data->references ?? null)) {
             $values = [];
-            foreach ($data->getReferences() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            foreach ($data->references as $value) {
+                $normalized = $value === null ? null : $this->normalizer->normalize($value, 'json', $context);
+                $values[] = \is_iterable($normalized) ? new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject($normalized) : $normalized;
             }
             $dataArray['references'] = $values;
         }
-        if ($data->isInitialized('extra') && null !== $data->getExtra()) {
-            $dataArray['extra'] = $this->normalizer->normalize($data->getExtra(), 'json', $context);
+        if (array_key_exists('extra', get_object_vars($data)) && null !== ($data->extra ?? null)) {
+            $normalized_1 = $this->normalizer->normalize($data->extra, 'json', $context);
+            $dataArray['extra'] = \is_iterable($normalized_1) ? new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\JsonObject($normalized_1) : $normalized_1;
         }
-        foreach ($data as $key => $value_1) {
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value_1;
             }

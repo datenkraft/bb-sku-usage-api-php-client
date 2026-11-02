@@ -41,7 +41,7 @@ class PatchTransactionNormalizer implements DenormalizerInterface, NormalizerInt
             $data['transactionSeen'] = (bool) $data['transactionSeen'];
         }
         if (\array_key_exists('transactionSeen', $data)) {
-            $object->setTransactionSeen($data['transactionSeen']);
+            $object->transactionSeen = $data['transactionSeen'];
             unset($data['transactionSeen']);
         }
         foreach ($data as $key => $value) {
@@ -54,8 +54,8 @@ class PatchTransactionNormalizer implements DenormalizerInterface, NormalizerInt
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        $dataArray['transactionSeen'] = $data->getTransactionSeen();
-        foreach ($data as $key => $value) {
+        $dataArray['transactionSeen'] = $data->transactionSeen;
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
                 $dataArray[$key] = $value;
             }

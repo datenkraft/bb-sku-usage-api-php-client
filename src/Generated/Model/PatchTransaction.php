@@ -2,42 +2,19 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class PatchTransaction extends \ArrayObject
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalPropertiesInterface;
+class PatchTransaction implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Transaction has been seen
      *
      * @var bool
      */
-    protected $transactionSeen;
-    /**
-     * Transaction has been seen
-     *
-     * @return bool
-     */
-    public function getTransactionSeen(): bool
+    public bool $transactionSeen;
+    public function definedProperties(): array
     {
-        return $this->transactionSeen;
-    }
-    /**
-     * Transaction has been seen
-     *
-     * @param bool $transactionSeen
-     *
-     * @return self
-     */
-    public function setTransactionSeen(bool $transactionSeen): self
-    {
-        $this->initialized['transactionSeen'] = true;
-        $this->transactionSeen = $transactionSeen;
-        return $this;
+        return ['transactionSeen' => 'transactionSeen'];
     }
 }
