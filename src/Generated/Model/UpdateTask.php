@@ -2,42 +2,19 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class UpdateTask extends \ArrayObject
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalPropertiesInterface;
+class UpdateTask implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Task Status
      *
      * @var string
      */
-    protected $taskStatus;
-    /**
-     * Task Status
-     *
-     * @return string
-     */
-    public function getTaskStatus(): string
+    public string $taskStatus;
+    public function definedProperties(): array
     {
-        return $this->taskStatus;
-    }
-    /**
-     * Task Status
-     *
-     * @param string $taskStatus
-     *
-     * @return self
-     */
-    public function setTaskStatus(string $taskStatus): self
-    {
-        $this->initialized['taskStatus'] = true;
-        $this->taskStatus = $taskStatus;
-        return $this;
+        return ['taskStatus' => 'taskStatus'];
     }
 }

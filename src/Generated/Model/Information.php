@@ -2,120 +2,35 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class Information extends \ArrayObject
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalPropertiesInterface;
+class Information implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Code
      *
      * @var string
      */
-    protected $code;
+    public string $code;
     /**
      * Message
      *
      * @var string
      */
-    protected $message;
+    public string $message;
     /**
      * References
      *
      * @var list<ErrorReferencesItem>
      */
-    protected $references;
+    public array $references;
     /**
      * @var ErrorExtra
      */
-    protected $extra;
-    /**
-     * Code
-     *
-     * @return string
-     */
-    public function getCode(): string
+    public ErrorExtra $extra;
+    public function definedProperties(): array
     {
-        return $this->code;
-    }
-    /**
-     * Code
-     *
-     * @param string $code
-     *
-     * @return self
-     */
-    public function setCode(string $code): self
-    {
-        $this->initialized['code'] = true;
-        $this->code = $code;
-        return $this;
-    }
-    /**
-     * Message
-     *
-     * @return string
-     */
-    public function getMessage(): string
-    {
-        return $this->message;
-    }
-    /**
-     * Message
-     *
-     * @param string $message
-     *
-     * @return self
-     */
-    public function setMessage(string $message): self
-    {
-        $this->initialized['message'] = true;
-        $this->message = $message;
-        return $this;
-    }
-    /**
-     * References
-     *
-     * @return list<ErrorReferencesItem>
-     */
-    public function getReferences(): array
-    {
-        return $this->references;
-    }
-    /**
-     * References
-     *
-     * @param list<ErrorReferencesItem> $references
-     *
-     * @return self
-     */
-    public function setReferences(array $references): self
-    {
-        $this->initialized['references'] = true;
-        $this->references = $references;
-        return $this;
-    }
-    /**
-     * @return ErrorExtra
-     */
-    public function getExtra(): ErrorExtra
-    {
-        return $this->extra;
-    }
-    /**
-     * @param ErrorExtra $extra
-     *
-     * @return self
-     */
-    public function setExtra(ErrorExtra $extra): self
-    {
-        $this->initialized['extra'] = true;
-        $this->extra = $extra;
-        return $this;
+        return ['code' => 'code', 'message' => 'message', 'references' => 'references', 'extra' => 'extra'];
     }
 }

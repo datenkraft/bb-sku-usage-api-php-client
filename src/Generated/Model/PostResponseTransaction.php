@@ -2,42 +2,19 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class PostResponseTransaction extends \ArrayObject
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalPropertiesInterface;
+class PostResponseTransaction implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Transaction Id
      *
      * @var string
      */
-    protected $transactionId;
-    /**
-     * Transaction Id
-     *
-     * @return string
-     */
-    public function getTransactionId(): string
+    public string $transactionId;
+    public function definedProperties(): array
     {
-        return $this->transactionId;
-    }
-    /**
-     * Transaction Id
-     *
-     * @param string $transactionId
-     *
-     * @return self
-     */
-    public function setTransactionId(string $transactionId): self
-    {
-        $this->initialized['transactionId'] = true;
-        $this->transactionId = $transactionId;
-        return $this;
+        return ['transactionId' => 'transactionId'];
     }
 }

@@ -2,42 +2,19 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class ErrorExtra extends \ArrayObject
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalPropertiesInterface;
+class ErrorExtra implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * External Id
      *
      * @var string
      */
-    protected $externalId;
-    /**
-     * External Id
-     *
-     * @return string
-     */
-    public function getExternalId(): string
+    public string $externalId;
+    public function definedProperties(): array
     {
-        return $this->externalId;
-    }
-    /**
-     * External Id
-     *
-     * @param string $externalId
-     *
-     * @return self
-     */
-    public function setExternalId(string $externalId): self
-    {
-        $this->initialized['externalId'] = true;
-        $this->externalId = $externalId;
-        return $this;
+        return ['externalId' => 'externalId'];
     }
 }

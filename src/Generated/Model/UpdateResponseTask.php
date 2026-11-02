@@ -2,70 +2,25 @@
 
 namespace Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model;
 
-class UpdateResponseTask extends \ArrayObject
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalAndPatternProperties;
+use Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\AdditionalPropertiesInterface;
+class UpdateResponseTask implements AdditionalPropertiesInterface
 {
-    /**
-     * @var array
-     */
-    protected $initialized = [];
-    public function isInitialized($property): bool
-    {
-        return array_key_exists($property, $this->initialized);
-    }
+    use AdditionalAndPatternProperties;
     /**
      * Task Id
      *
      * @var string
      */
-    protected $taskId;
+    public string $taskId;
     /**
      * Task Status
      *
      * @var string
      */
-    protected $taskStatus;
-    /**
-     * Task Id
-     *
-     * @return string
-     */
-    public function getTaskId(): string
+    public string $taskStatus;
+    public function definedProperties(): array
     {
-        return $this->taskId;
-    }
-    /**
-     * Task Id
-     *
-     * @param string $taskId
-     *
-     * @return self
-     */
-    public function setTaskId(string $taskId): self
-    {
-        $this->initialized['taskId'] = true;
-        $this->taskId = $taskId;
-        return $this;
-    }
-    /**
-     * Task Status
-     *
-     * @return string
-     */
-    public function getTaskStatus(): string
-    {
-        return $this->taskStatus;
-    }
-    /**
-     * Task Status
-     *
-     * @param string $taskStatus
-     *
-     * @return self
-     */
-    public function setTaskStatus(string $taskStatus): self
-    {
-        $this->initialized['taskStatus'] = true;
-        $this->taskStatus = $taskStatus;
-        return $this;
+        return ['taskId' => 'taskId', 'taskStatus' => 'taskStatus'];
     }
 }

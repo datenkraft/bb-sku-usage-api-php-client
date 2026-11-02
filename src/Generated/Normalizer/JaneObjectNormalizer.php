@@ -104,46 +104,50 @@ class JaneObjectNormalizer implements DenormalizerInterface, NormalizerInterface
     }
     private function initNormalizer(string $normalizerClass)
     {
-        $normalizer = new $normalizerClass();
-        $normalizer->setNormalizer($this->normalizer);
-        $normalizer->setDenormalizer($this->denormalizer);
+        $normalizer = match ($normalizerClass) {
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuditLogNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuditLogNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuditLogCollectionNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuditLogCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthPermissionResourceNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthPermissionResourceNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthPermissionRolePaginatedCollectionNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthPermissionRolePaginatedCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthPermissionRoleResourceNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthPermissionRoleResourceNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthRoleCollectionNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthRoleCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthRoleIdentityPaginatedCollectionNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthRoleIdentityPaginatedCollectionNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthRoleIdentityResourceNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthRoleIdentityResourceNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthRoleResourceNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\AuthRoleResourceNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\CollectionNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\CollectionNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\CollectionPaginationNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\CollectionPaginationNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\ErrorNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\ErrorNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\ErrorReferencesItemNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\ErrorReferencesItemNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\ErrorExtraNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\ErrorExtraNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\ErrorResponseNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\ErrorResponseNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\GetAuthPermissionCollectionResponseNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\GetAuthPermissionCollectionResponseNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\GetSkuUsageResponseNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\GetSkuUsageResponseNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\InformationNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\InformationNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\InformationResponseNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\InformationResponseNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\NewAuthRoleResourceNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\NewAuthRoleResourceNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\NewSkuUsageNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\NewSkuUsageNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\PatchResponseTransactionNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\PatchResponseTransactionNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\PatchTransactionNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\PatchTransactionNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\PostResponseTransactionNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\PostResponseTransactionNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\SkuUsageNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\SkuUsageNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\TaskNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\TaskNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\TransactionNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\TransactionNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\UpdateResponseTaskNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\UpdateResponseTaskNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\UpdateTaskNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Normalizer\UpdateTaskNormalizer(),
+            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\ReferenceNormalizer::class => new \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Runtime\Normalizer\ReferenceNormalizer(),
+            default => throw new \InvalidArgumentException('Unknown normalizer class: ' . $normalizerClass),
+        };
+        if ($normalizer instanceof \Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface) {
+            $normalizer->setNormalizer($this->normalizer);
+        }
+        if ($normalizer instanceof \Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface) {
+            $normalizer->setDenormalizer($this->denormalizer);
+        }
         $this->normalizersCache[$normalizerClass] = $normalizer;
         return $normalizer;
     }
     public function getSupportedTypes(?string $format = null): array
     {
-        return [
-            
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuditLog::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuditLogCollection::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthPermissionResource::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthPermissionRolePaginatedCollection::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthPermissionRoleResource::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleCollection::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleIdentityPaginatedCollection::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleIdentityResource::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\AuthRoleResource::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Collection::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\CollectionPagination::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Error::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorReferencesItem::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorExtra::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\ErrorResponse::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\GetAuthPermissionCollectionResponse::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\GetSkuUsageResponse::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Information::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\InformationResponse::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewAuthRoleResource::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\NewSkuUsage::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\PatchResponseTransaction::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\PatchTransaction::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\PostResponseTransaction::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\SkuUsage::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Task::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\Transaction::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\UpdateResponseTask::class => false,
-            \Datenkraft\Backbone\Client\SkuUsageApi\Generated\Model\UpdateTask::class => false,
-            \Jane\Component\JsonSchemaRuntime\Reference::class => false,
-        ];
+        return array_combine(array_keys($this->normalizers), array_fill(0, count($this->normalizers), false));
     }
 }
